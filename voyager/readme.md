@@ -1,17 +1,17 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Terrain 2]( http://jaanga.github.io/terrain-r2/ ) &raquo; [Viewers]( http://jaanga.github.io/terrain-r2/viewers/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Voyager Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/terrain-r2/viewers/moon-voyager/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/terrain-r2/tree/gh-pages/viewers/moon-voyager/'; />
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/terrain-r2/viewers/moon-voyager/moon-voyager-r2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/terrain-r2/viewers/moon-voyager/moon-voyager-r2.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html" width=100% height=600px ></iframe>  
+####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html )
 
 
-[Mars Voyager Demo Full Screen - Dev]( http://jaanga.github.io/terrain-r2/viewers/moon-voyager/dev/ )
+[Moon Voyager Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/dev/ )
 
 
 
@@ -52,7 +52,7 @@ To show the usually hidden backside of the moon as easily as the front
 
 <!--
 * Supports permalinks
-	* [Copernicus]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#20 )
+	* [Copernicus]( http://jaanga.github.io/moon-voyager/moon-rover-mobile/dev/index.html#20 )
 	* [Gassendi]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#30 )
 	* [Tycho]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#93 )
 -->

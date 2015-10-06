@@ -18,11 +18,11 @@
 <script>
 
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
-	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/terrain-r2/viewers/';
+	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/moon/';
 
-	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-100-gazetteer-source.csv';
+	var gazetteerFile = sourceFolder + 'gazetteer/moon-100-gazetteer-source.csv';
 
-	var heightMapSource = sourceFolder + '/moon-heightmaps/WAC_GLD100_E000N1800_004P.png';
+	var heightMapSource = sourceFolder + 'heightmaps/WAC_GLD100_E000N1800_004P.png';
 
 	var moonRadiusEquator = 1728;
 
@@ -77,7 +77,7 @@
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
 		menu.innerHTML = '<h3>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/terrain-r2/viewers/moon-voyager/ >&#x24D8;</a>' +
+				'<a id=i href=http://jaanga.github.io/moon/voyager/ >&#x24D8;</a>' +
 			'</h3>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p id=message ></p>' +
