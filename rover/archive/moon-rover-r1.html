@@ -1,0 +1,194 @@
+
+<!doctype html>
+<html lang=en >
+<head>
+<title>Moon Rover R1</title>
+<meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+</head>
+<body>
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<script>
+
+	var terrain;
+	var terrainX = 0
+	var terrainZ = 0;
+
+	var css, info, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		css = document.head.appendChild( document.createElement('style') );
+		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' ;
+
+		info = document.body.appendChild( document.createElement( 'div' ) );
+		info.style.cssText = 'margin: 20px; position: absolute; ';
+		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+			'<p><button onclick=goNorth() >North</button></p>' +
+			'<p><button onclick=goSouth() >South</button></p>' +
+			'<p><button onclick=goEast() >East</button></p>' +
+			'<p><button onclick=goWest() >West</button></p>' +
+			'<div id=msg ></div>' +
+		'';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, 100, 100 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.noKeys = true;
+
+		scene = new THREE.Scene();
+
+// ground box
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( 0, -10, 0 );
+		scene.add( mesh );
+
+		mesh = new THREE.GridHelper( 50, 10 );
+		mesh.position.set( 0, -9, 0 );
+		scene.add( mesh );
+
+// axes
+		var axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+		terrain = new THREE.Object3D();
+		scene.add( terrain );
+
+		updateTerrain( terrainX, terrainZ );
+
+		window.addEventListener( 'keydown', onKeyUp, false );
+
+	}
+
+	function goNorth() {
+
+		updateTerrain( terrainX, ++terrainZ );
+
+	}
+
+	function goSouth() {
+
+		updateTerrain( terrainX, --terrainZ );
+
+	}
+
+
+	function goEast() {
+
+		updateTerrain( ++terrainX, terrainZ );
+
+	}
+
+	function goWest() {
+
+		updateTerrain( --terrainX, terrainZ );
+
+	}
+
+
+	function updateTerrain( centerX, centerZ ) {
+
+		newTerrain = new THREE.Object3D();
+
+		geometry = new THREE.BoxGeometry( 5, 2, 5 );
+		material = new THREE.MeshNormalMaterial();
+
+		startX = centerX - 8;
+		endX = centerX + 8;
+
+		startZ = centerZ - 8;
+		endZ = centerZ + 8;
+
+		for ( var i = terrain.children.length - 1; i >= 0 ; i-- ) {
+			pt = terrain.children[ i ].position.clone();;
+
+			if ( pt.x < 10 * startX || pt.x > 10 * endX || pt.z < 10 * startZ || pt.z > 10 * endZ ) {
+
+				terrain.remove ( terrain.children[ i ] );
+
+			} else {
+
+			}
+
+		}
+
+		for ( var x = startX; x < endX; x++ ) {
+			for ( var z = startZ; z < endZ; z++ ) {
+
+					doit = true;
+					px = 10 * x 
+					pz = 10 * z;
+
+					for ( var i = 0; i < terrain.children.length; i++ ) {
+
+						pt = terrain.children[ i ].position;
+
+						if ( pt.x === px && pt.z === pz ) {
+
+							doit = false;
+							break;
+
+						} 
+
+					}
+
+					if ( doit  === true ) {
+
+						mesh = new THREE.Mesh( geometry, material );
+						mesh.position.set( px, 0, pz );
+						terrain.add( mesh );
+
+					}
+
+			}
+		} 
+
+	}
+
+
+	function onKeyUp ( event ) {
+
+		event.preventDefault();
+
+//console.log( 'key', event.keyCode );
+	
+		switch( event.keyCode ) {
+
+			case 37: /* cursor left */ updateTerrain( --terrainX, terrainZ ); break;
+			case 39: /* cursor right */ updateTerrain( ++terrainX, terrainZ ); break;
+			case 38: /* cursor up */ updateTerrain( terrainX, ++terrainZ ); break;
+			case 40: /* cursor down */ updateTerrain( terrainX, --terrainZ ); break;
+
+		}
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

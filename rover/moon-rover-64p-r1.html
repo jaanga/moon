@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Moon Rover Mobile r5.2</title>
+<meta charset=utf-8 />
+<meta name=viewport content = 'width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' />
+</head>
+<body>
+<script src = http://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/FirstPersonControls.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script>
+
+// Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
+
+	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/terrain-r2/viewers/';
+
+	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-100-5760x2880.csv';
+//	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-9000-5760x2880.csv';
+
+//	var mapImage = sourceFolder + 'moon-images/Moonmap_from_clementine_data.png'; // 1440 x 720
+//	var mapImage = sourceFolder + 'moon-images/WAC_GLD100_E000N1800_008P.jpg'; // 1440 x 720
+//	var mapImage = sourceFolder + 'moon-images/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_1.2km.jpg'; // 9216 x 4608
+//	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16.jpg'; // 8192 x 4096 http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
+	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16_4096x2048.jpg'; //  http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
+
+//	var heightmapImage = sourceFolder + 'moon-heightmaps/moon_lro_bumpmap_8192x4096.jpg'
+//	var heightmapImage = sourceFolder + 'moon-heightmaps/WAC_GLD100_E000N1800_008P.jpg'; // 5770 x 2880
+//	var heightmapImage = sourceFolder + 'moon-heightmaps/LALT_GGT_MAP.jpg'; // 5770 x 2880
+//	var heightmapImage = sourceFolder + 'moon-heightmaps/WAC_GLD100_E000N1800_016P.png'; // 5770 x 2880
+	var heightmapImage = sourceFolder + 'moon-heightmaps/WAC_GLD100_E000N1800_016P.jpg'; // 5770 x 2880
+
+	var width = 5760;
+	var height = 2880;
+
+	var halfWidth = 0.5 * width;
+	var halfHeight = 0.5 * height;
+
+	var heightMeshWidth;
+	var heightMeshHeight;
+
+	var heightMeshHalfWidth;
+	var heightMeshHalfHeight;
+
+	var delta;
+
+	var defaultPixels = 512;
+
+	var heightMeshYPosition = 1;
+
+	var placardHeight = 200;
+	var placardSize = 0.15;
+
+//	var selectedPlace = 1753;  // Copernicus 9000
+//	var selectedPlace = 20;  // Copernicus 100
+	var selectedPlace = Math.floor( Math.random() * 97 );  // Copernicus 100
+
+	var scale = 1;
+	var scaleAdjust = 0.5;
+	var scl = scale * scaleAdjust;
+
+	var mapMesh, heightmap, heightMesh;
+	var canvas, context;
+	var centerX, centerZ;
+
+	var css, hamburger, menu, navigation, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
+			'h3 { margin: 0; }' +
+			'#bars, #i { font-size: 24pt; text-decoration: none; }' +
+			'#bars { color: pink; } ' +
+
+			'input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: silver; height: 20px; width: 180px; } ' +
+			'input[type=range]::-moz-range-thumb { -moz-appearance: none; background-color: #888; width: 10px; } ' +
+			'input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; opacity: 0.5; height: 28px; width: 10px; } ' +
+		'';
+
+		hamburger = document.body.appendChild( document.createElement( 'div' ) );
+		hamburger.style.cssText = ' left: 220px; position: absolute; top: 0px; transition: left 1s; ';
+		hamburger.innerHTML = '<a id=bars href=JavaScript:slideHamburger(); >&#9776;</a>';
+
+		menu = hamburger.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -220px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
+			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
+		menu.innerHTML = '<h3 style=margin:0; ><a href="" >' + document.title + '</a> ' +
+			'<a id=i href=http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/ >&#x24D8;</a></h3>' +
+			'<p><select id=selPlace></select></p>' +
+			'<p>' +
+				'<button onclick=controls.reset(); >Zoom All</button> ' +
+				'<button id=butZoomIn onclick=zoomIn(); >Zoom In</button>' +
+			'</p>' +
+			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;initTerrain(); /></p>' +
+			'<p>' +
+				'Field of view/pixels:<br>' +
+				'<input type=radio name=radField id=but256 onchange=updateMeshDims(256);initTerrain(true); />256 ' +
+				'<input type=radio name=radField id=but512 onchange=updateMeshDims(512);initTerrain(true); checked=true />512 ' +
+				'<input type=radio name=radField id=but1025 onchange=updateMeshDims(1024);initTerrain(true); />1024' +
+			'</p>' +
+			'<div id=info ></div>' +
+		'';
+
+		navigation = document.body.appendChild( document.createElement( 'div' ) );
+		navigation.style.cssText = ' bottom: 0; left: 0; margin: 10px auto; position: absolute; right: 0; width: 250px; ';
+		navigation.innerHTML = '<div><button onclick=goNorth(); >North</button> ' +
+				'<button onclick=goSouth(); >South</button> ' +
+				'<button onclick=goEast(); >East</button> ' +
+				'<button onclick=goWest(); >West</button><br>' +
+				'</div>' +
+			'<div id=msg ></div>' +
+		'';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
+		camera.position.set( 1000, 4000, 4000 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 10000;
+		controls.enableKeys = false;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'keyup', onKeyUp, false );
+
+// assets
+
+		updateMeshDims( defaultPixels );
+
+		var axisHelper = new THREE.AxisHelper( 500 );
+		scene.add( axisHelper );
+
+		heightmapImg = document.createElement( 'img' );
+//		document.body.appendChild( heightmapImg );
+//		heightmapImg.style.cssText = 'position: absolute; top: 0; z-index: -50;';
+		heightmapImg.crossOrigin = 'Anonymous';
+		heightmapImg.onload = initTerrain;
+		heightmapImg.src = heightmapImage;
+
+		THREE.ImageUtils.crossOrigin = 'anonymous';
+		var texture = THREE.ImageUtils.loadTexture( mapImage );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		geometry = new THREE.PlaneGeometry( width, height );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+		mapMesh = new THREE.Mesh( geometry, material );
+		scene.add( mapMesh );
+
+		canvas = document.createElement( 'canvas' );
+//		document.body.appendChild( canvas );
+//		canvas.style.cssText = 'position: absolute; top: 0; z-index: -1;';
+		canvas.width = heightMeshWidth;
+		canvas.height = heightMeshHeight;
+		context = canvas.getContext( '2d' );
+
+		geometry = new THREE.PlaneBufferGeometry( heightMeshWidth, heightMeshHeight, heightMeshWidth - 1, heightMeshWidth - 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		vertices = geometry.attributes.position.array;
+		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
+		heightMesh = new THREE.Mesh( geometry, material3D );
+		heightMesh.position.y = heightMeshYPosition;
+		scene.add( heightMesh );
+
+		if ( location.hash.length > 1 ) {
+
+			selectedPlace = location.hash.substr( 1 );
+
+		} else { 
+
+			selectedPlace = Math.floor( Math.random() * 97 );  // Copernicus 100
+
+		}
+
+		getGazetteerMoon();
+
+	}
+
+	function updateMeshDims( pixels ) {
+
+		heightMeshWidth = pixels; // 256;
+		heightMeshHeight = pixels; //256;
+
+		heightMeshHalfWidth = 0.5 * heightMeshWidth; // 256;
+		heightMeshHalfHeight = 0.5 * heightMeshHeight; //256;
+
+		delta = heightMeshWidth / 8;
+
+		if ( heightMesh !== undefined ) {
+
+			canvas.width = heightMeshWidth;
+			canvas.height = heightMeshHeight;
+			context = canvas.getContext( '2d' );
+
+			scene.remove( heightMesh );
+			geometry = new THREE.PlaneBufferGeometry( heightMeshWidth, heightMeshHeight, heightMeshWidth - 1, heightMeshWidth - 1 );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+			vertices = geometry.attributes.position.array;
+			material3D = new THREE.MeshNormalMaterial( { side: 2 } );
+			heightMesh = new THREE.Mesh( geometry, material3D );
+			heightMesh.position.y = heightMeshYPosition;
+			scene.add( heightMesh );
+
+			initTerrain( true );
+
+		}
+
+	}
+
+	function getGazetteerMoon() {
+
+		var data = requestGazetteer( gazetteerFile );
+		var xmlHttp;
+
+		function requestGazetteer( fileName ) {
+
+			xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( 'GET', fileName, true );
+			xmlHttp.onreadystatechange = callbackGazetteer;
+			xmlHttp.send( null );
+
+		}
+
+		function callbackGazetteer() {
+
+			if ( xmlHttp.readyState != 4  ) { return; }
+
+			var response = xmlHttp.responseText;
+
+			var lines = response.split(/\r\n|\n/);
+
+			gazetteer = [];
+
+			for ( var i = 0, place; i < lines.length; i++ ) {
+
+				place = lines[i].split( ',' );
+
+				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
+
+					drawSprite( place[ 0 ], placardSize, 120, parseFloat( place[ 2 ] ) - halfWidth, placardHeight, parseFloat( place[ 3 ] ) - halfHeight );
+
+			}
+
+			gazetteer.sort();
+
+			for ( var i = 0, place; i < lines.length; i++ ) {
+
+				selPlace.appendChild( document.createElement( 'option' ) );
+				selPlace.children[ i ].text = gazetteer[ i  ][ 0 ];
+
+			}
+
+			selPlace.selectedIndex = selectedPlace;
+
+			selPlace.onchange = function() {
+
+				var place = gazetteer[ this.selectedIndex ];
+
+				centerX = place[ 2 ];
+				centerZ = place[ 3 ];
+
+				drawSprite( place[ 0 ], placardSize, 120, parseFloat( place[ 2 ] ) - halfWidth, placardHeight, parseFloat( place[ 3 ] ) - halfHeight );
+
+				initTerrain( true );
+
+				canvas.focus();
+
+			};
+
+			selPlace.onchange();
+			zoomIn();
+
+		}
+
+	}
+
+	function initTerrain( follow ) {
+
+		if ( centerX < halfWidth ) {
+
+			context.drawImage( heightmapImg, centerX - heightMeshHalfWidth + halfWidth, centerZ - heightMeshHalfHeight, heightMeshWidth, heightMeshHeight, 0, 0, heightMeshWidth, heightMeshHeight );
+
+		} else {
+
+			context.drawImage( heightmapImg, centerX - heightMeshHalfWidth - halfWidth, centerZ - heightMeshHalfHeight, heightMeshWidth, heightMeshWidth, 0, 0, heightMeshWidth, heightMeshHeight );
+
+		}
+
+		map = context.getImageData( 0, 0, heightMeshWidth, heightMeshHeight ).data;
+
+		for ( var i = 1, j = 0; i < vertices.length; i += 3, j += 4 ) {
+
+			vertices[ i ] = scl * map[ j ]; ;
+
+		}
+
+		heightMesh.geometry = geometry.clone();
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+		heightMesh.position.set( centerX - halfWidth, heightMeshYPosition, centerZ - halfHeight );
+
+		if ( follow === true ) {
+
+			zoomAlong();
+
+		}
+
+	}
+
+	function zoomIn() {
+
+		controls.target.set( centerX - halfWidth, heightMeshYPosition + 100, centerZ - halfHeight );
+		camera.position.set( centerX - halfWidth + 100, heightMeshYPosition + 500, centerZ - halfHeight + 250 );
+
+	}
+
+	function zoomAlong() {
+
+		var diff = controls.target.clone().sub( camera.position );
+		controls.target.set( centerX - halfWidth, heightMeshYPosition + 100, centerZ - halfHeight);
+		var pos = controls.target.clone().sub( diff );
+		camera.position.set( pos.x, pos.y, pos.z );
+
+	}
+
+// cursor keys
+
+	function onKeyUp ( event ) {
+
+		event.preventDefault();
+
+//console.log( 'key', event.keyCode );
+
+		switch( event.keyCode ) {
+
+			case 37: goWest(); break; // cursor left
+
+			case 39: goEast(); break; // cursor right
+
+			case 38: goNorth(); break; // cursor up
+
+			case 40: goSouth(); break; // cursor down
+
+		}
+
+	}
+
+	function goNorth() {
+
+		centerZ -= delta;
+		centerZ = centerZ <= heightMeshHalfHeight ? heightMeshHalfHeight : centerZ;
+
+		initTerrain( true );
+
+	}
+
+	function goSouth() {
+
+		centerZ += delta;
+		centerZ = centerZ >= height - heightMeshHalfHeight ? height - heightMeshHalfHeight : centerZ;
+
+		initTerrain( true );
+
+	}
+
+	function goEast() {
+
+		centerX += delta;
+
+		if ( centerX < width - heightMeshHalfWidth ) {
+
+			if ( centerX > halfWidth - heightMeshHalfWidth && centerX < halfWidth ) {
+
+				centerX = halfWidth + heightMeshHalfWidth;
+
+			}
+
+		} else {
+
+			centerX = -heightMeshHalfWidth ;
+
+		}
+
+		initTerrain( true );
+
+
+	}
+
+	function goWest() {
+
+		centerX -= delta;
+
+		if ( centerX > heightMeshHalfWidth ) {
+
+			if ( centerX > halfWidth && centerX < halfWidth + heightMeshHalfWidth ) {
+
+				centerX = halfWidth - heightMeshHalfWidth;
+
+			}
+
+		} else {
+
+			centerX = width - heightMeshHalfWidth;
+
+		}
+
+		initTerrain( true );
+
+	}
+
+// draw placards
+
+	function drawSprite( text, scale, color, x, y, z) {
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }  );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+		scene.add ( sprite );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, 0, z ),  v( x, placardHeight,  z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+		scene.add( line );
+
+	}
+
+	function canvasMultilineText( textArray, parameters ) {
+
+		var parameters = parameters || {} ;
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		var col = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+		context.fillStyle = 'hsl( ' + col + ', 80%, 50% )' ;
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+
+		return texture;
+
+	}
+
+	function slideHamburger() {
+
+		hamburger.style.left = hamburger.style.left === '220px' ? 0 : '220px';
+
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+	function v( x, y, z){ return new THREE.Vector3( x, y, z ); }
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

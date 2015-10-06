@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Jaanga Moon Viewer R3</title>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+<script src = http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src = http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src = http://mrdoob.github.io/three.js/examples/js/controls/FirstPersonControls.js ></script>
+<script>
+
+	var centerX = 4000;
+	var centerZ = 2000;
+
+	var delta = 8;
+//	var imageName = '../../images/LALT_GGT_MAP.jpg';
+	var imageName = '../../images/ACopldB.jpg';
+
+	var scale = 10;
+	var heightMap;
+	var vertices;
+
+	var cam1, cam2, con1, con2;
+	var clock = new THREE.Clock();
+
+	var renderer, scene, camera, controls, heightMap;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		css = document.head.appendChild( document.createElement('style') );
+		css.innerHTML ='body { color: #fff; font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'a { color: #fff; } ' +
+		'';
+
+		info = document.body.appendChild( document.createElement( 'div' ) );
+		info.style.cssText = 'margin: 20px; position: absolute; ';
+		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+			'<p><button onclick=goNorth(); >North</button></p>' +
+			'<p><button onclick=goSouth(); >South</button></p>' +
+			'<p><button onclick=goEast(); >East</button></p>' +
+			'<p><button onclick=goWest(); >West</button></p>' +
+			'<p>X <input type=range id=inpX min=0 max=8192 step=10 value=' + centerX + ' onclick=centerX=parseInt(this.value,10);initTerrain(); /> </p>' +
+			'<p>Y <input type=range id=inpY min=0 max=4096 step=10 value=' + centerZ + ' onclick=centerZ=parseInt(this.value,10);initTerrain(); /> </p>' +
+			'<p><button onclick=setControlsFirstPerson(); >First Person Controls</button> ' +
+				'<button onclick=setControlsOrbit(); >Orbit Controls</button></p>' +
+			'<p>Freeze camera: <input type=checkbox id=chkFreeze ></p>' +
+			'<div id=msg ></div>' +
+		'';
+
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		scene = new THREE.Scene();
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 0, 200, 350 );
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.noKeys = true;
+
+		window.addEventListener( 'keydown', onKeyUp, false );
+
+		canvas = document.createElement( 'canvas' );
+//		document.body.appendChild( canvas );
+//		canvas.style.cssText = 'position: absolute; top: 0; z-index: -1;';
+		canvas.width = 256;
+		canvas.height =  256;
+		context = canvas.getContext( '2d' );
+
+		heightMap = document.createElement( 'img' );
+//		document.body.appendChild( heightMap );
+//		heightMap.style.cssText = 'position: absolute; top: 0; z-index: -1;';
+		heightMap.crossOrigin = 'Anonymous';
+		heightMap.onload = initTerrain;
+		heightMap.src = imageName;
+
+		geometry = new THREE.PlaneBufferGeometry( 500, 500, 255, 255);
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		vertices = geometry.attributes.position.array;
+		material = new THREE.MeshNormalMaterial( { side: 2 } );
+		scale = 0.05 * scale;
+
+		addCamerasControls();
+
+	}
+
+	function addCamerasControls() {
+
+		cam1 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam1.position.set( -150, 20, 0 );
+
+		cam2 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam2.position.set( 100, 100, 100 );
+		con2 = new THREE.OrbitControls( cam2, renderer.domElement );
+
+		window.addEventListener( 'keydown', onKeyDown, false );
+//		renderer.domElement.addEventListener( 'wheel', onMouseWheel, false );
+
+		setControlsOrbit();
+
+	}
+
+	function setControlsFirstPerson() {
+
+		cam1.position.set( 150, 100, 0 );
+		con1 = new THREE.FirstPersonControls( cam1 );
+		con1.lookSpeed = 0.05;
+		con1.movementSpeed = 50;
+		con1.lon = 180;
+
+		camera = cam1;
+		controls = con1;
+
+	}
+
+
+	function setControlsOrbit() {
+
+		camera = cam2;
+		camera.position.set( 0, 200, 350 );
+		controls = con2;
+
+	}
+
+
+	function onKeyDown( event ) {
+
+		switch ( event.keyCode ) {
+
+			case 32: /*spacebar*/ chkFreeze.checked = !chkFreeze.checked; break;
+
+		}
+
+	}
+
+	function initTerrain() {
+
+		context.drawImage( heightMap, centerX - 128, centerZ - 128, 256, 256, 0, 0, 256, 256 );
+		pix = context.getImageData( 0, 0, 256, 256 ).data;
+
+		for ( var i = 0, j = 1; i < pix.length; i += 4, j += 3 ) {
+
+			vertices[ j ] = scale * pix[ i ];
+
+		}
+
+		scene.remove( mesh );
+		mesh = new THREE.Mesh( geometry.clone(), material );
+		mesh.geometry.computeFaceNormals();
+		mesh.geometry.computeVertexNormals();
+
+		scene.add( mesh );
+
+	}
+
+	function goNorth() {
+
+		centerZ -= delta;
+		initTerrain();
+
+	}
+
+	function goSouth() {
+
+		centerZ += delta;
+		initTerrain();
+
+	}
+
+	function goEast() {
+
+		centerX += delta;
+		initTerrain();
+
+	}
+
+	function goWest() {
+
+		centerX -= delta;
+		initTerrain();
+
+	}
+
+
+	function onKeyUp ( event ) {
+
+		event.preventDefault();
+
+//console.log( 'key', event.keyCode );
+	
+		switch( event.keyCode ) {
+
+			case 37: /* cursor left */ goWest(); break;
+
+			case 39: /* cursor right */ goEast(); break;
+
+			case 38: /* cursor up */ goNorth(); break;
+
+			case 40: /* cursor down */ goSouth(); break;
+
+		}
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+
+		if ( chkFreeze.checked === true ) {
+
+			controls.enabled = false
+
+		} else {
+
+			controls.enabled = true;
+			controls.update( clock.getDelta() );
+msg.innerHTML = 'cam x:' + camera.position.x.toFixed( 1 ) + ' z:' + camera.position.z.toFixed( 1 );
+
+		}
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>moon-gazetteer-display-v-0-2-0.html</title>
+<meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+</head>
+<body>
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<script>
+
+	var image = 'Lunar_Clementine_UVVIS_750nm_Global_Mosaic_1.2km.jpg'; // 9216 x 4608
+	var heightmapImage = '../moon-viewer/LALT_GGT_MAP.jpg'; // 5770 x 2880
+	var image = '../moon-viewer/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_1.2km.jpg'; // 9216 x 4608
+
+	var gazetteerFile = 'moon-100-9216x4608.csv';
+	var gazetteerFile = 'moon-100-5760x2880.csv';
+
+	var width = 9216;
+	var height = 4608;
+
+	var width = 5760;
+	var height = 2880;
+
+	var placardHeight = 260;
+
+	var centerX = 2702;
+	var centerZ = 2134;
+	var scale = 1;
+
+	var css, menu, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		css = document.head.appendChild( document.createElement( 'style' ) );
+		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'#i {text-decoration: none; }' +
+		'';
+
+		menu = document.body.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = 'margin: 0 20px; position: absolute; ';
+		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
+			'<a id=i href=http://jaanga.github.io/ >&#x24D8;</a></h2>' +
+			'<p><select id=selPlace></select></p>' +
+			'<div id=info ></div>' +
+		'';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
+		camera.position.set( 1000, 4000, 4000 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 10000;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+// assets
+
+		texture = THREE.ImageUtils.loadTexture( image );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		geometry = new THREE.PlaneGeometry( width, height );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+		planview = new THREE.Mesh( geometry, material );
+
+		scene.add( planview );
+
+		var axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+		getGazetteerMoon();
+
+		material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+		canvas = document.createElement( 'canvas' );
+		document.body.appendChild( canvas );
+		canvas.style.cssText = 'position: absolute; top: 0; z-index: -1;';
+		canvas.width = 256;
+		canvas.height =  256;
+		context = canvas.getContext( '2d' );
+
+		heightMap = document.createElement( 'img' );
+//		document.body.appendChild( heightMap );
+//		heightMap.style.cssText = 'position: absolute; top: 0; z-index: -1;';
+		heightMap.crossOrigin = 'Anonymous';
+		heightMap.onload = initTerrain;
+		heightMap.src = heightmapImage;
+
+		geometry = new THREE.PlaneBufferGeometry( 256, 256, 255, 255);
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		vertices = geometry.attributes.position.array;
+
+//		scale = 0.05 * scale;
+
+	}
+
+	function initTerrain() {
+
+		context.drawImage( heightMap, centerX - 128, centerZ - 128, 256, 256, 0, 0, 256, 256 );
+		pix = context.getImageData( 0, 0, 256, 256 ).data;
+
+		for ( var i = 0, j = 1; i < pix.length; i += 4, j += 3 ) {
+
+			vertices[ j ] = scale * pix[ i ];
+
+		}
+
+//		scene.remove( sprite );		
+
+		scene.remove( mesh );
+		material = new THREE.MeshNormalMaterial( { side: 2 } );
+		mesh = new THREE.Mesh( geometry.clone(), material );
+		mesh.geometry.computeFaceNormals();
+		mesh.geometry.computeVertexNormals();
+		mesh.position.set( centerX - 0.5 * width, 50, centerZ - 0.5 * height );
+		scene.add( mesh );
+
+		controls.target.set( centerX - 0.5 * width, 50 + 100, centerZ - 0.5 * height );
+		camera.position.set( centerX - 0.5 * width + 200, 50 + 300, centerZ - 0.5 * height - 200 );
+
+	}
+
+	function getGazetteerMoon() {
+
+// https://the-moon.wikispaces.com/Lunar+100
+// Edits and additions by Jaanga authors
+
+		var data = requestGazetteer( gazetteerFile );
+		var xmlHttp;
+
+		function requestGazetteer( fileName ) {
+
+			xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( 'GET', fileName, true );
+			xmlHttp.onreadystatechange = callbackGazetteer;
+			xmlHttp.send( null );
+
+		}
+
+		function callbackGazetteer() {
+
+			if ( xmlHttp.readyState != 4  ) { return; }
+
+			var response = xmlHttp.responseText;
+
+			var lines = response.split(/\r\n|\n/);
+			gazetteer = [ ['select destination'] ];
+			var index = 0;
+
+			for ( var i = 0, place; i < lines.length; i++ ) {
+
+				place = lines[i].split( ',' );
+
+				gazetteer.push( [ place[0], place[1], parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
+
+				sprite = drawSprite( place[ 0 ], 0.25, 120, parseFloat( place[ 2 ] ) - 0.5 * width, placardHeight, parseFloat( place[ 3 ] ) - 0.5 * height );
+				scene.add ( sprite );
+
+				parent.selPlace.appendChild( document.createElement( 'option' ) );
+				parent.selPlace.children[ i ].text = gazetteer[ i  ][ 0 ];
+
+			}
+
+// console.log( gazetteer );
+
+			parent.selPlace.onchange = function() {
+
+				var startPlace = this.selectedIndex;
+
+				centerX = gazetteer[ startPlace ][ 2 ];
+				centerZ = gazetteer[ startPlace ][ 3 ];
+
+				initTerrain();
+
+//				scene.remove( sprite );
+//				sprite = drawSprite( gazetteer[ startPlace ][ 0 ], 0.5, 120, 0, 150, 0 );
+//				scene.add( sprite );
+
+			};
+
+		}
+
+	}
+
+
+	function drawSprite( text, scale, color, x, y, z) {
+
+		texture = canvasMultilineText( text, { backgroundColor: color }  );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, 0, z ),  v( x, placardHeight,  z ) ];
+		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		line = new THREE.Line( geometry, material );
+		scene.add( line )
+
+		return sprite;
+
+	}
+
+	function canvasMultilineText( textArray, parameters ) {
+
+		var parameters = parameters || {} ;
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		col = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+		context.fillStyle = 'hsl( ' + col + ', 80%, 50% )' ;
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+
+		return texture;
+
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+	function v( x, y, z){ return new THREE.Vector3( x, y, z ); } 
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

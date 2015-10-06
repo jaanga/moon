@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>get-moon-100.html</title>
+<meta charset=utf-8 />
+<meta name=author content='Theo Armour' />
+</head>
+<body>
+<script>
+// https://the-moon.wikispaces.com/Lunar+100
+
+	var fileName = './moon-100-gazetteer-source.csv';
+
+	var width = 9216;
+	var height = 4608;
+
+//	var width = 8192;
+//	var height = 4096;
+
+	var width = 5760;
+	var height = 2880;
+
+	var gazetteer;
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+		'<p><button onclick=saveFile(); >Save File</button></p>' +
+		'<div id=msg1 ></div>' +
+	'';
+
+	getGazetteerGEBCO();
+
+	function getGazetteerGEBCO() {
+
+		requestGazetteer();
+		var xmlHttp;
+
+		function requestGazetteer(  ) {
+
+			xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( 'GET', fileName, true );
+			xmlHttp.onreadystatechange = callbackGazetteer;
+			xmlHttp.send( null );
+
+		}
+
+		function callbackGazetteer() {
+
+			if ( xmlHttp.readyState != 4  ) { return; }
+
+			var response = xmlHttp.responseText;
+
+			lines = response.split(/\r\n|\n|\n/);
+//console.log( lines );
+			gazetteer = [];
+
+			var index = 0;
+
+			places = [];
+
+			for ( var i = 0, place = 0; i < lines.length - 1; i++ ) {
+
+				place = lines[i].split( ',' );
+
+				places.push( place );
+
+				lat = place[ 2 ].substr( -1 ) === 'N' ? place[ 2 ].slice( 0, -1 ) : '-' +  place[ 2 ].slice( 0, -1 );
+
+				y = height * ( 1 - ( parseFloat( lat ) + 90 ) / 180  );
+
+				lon = place[ 3 ].substr( -1 ) === 'E' ? place[ 3 ].slice( 0, -1 ) : '-' +  place[ 3 ].slice( 0, -1 );
+
+				x = width * ( parseFloat( lon ) + 180 ) / 360 ;
+
+				gazetteer.push( [ place[ 0 ], place[ 1 ], x.toFixed( 0 ), y.toFixed( 0 ) ] );
+
+			}
+
+// console.log( places );
+
+			var txt = '';
+
+			for ( var i = 0; i < gazetteer.length; i++ ) {
+
+//				txt += gazetteer[ i ][ 0 ] + ' ~ ' + gazetteer[ i ][ 1 ]  + ' ~ lat:' + gazetteer[ i ][ 2 ] + ' lon:' + gazetteer[ i ][ 3 ] + '<br>' ;
+
+				txt += gazetteer[ i ][ 0 ] + ',' + gazetteer[ i ][ 1 ]  + ',' + gazetteer[ i ][ 2 ] + ',' + gazetteer[ i ][ 3 ] + '<br>' ;
+
+			}
+
+			msg1.innerHTML = txt;
+
+		}
+
+	}
+
+	function saveFile() {
+
+		var blob = new Blob( [ msg1.innerText ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'moon-100-' + width + 'x' + height + '.csv';
+		a.click();
+		delete a;
+
+	}
+</script>
+</body>
+</html>
+
