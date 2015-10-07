@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Rover 16p r1.1</title>
+<title>Moon Rover 64p r1.1</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -13,19 +13,19 @@
 <script>
 
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
-	var sourceFolder = window.self === window.top ? '../' : 'http://exploratoria.github.io/sandbox/astronomy/';
-	var heightMapsFolder = 'c:/temp/moon-heightmaps/64p/'
+	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/moon/';
+	var heightMapsFolder = '../heightmaps/64p/'
 	var name = '/64p-';
 
 //	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-100-9216x4608.csv';
 //	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-100-5760x2880.csv';
-	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-9000-5760x2880.csv';
+	var gazetteerFile = sourceFolder + 'gazetteer/moon-9000-5760x2880.csv';
 
 //	var mapImage = sourceFolder + 'moon-images/Moonmap_from_clementine_data.png'; // 1440 x 720
 //	var mapImage = sourceFolder + 'moon-images/WAC_GLD100_E000N1800_008P.jpg'; // 1440 x 720
 //	var mapImage = sourceFolder + 'moon-images/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_1.2km.jpg'; // 9216 x 4608
 //	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16.jpg'; // 8192 x 4096 http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
-	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16_4096x2048.jpg'; // http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
+	var mapImage = sourceFolder + 'images/moon_8k_color_brim16_4096x2048.jpg'; // http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
 //	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16_2880x1440.jpg'; // http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
 
 //	var heightmapImage = sourceFolder + 'moon-images/LALT_GGT_MAP.jpg'; // 5770 x 2880
@@ -97,7 +97,7 @@
 		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -300px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; width: 260px; ';
 		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
-			'<a id=i href=http://exploratoria.github.io/sandbox/astronomy/moon-rover/ >&#x24D8;</a></h2>' +
+			'<a id=i href=http://jaanga.github.io/moon/rover/ >&#x24D8;</a></h2>' +
 			'<p>Use cursor keys to move over terrain</p>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
