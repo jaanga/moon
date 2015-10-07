@@ -1,20 +1,20 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Terrain 2]( http://jaanga.github.io/terrain-r2/index.html ) &raquo; [Viewers]( http://jaanga.github.io/terrain-r2/viewers/index.html ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Rover Mobile Read Me]( ./index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/terrain-r2/tree/gh-pages/viewers/moon-rover-mobile/'; />
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/rover-mobile/ "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/moon-rover-mobile/'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/moon-rover-mobile-r5-2.html" width=100% height=500px ></iframe>  
-####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/moon-rover-mobile-r5-2.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-mobile/moon-rover-mobile-r5-2.html" width=100% height=500px ></iframe>  
+####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-mobile/moon-rover-mobile-r5-2.html )
 
 
-[Moon Rover Mobile R5 Demo Full Screen - Dev]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/ )
+[Moon Rover Mobile R5 Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-mobile/moon-rover-mobile/dev/ )
 
 <!--
-[Moon Rover Mobile R5 Demo Full Screen - Build]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/build/ )
+[Moon Rover Mobile R5 Demo Full Screen - Build]( http://jaanga.github.io/moon/rover-mobile/build/ )
 -->
 
 ## Concept
@@ -26,9 +26,7 @@ From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D o
 ## Mission
 
 To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
-To show the usually hidden backside of the moon as easily as the fromt
-
-
+To show the usually hidden backside of the moon as easily as the front
 
 ## Things to Do
 
