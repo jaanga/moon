@@ -11,7 +11,7 @@
 ####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-mobile/moon-rover-mobile-r5-2.html )
 
 
-[Moon Rover Mobile R5 Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-mobile/moon-rover-mobile/dev/ )
+[Moon Rover Mobile R5 Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-mobile/dev/ )
 
 <!--
 [Moon Rover Mobile R5 Demo Full Screen - Build]( http://jaanga.github.io/moon/rover-mobile/build/ )
