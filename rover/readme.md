@@ -1,20 +1,14 @@
-[Jaanga Terrain2]( http://jaanga.github.io/terrain-r2/index.html ) &raquo; [Viewers]( http://jaanga.github.io/terrain-r2/viewers/index.html )
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )
 
-[Moon Rover Read Me]( ./index.html )
+[Moon Rover 64P Read Me]( ./index.html )
 ===
-<span style=display:none; >[View as web page]( http://jaanga.github.io/terrain-r2/viewers/moon-rover/ "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
 
-Interesting algorithms, but probably not best way to proceed.
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/rover/ "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/moon-rover/'; />
 
-Possibility: reuse the name somewhere else
 
-* [Moon Rover R2]( http://jaanga.github.io/terrain-r2/viewers/moon-rover/moon-rover-r2.html )
-	* 2015-05-19
-	* Very fast
-		* Try using the cursor keys!
-	* Issue: the cracks/gaps between tiles are simply just about absolutely unavoidable
-	* Resolution: use a single mesh
-* [Moon Rover R1]( http://jaanga.github.io/terrain-r2/viewers/moon-rover/moon-rover-r1.html )
-	* Working out simple method for moving the 'window' over a grid of data
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover/moon-rover-64p-r1.html" width=100% height=500px ></iframe>  
+####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover/moon-64p-r1.html )
 
-<input type=button value='View file as source code on GitHub' onclick=window.location.href='https://github.com/jaanga/terrain-r2/tree/gh-pages/viewers/moon-rover'; />
+
+[Moon Rover 64P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover/dev/ )
