@@ -12,3 +12,9 @@
 
 
 [Moon Rover 64P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover/dev/ )
+
+[Moon Rover 64P Demo Full Screen - Build]( http://jaanga.github.io/moon/rover/build/ )
+
+10917 km circumference of moon / ( 360 degrees * 64 pixels per degree ) = 0.473828125 or each pixel represents 474 meters or, roughly, each pixel is about half a kilometer.
+
+

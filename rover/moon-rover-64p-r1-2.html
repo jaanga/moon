@@ -386,6 +386,26 @@
 
 // cursor keys
 
+	function onKeyUp ( event ) {
+
+		event.preventDefault();
+
+//console.log( 'key', event.keyCode );
+
+		switch( event.keyCode ) {
+
+			case 37: goWest(); break; // cursor left
+
+			case 39: goEast(); break; // cursor right
+
+			case 38: goNorth(); break; // cursor up
+
+			case 40: goSouth(); break; // cursor down
+
+		}
+
+	}
+
 	function goNorth() {
 
 		centerZ -= delta;
@@ -466,26 +486,6 @@
 
 	}
 
-
-	function onKeyUp ( event ) {
-
-		event.preventDefault();
-
-//console.log( 'key', event.keyCode );
-
-		switch( event.keyCode ) {
-
-			case 37: /* cursor left */ goWest(); break;
-
-			case 39: /* cursor right */ goEast(); break;
-
-			case 38: /* cursor up */ goNorth(); break;
-
-			case 40: /* cursor down */ goSouth(); break;
-
-		}
-
-	}
 	function slideHamburger() {
 
 		hamburger.style.left = hamburger.style.left === '320px' ? 0 : '320px';
