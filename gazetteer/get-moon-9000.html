@@ -66,15 +66,16 @@
 
 				radius = place[ 2 ];
 
-				lat = place[ 3 ]; //.substr( -1 ) === 'N' ? place[ 2 ].slice( 0, -1 ) : '-' +  place[ 2 ].slice( 0, -1 );
+				lat = place[ 3 ];
 
 				y = height * ( 1 - ( parseFloat( lat ) + 90 ) / 180  );
 
-				lon = place[ 4 ]; // .substr( -1 ) === 'E' ? place[ 3 ].slice( 0, -1 ) : '-' +  place[ 3 ].slice( 0, -1 );
+				lon = place[ 4 ];
 
 				x = width * ( parseFloat( lon ) + 180 ) / 360 ;
 
-				gazetteer.push( [ place[ 0 ].replace( /"/g, '' ),radius, x.toFixed( 0 ), y.toFixed( 0 ) ] );
+//				gazetteer.push( [ place[ 0 ].replace( /"/g, '' ),radius, x.toFixed( 0 ), y.toFixed( 0 ) ] );
+				gazetteer.push( [ place[ 0 ].replace( /"/g, '' ),radius, lat, lon] );
 
 			}
 

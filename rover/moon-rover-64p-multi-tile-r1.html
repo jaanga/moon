@@ -14,6 +14,9 @@
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
 	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/moon/';
 
+	var gazetteerFile = sourceFolder + 'gazetteer/moon-iau-nomenclature.csv';
+	var gazetteer;
+
 	var heightMapsFolder = sourceFolder + 'heightmaps/64p/'
 	var name = '/64p-';
 
@@ -27,6 +30,12 @@
 	var scale = 1;
 	var scaleAdjust = 0.015;
 	var scl = scale * scaleAdjust;
+
+	var placardYPosition = 100;
+
+	var selectedPlace = 1753;  // Copernicus
+
+	var minPlaceRadiusToDisplay = 50; // radius of feature as defined by the gazetteer
 
 	var count;
 	var centerX, centerZ;
@@ -63,7 +72,7 @@
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
-				'<button id=butZoomIn onclick="camera.position.set(centerX-halfMapWidth+50,heightMeshYPosition+300,centerZ-halfMapHeight+400);" >Zoom In</button>' +
+//				'<button id=butZoomIn onclick="camera.position.set(centerX-halfMapWidth+50,heightMeshYPosition+300,centerZ-halfMapHeight+400);" >Zoom In</button>' +
 			'</p>' +
 			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;updateHeightMap(); /></p>' +
 			'<div id=info ></div>' +
@@ -116,6 +125,7 @@
 			for ( var y = 0; y < 4; y++ ) {
 
 				pane = document.createElement( 'img' );
+				pane.crossOrigin = 'Anonymous';
 				pane.id = x + '-' + y;
 				pane.onload = function() { drawTile( this ) };
 				panes.push( pane );
@@ -135,7 +145,7 @@
 
 	function latlon2xy( lat, lon ) {
 
-		cx = Math.floor( 90 + 90 * lon / 360 );
+		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 44 + 90 * lon / 360 );
 		cy = Math.floor( 23 - 45 * lat / 180 ) ;
 
 		return [ cx, cy ];
@@ -189,7 +199,104 @@
 
 		scene.add( heightMesh );
 
+		if ( gazetteer === undefined ) { getGazetteerMoon(); }
+
 	}
+
+
+	function getGazetteerMoon() {
+
+		var data = requestGazetteer( gazetteerFile );
+		var xmlHttp;
+
+		function requestGazetteer( fileName ) {
+
+			xmlHttp = new XMLHttpRequest();
+			xmlHttp.open( 'GET', fileName, true );
+			xmlHttp.onreadystatechange = callbackGazetteer;
+			xmlHttp.send( null );
+
+		}
+
+		function callbackGazetteer() {
+
+			if ( xmlHttp.readyState != 4  ) { return; }
+
+			var response = xmlHttp.responseText;
+
+			var lines = response.split(/\r\n|\n/);
+
+			gazetteer = [ ['select destination'] ];
+
+			for ( var i = 0, place; i < lines.length; i++ ) {
+
+				place = lines[i].split( ',' );
+
+				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
+
+				if ( parseFloat( place[ 1 ] ) > minPlaceRadiusToDisplay ) {
+
+//					drawSprite( place[ 0 ], 0.15, 120, parseFloat( place[ 2 ] ) - 0.5 * mapWidth, placardYPosition, parseFloat( place[ 3 ] ) - 0.5 * mapHeight);
+
+				}
+
+			}
+
+			for ( var i = 0, place; i < lines.length; i++ ) {
+
+				selPlace.appendChild( document.createElement( 'option' ) );
+				selPlace.children[ i ].text = gazetteer[ i  ][ 0 ];
+
+			}
+
+			selPlace.selectedIndex = selectedPlace;
+
+			selPlace.onchange = function() {
+
+				var place = gazetteer[ this.selectedIndex ];
+
+				pt = latlon2xy( place[ 2 ], place[ 3 ] );
+
+				centerX = pt[ 0 ];
+				centerZ = pt[ 1 ];
+
+				updateHeightMap();
+
+//				centerX = nextPlace[ 2 ];
+//				centerZ = nextPlace[ 3 ];
+
+//				drawSprite( nextPlace[ 0 ], 0.15, 120, nextPlace[ 2 ] - 0.5 * mapWidth, placardYPosition, nextPlace[ 3 ] - 0.5 * mapHeight);
+
+				//butZoomIn.onclick();
+//controls.reset(); 
+
+			};
+
+/*
+county = 0;
+
+		for ( var i = 0; i < gazetteer.length; i++ ) {
+
+			place = gazetteer[ i ];
+
+			if ( place[ 2 ] < 5 && place[ 2 ] > 0 && place[ 3 ] > 0 && place[ 3 ] < 5 ) {
+
+county++;
+
+			}
+
+		}
+
+console.log( county );
+
+*/
+
+//			selPlace.onchange();
+
+		}
+
+	}
+
 
 // cursor keys
 
