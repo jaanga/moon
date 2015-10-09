@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Rover 64P R1</title>
+<title>Moon Rover 64P R1.1</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -74,7 +74,13 @@
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
 //				'<button id=butZoomIn onclick="camera.position.set(centerX-halfMapWidth+50,heightMeshYPosition+300,centerZ-halfMapHeight+400);" >Zoom In</button>' +
 			'</p>' +
+
 			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;updateHeightMap(); /></p>' +
+			'<p><small>' +
+				'Use cursor keys to move around the moon<br>' +
+				'Roll = left | 1 finger<br>Zoom = scroll | 2 finger<br>Move = right | 3 finger' +
+			'</small></p>' +
+
 			'<div id=info ></div>' +
 		'';
 
@@ -134,6 +140,8 @@
 
 		} 
 
+	getCoordinates( latDefault, lonDefault);
+
 		pt = latlon2xy( latDefault, lonDefault );
 
 		centerX = pt[ 0 ];
@@ -141,12 +149,54 @@
 
 		updateHeightMap();
 
+
+
+	}
+
+	function getCoordinates( lat, lon ) {
+
+//console.log( 'lat', lat, 'lon', lon  );
+
+		pt = latlon2xy( lat, lon );
+//console.log( 'lat', lat, 'lon', lon, '\n', 'centerX', pt[ 0 ], 'centerZ', pt[ 1 ]  );
+
+		pt2 = xz2latlon( pt[ 0 ], pt[ 1 ] ) 
+
+console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ], '\nlat', pt2[ 0 ], 'lon', pt2[ 1 ] );
+
+	}
+
+	function xz2latlon( x, z ) {
+
+		if ( x > 44 ) {
+
+			lon = ( 4 * ( x + 1 ) ) - 361;
+
+		} else {
+
+			lon = 90 - 4 * x ;
+
+		}
+
+
+		if ( z > 22 ) {
+
+			lat = 90 - ( 4 * ( z - 1 ) ); 
+
+		} else {
+
+			lat = 89 - ( 4 * z );
+
+		}
+
+		return [ lat, lon ];
+
 	}
 
 	function latlon2xy( lat, lon ) {
 
-		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 44 + 90 * lon / 360 );
-		cy = Math.floor( 23 - 45 * lat / 180 ) ;
+		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 1 + 90 * lon / 360 );
+		cy = Math.floor( 22 - 45 * lat / 180 ) ;
 
 		return [ cx, cy ];
 
@@ -261,6 +311,8 @@
 				centerZ = pt[ 1 ];
 
 				updateHeightMap();
+
+getCoordinates( place[ 2 ], place[ 3 ]  );
 
 //				centerX = nextPlace[ 2 ];
 //				centerZ = nextPlace[ 3 ];

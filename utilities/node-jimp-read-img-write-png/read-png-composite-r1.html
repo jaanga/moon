@@ -9,10 +9,10 @@
 <script>
 
 //	var dirName = '/16p';
-	var dirName = 'c:/temp/moon-heightmaps/64p/';
+	var dirName = 'c:/temp/moon-heightmaps/256p/';
 
 	var widthSource = 23040; // 64p
-	var heightSource = 11520;
+	var heightSource = 15360;
 
 	var widthDestination = 256;
 	var heightDestination = 256;
@@ -59,6 +59,7 @@
 //		tile.crossOrigin = 'Anonymous';
 
 		processTiles();
+
 	}
 
 	function processTiles() {
@@ -97,7 +98,7 @@ console.log(  'end of story' );
 
 		}
 
-		tile.src = dirName + x + '/' + '16p-' + x + '-' + y + '.png';
+		tile.src = dirName + '+' + x + '/' + '256p+' + x + '+' + y + '.png';
 
 	}
 
