@@ -19,14 +19,19 @@
 
 //	var heightMapsFolder = sourceFolder + 'heightmaps/256p/'
 	var heightMapsFolder = 'c:/temp/moon-heightmaps/256p/'
-	var name = '/64p';
+
+//	var path = 'c:/temp/moon-heightmaps/';
+	var path = 'http://jaanga.github.io/';
+
+
+	var dirNE = 'moon-heightmaps-256p-ne/';
+	var dirNW = 'moon-heightmaps-256p-nw/';
+	var dirSE = 'moon-heightmaps-256p-se/';
+	var dirSW = 'moon-heightmaps-256p-sw/';
 
 // Copernicus,Archetypal large complex crater,9.7N,20.1W
 	var latDefault = 9.7;
 	var lonDefault = -20.1;
-
-	var latDefault = 30;
-	var lonDefault = 10;
 
 	var heightmapWidth = 1024;
 	var heightmapHeight = 1024;
@@ -38,21 +43,23 @@
 	var scaleAdjust = 0.065;
 	var scl = scale * scaleAdjust;
 
+	var placards;
 	var placardYPosition = 100;
 
 	var selectedPlace = 1753;  // Copernicus
 
 	var minPlaceRadiusToDisplay = 50; // radius of feature as defined by the gazetteer
 
+	tileXCount = heightmapWidth / widthDestination
+	tileYCount = heightmapWidth / widthDestination
 
-	var tilesX = 34; //widthSource / widthDestination;
-	var tilesY = 18; //heightSource / heightDestination;
+	var tileXStart = -22;
+	var tileXFinish = tileXStart + tileXCount;
+	var tileX = tileXStart;
 
-	tileX = 30;
-	tileY = tilesY - 4;
-
-	var offset = 30;
-	var offsetY = tilesY - 4;
+	var tileYStart = 8;
+	var tileYFinish = tileYStart + tileYCount;
+	var tileY = tileYStart;
 
 	var count;
 	var centerX, centerZ;
@@ -85,7 +92,6 @@
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; width: 260px; ';
 		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
 			'<a id=i href=http://jaanga.github.io/moon/rover/ >&#x24D8;</a></h2>' +
-			'<p>Use cursor keys to move over terrain</p>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
@@ -94,11 +100,11 @@
 
 			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;updateHeightMap(); /></p>' +
 			'<p><small>' +
-				'Use cursor keys to move around the moon<br>' +
+				'Use cursor keys to rove the moon<br>' +
 				'Roll = left | 1 finger<br>Zoom = scroll | 2 finger<br>Move = right | 3 finger' +
 			'</small></p>' +
-
 			'<div id=info ></div>' +
+			'<p id=places></p>' +
 		'';
 
 		stats = new Stats();
@@ -110,7 +116,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
-		camera.position.set( 200, 800, 800 );
+		camera.position.set( 200, 900, 1200 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 8000;
@@ -122,12 +128,12 @@
 		window.addEventListener( 'keydown', onKeyUp, false );
 
 // assets
-		var axisHelper = new THREE.AxisHelper( 800 );
+		var axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
 		heightmapCanvas = document.createElement( 'canvas' );
-		document.body.appendChild( heightmapCanvas );
-		heightmapCanvas.style.cssText = 'border: 5px red solid; position: absolute; top: 0; z-index: -50;';
+//		document.body.appendChild( heightmapCanvas );
+//		heightmapCanvas.style.cssText = 'border: 5px red solid; position: absolute; top: 0; z-index: -50;';
 		heightmapCanvas.width = heightmapWidth;
 		heightmapCanvas.height = heightmapHeight;
 		heightmapContext = heightmapCanvas.getContext( '2d' );
@@ -138,10 +144,11 @@
 
 		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
 		heightMesh = new THREE.Mesh( geometry3D.clone(), material3D );
-//		heightMesh.position.y = heightMeshYPosition;
-		scene.add( heightMesh );
+//		heightMesh.position.y = -300; //heightMeshYPosition;
+//		scene.add( heightMesh );
 
 		tile = document.createElement( 'img' );
+		tile.crossOrigin = 'Anonymous';
 
 		processTiles();
 
@@ -149,26 +156,27 @@
 
 	function processTiles() {
 
-//console.log( 'tx', tileX, 'ty', tileY, 's', tilesX, tilesY);
+//console.log( 'tx', tileX, 'ty', tileY, 's', tileXFinish, tilesY);
 
-		if ( tileY < tilesY && tileX < tilesX ) {
+		if ( tileY <= tileYFinish && tileX < tileXFinish ) {
 
-			tileY++;
+			addImage( tileX, tileY++ );
 
-			addImage( tileX, tileY - 1 );
-
-		} else if ( tileX < tilesX - 1 ) {
+		} else if ( tileX < tileXFinish ) {
 
 			tileX++;
-			tileY = 0;
+			tileY = tileYStart;
 
 			processTiles();
 
 		} else {
 
-console.log(  'end of story' );
+// console.log(  'end of story' );
 
 			updateTerrain();
+
+			info.innerHTML = 'lat: ' + tileYStart + ' to ' + tileYFinish + ' lon: ' + tileXStart + ' to ' + tileXFinish;
+//console.log( tile.src );
 
 		}
 
@@ -179,51 +187,48 @@ console.log(  'end of story' );
 
 		tile.onload = function() {
 
-			heightmapContext.drawImage( tile, 0, 0, widthDestination, heightDestination, ( x - offset ) * widthDestination, ( y - offsetY ) * heightDestination, widthDestination, heightDestination ); 
+			heightmapContext.drawImage( tile, 0, 0, widthDestination, heightDestination, ( x - tileXStart ) * widthDestination, ( 4 - y + tileYStart ) * heightDestination, widthDestination, heightDestination ); 
 
 			processTiles();
 
 		}
 
-		tile.src =  'c:/temp/moon-heightmaps/256p/' + '+' + x + '/' + '256p+' + x + '+' + y + '.png';
-console.log( tile.src );
-	}
+		if ( x < 0 ) {
 
+			signEW = '';
 
-	function latlon2xy( lat, lon ) {
+			if ( y < 0 ) {
 
-		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 1 + 90 * lon / 360 );
-		cy = Math.floor( 22 - 45 * lat / 180 ) ;
+				signNS = '';
+				dir = dirSW;
 
-		return [ cx, cy ];
+			} else {
 
-	}
-
-	function updateHeightMap() {
-
-		count = 0;
-		var index = 0;
-
-		for ( var x = centerX - 1; x < centerX + 3; x++ ) {
-
-			for ( var z = centerZ - 1; z < centerZ + 3; z++ ) {
-
-				panes[ index++ ].src = heightMapsFolder + x + name + x + '-' + z + '.png';
+				signNS = '+';
+				dir = dirNW;
 
 			}
 
-		} 
+		} else {
 
-	}
+			signEW = '+';
 
-	function drawTile( img ) {
+			if ( y < 0 ) {
 
-		point = img.id.split( '-' );
-		x = 256 * point[ 0 ];
-		y = 256 * point[ 1 ];
-		heightmapContext.drawImage( img, 0, 0, 256, 256, x, y, 256, 256 );
+				signNS = '';
+				dir = dirSE;
 
-		if ( ++count > 15 ) { updateTerrain(); }
+			} else {
+
+				signNS = '+';
+				dir = dirNE;
+
+			}
+
+		}
+
+		tile.src = path + dir + signEW + x + '/' + '256p' + signEW + x + signNS + y + '.png';
+//console.log( tile.src );
 
 	}
 
@@ -233,20 +238,21 @@ console.log( tile.src );
 
 		for ( var i = 1, j = 0; i < vertices.length; i += 3, j += 4 ) {
 
-			vertices[ i ] = scl * ( map[ j ] + 255 * map[ j + 1 ] );
+			vertices[ i ] = scl * ( map[ j ] + 255 * map[ j + 1 ] ) - 300;
 
 		}
 
 		heightMesh.geometry.dispose();
 		scene.remove( heightMesh );
 		heightMesh = new THREE.Mesh( geometry3D, material3D );
+		heightMesh.position.y = -300; //heightMeshYPosition;
 
-//		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeFaceNormals();
 		heightMesh.geometry.computeVertexNormals();
 
 		scene.add( heightMesh );
 
-//		if ( gazetteer === undefined ) { getGazetteerMoon(); }
+		if ( gazetteer === undefined ) { getGazetteerMoon(); } else { checkoutPlace(); }
 
 	}
 
@@ -281,12 +287,6 @@ console.log( tile.src );
 
 				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
 
-//				if ( parseFloat( place[ 1 ] ) > minPlaceRadiusToDisplay ) {
-
-//					drawSprite( place[ 0 ], 0.15, 120, parseFloat( place[ 2 ] ) - 0.5 * mapWidth, placardYPosition, parseFloat( place[ 3 ] ) - 0.5 * mapHeight);
-
-//				}
-
 			}
 
 			for ( var i = 0, place; i < lines.length; i++ ) {
@@ -302,47 +302,54 @@ console.log( tile.src );
 
 				var place = gazetteer[ this.selectedIndex ];
 
-				pt = latlon2xy( place[ 2 ], place[ 3 ] );
+				tileXStart = Math.floor( place[ 3 ] ) - 1;
+				tileYStart = Math.floor( place[ 2 ] ) - 1;
 
-				centerX = pt[ 0 ];
-				centerZ = pt[ 1 ];
+				tileXFinish = tileXStart + tileXCount;
+				tileX = tileXStart;
 
-				updateHeightMap();
+				tileYFinish = tileYStart + tileYCount;
+				tileY = tileYStart;
+				processTiles();
 
-getCoordinates( place[ 2 ], place[ 3 ]  );
+			}
 
-//				centerX = nextPlace[ 2 ];
-//				centerZ = nextPlace[ 3 ];
+			checkoutPlace(); 
 
-//				drawSprite( nextPlace[ 0 ], 0.15, 120, nextPlace[ 2 ] - 0.5 * mapWidth, placardYPosition, nextPlace[ 3 ] - 0.5 * mapHeight);
+		}
 
-				//butZoomIn.onclick();
-//controls.reset(); 
+	}
 
-			};
+	function checkoutPlace() {
 
-/*
-county = 0;
+		var txt = '';
+
+		scene.remove( placards );
+
+		placards = new THREE.Object3D();
 
 		for ( var i = 0; i < gazetteer.length; i++ ) {
 
 			place = gazetteer[ i ];
 
-			if ( place[ 2 ] < 5 && place[ 2 ] > 0 && place[ 3 ] > 0 && place[ 3 ] < 5 ) {
+			if ( place[ 2 ] > tileYStart && place[ 2 ] < tileYFinish && place[ 3 ] > tileXStart && place[ 3 ] < tileXFinish ) {
 
-county++;
+
+				difLon = place[ 3 ] - tileX;
+
+//console.log( place[ 3 ], tileX );
+
+				txt += place[ 0 ] + '<br>&bull; lat:' + place[ 2 ] + ' lon:' + place[ 3 ] + '<br>';
+
+				drawSprite( place[ 0 ], 0.25, 120, 256 * ( place[ 3 ] - tileX + 2 ), 300 , -256 * ( place[ 2 ] - tileY - 3 ) );
+
 
 			}
 
-		}
+		};
 
-console.log( county );
-
-*/
-
-//			selPlace.onchange();
-
-		}
+		places.innerHTML = txt;
+		scene.add( placards );
 
 	}
 
@@ -371,37 +378,113 @@ console.log( county );
 
 	function goNorth() {
 
-		centerZ--;
-		centerZ = centerZ <= 3 ? 3 : centerZ;
+		tileX = tileXStart - 1;
 
-		updateHeightMap();
+		tileYStart = ++tileYStart > 56 ? 56: tileYStart;
+		tileYFinish = tileYStart + tileYCount;
+
+		processTiles();
 
 	}
 
 	function goSouth() {
 
-		centerZ++;
-		centerZ = centerZ >= 41 ? 41 : centerZ;
+		tileX = tileXStart - 1;
+		--tileYStart;
+		tileYStart = tileYStart < -60 ? -60 : tileYStart;
+		tileYFinish = tileYStart + tileYCount;
 
-		updateHeightMap();
+		processTiles();
 
 	}
 
 	function goEast() {
 
-		centerX++;
-		centerX = centerX < 86 ? centerX : 3;
+		tileXStart = ++tileXStart > 175 ? -180 : tileXStart;
+		tileX = tileXStart;
+		tileXFinish = tileXStart + tileXCount;
 
-		updateHeightMap();
+		processTiles();
 
 	}
 
 	function goWest() {
 
-		centerX--;
-		centerX = centerX <  3 ? 86 : centerX;
+		tileXStart = --tileXStart < -180 ? 175 : tileXStart;
+		tileX = tileXStart;
+		tileXFinish = tileXStart + tileXCount;
 
-		updateHeightMap();
+		processTiles();
+
+	}
+
+
+// draw placards
+
+	function drawSprite( text, scale, color, x, y, z) {
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }  );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+		placards.add ( sprite );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, 0, z ),  v( x, 300,  z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+		placards.add( line );
+
+	}
+
+	function canvasMultilineText( textArray, parameters ) {
+
+		var parameters = parameters || {} ;
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		var col = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+		context.fillStyle = 'hsl( ' + col + ', 80%, 50% )' ;
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+
+		return texture;
 
 	}
 

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>img-viewer-3d-moon.html</title>
+<meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+</head>
+<body>
+<script>
+	var info, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh;
+
+	var startTime = Date.now();
+
+	var changes = 0;
+
+//	var fileName = '../../../data-samples/usgs-srtm1-2-1/N37W121.hgt';
+//	var fileName = 	'C:/temp/de-ferranti/P32/N60E006.hgt';
+//	var fileName = 	'C:/temp/LDEM_16.IMG';
+//	var fileName = 	'C:/temp/WAC_GLD100_E000N1800_004P.IMG';
+//	var fileName = 	'C:/temp/WAC_GLD100_E000N1800_008P.IMG';
+
+
+//	var width = 1440; // 4P
+//	var height = 720;
+
+//	var width = 1440 * 4;
+//	var height = 720 * 4;
+
+	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000N1800_016P.IMG';
+	var width = 5760;
+	var height = 2880;
+
+/*
+	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000N1800_032P.IMG';
+	var width = 11520;
+	var height = 5760;
+*/
+
+	var xmlHttp;
+	var byteArray;
+
+	init();
+
+	function init() {
+
+		var css = document.head.appendChild( document.createElement('style') );
+		css.innerHTML ='body { font: 12pt monospace; margin: 0; /* overflow: hidden; */ }' ;
+
+		if ( window.self === window.top ) {
+
+			var info = document.body.appendChild( document.createElement( 'div' ) );
+//			info.style.cssText = 'margin: 0 20px; position: absolute; ';
+			info.innerHTML = '<h2><a href="" >' + document.title + '</a></h2>' +
+				'<p><a id=download href="" onclick=saveIt(); ><button>Save it</button></a></p>' +
+//			'<canvas id=canvas ></canvas>' +
+				'<div id=msg0 ></div>' +
+				'<div id=msg1 ></div>' +
+				'<div id=msg2 ></div>' +
+			'';
+
+		} else {
+//			document.write('<h1>Inside an iframe</h1>');
+		}
+
+		canvas = document.createElement( 'canvas' );
+		canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+		canvas.width = width;
+		canvas.height = height;
+		canvas.style.cssText = 'border: 1px solid gray; ';
+		context = canvas.getContext( '2d' );
+
+		imageData = context.createImageData( canvas.width, canvas.height );
+		imageDataData = imageData.data;
+
+		requestIMGFile( fileName );
+
+		canvasCrop = document.createElement( 'canvas' );
+		canvasCrop = document.body.appendChild( document.createElement( 'canvas' ) );
+		canvasCrop.width = 512;
+		canvasCrop.height = 512;
+		canvasCrop.style.cssText = 'border: 1px solid red; ';
+		contextCrop = canvasCrop.getContext( '2d' );
+
+	}
+
+	function requestIMGFile( fileName, startByte, finishByte ) {
+
+		startTime = new Date();
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.crossOrigin = 'Anonymous';
+		xmlHttp.responseType = 'arraybuffer';
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = getData;
+//		xmlHttp.setRequestHeader('Range', 'bytes=' + startByte + '-' + finishByte );
+		xmlHttp.send( null );
+
+	}
+
+	function getData() {
+
+		if ( xmlHttp.readyState === 4  ) {
+
+			byteArray = new Int16Array( xmlHttp.response );
+			var index = 0;
+			elevations = [];
+
+			for ( var i = 0; i < byteArray.length; i++ ) {
+
+				elevation = byteArray[ i ] + 10000;
+				elevations.push( elevation );
+
+				imageDataData[ index++ ] = (elevation & 0x0000ff )
+				imageDataData[ index++ ] = (elevation & 0x00ff00 ) >> 8;
+				imageDataData[ index++ ] = (elevation & 0xff0000 ) >> 16;
+				imageDataData[ index++ ] = 255;
+
+			}
+
+			context.putImageData( imageData, 0, 0 );
+
+			context.moveTo( 0, 1440 );
+			context.lineTo( 5760, 1440 );
+			context.stroke();
+
+			context.moveTo( 2880, 0 );
+			context.lineTo( 2880, 2880 );
+			context.stroke();
+
+			crop = context.getImageData( 0.5 * width, 0.5 * height, 512, 512 );
+
+			contextCrop.putImageData( crop, 0, 0 );
+
+		}
+
+	}
+
+	function saveIt() {
+
+		slash = navigator.platform === 'Win32' ? '\\' : '/' ;
+
+		name = fileName.substr( 1 + fileName.lastIndexOf( slash ) );
+
+		name = name.replace(/\.img|\.html|\.json|\.js|\.obj|\.stl/gi,'-') + width + 'x' + height + '.png';
+
+		var c2du = canvas.toDataURL();
+
+		download.download = name;
+
+		download.href = c2du;
+
+	}
+
+</script>
+</body>
+</html>

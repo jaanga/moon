@@ -1,23 +1,16 @@
+// source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 	var fs = require( 'fs' );
 // https://github.com/oliver-moran
 	var Jimp = require( '../node_modules/jimp' );
 
-	var startTime = Date.now();
+// lat /lon from lower left
+//	var fileName = 'c:/temp/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon + 0-90
+//	var fileName = 'c:/temp/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
+//	var fileName = 'c:/temp/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
 
-//	var fileName = 'c:/temp/WAC_GLD100_E300N0450_256P.IMG'; // + 0-90
-	var fileName = 'c:/temp/WAC_GLD100_E300N3150_256P.IMG'; //-90 to 0
-
-
-//	var dirName = __dirname + dirName;
-	var dirName = 'c:/temp/moon-heightmaps/256p/';
-	var name = '256p';
-
-	var widthSource = 23040; // 64p
+	var widthSource = 23040; // 256p ~ 90 degrees * 256 pixels
 	var heightSource = 15360;
-
-	var widthDestination = 23040;
-	var heightDestination = 15360;
 
 	var widthDestination = 256;
 	var heightDestination = 256;
@@ -25,46 +18,144 @@
 	var byteArray;
 	var bitmap;
 
-			var signEW = '-';
+	var signEW;
+	var signNS;
 
+	var path = 'c:/temp/moon-heightmaps/';
+	var namePrefix = '256p';
+	var fileName = process.argv[ 2 ];
 
-// Need to split into three runs
+	var tileXStart = parseFloat( process.argv[ 4 ] );
+	var tileXFinish = parseFloat( process.argv[ 5 ] );
+	var tileX = tileXStart;
+
+	var tileYStart = parseFloat( process.argv[ 6 ] );
+	var tileYFinish = parseFloat( process.argv[ 7 ] );
+	var tileY = tileYStart;
+
+	var destinationDirName = path + process.argv[ 3 ];
+
+// Need to split into multiple runs
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
+
+//	var tileX = -90;
+//	var tileX = -60;
+//	var tileX = -30;
+
+//	var tileXFinish = -60;
+//	var tileXFinish = -30;
+//	var tileXFinish = 0;
+
+	var tileYStart = 60;
+	var tileY = tileYStart;
+	var tileYFinish = 0;
+*/
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N2250_256P.IMG'; // lat min 0 to max 60 , lon -180 to -90 
+
+//	var tileX = -180;
+//	var tileX = -150;
+	var tileX = -120;
+
+//	var tileXFinish = -150;
+//	var tileXFinish = -120;
+	var tileXFinish = -90;
+
+	var tileYStart = 60;
+	var tileY = tileYStart;
+	var tileYFinish = 0;
+*/
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon 0 to 90 
 
 	var tileX = 0;
 //	var tileX = 30;
 //	var tileX = 60;
 
-	var tileY = 60;
+	var tileXFinish = 30;
+//	var tileXFinish = 60;
+//	var tileXFinish = 90;
 
-//	var tilesX = 30; //widthSource / widthDestination;
-//	var tilesX = 60; //widthSource / widthDestination;
-//	var tilesX = widthSource / widthDestination;
+	var tileYStart = 60;
+	var tileY = tileYStart;
+	var tileYFinish = 0;
+*/
 
-	var tilesY = 60; // heightSource / heightDestination;
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
+
+//	var tileX = 90;
+	var tileX = 120;
+//	var tileX = 150;
+
+//	var tileXFinish = 120;
+	var tileXFinish = 150;
+//	var tileXFinish = 180;
+
+	var tileYStart = 60;
+	var tileY = tileYStart;
+	var tileYFinish = 0;
+*/
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S0450_256P.IMG'; // lat min -60 to max -1 , lon 0 to 90 
+
+//	var tileX = 0;
+//	var tileX = 30;
+	var tileX = 60;
+
+//	var tileXFinish = 30;
+//	var tileXFinish = 60;
+	var tileXFinish = 90;
+
+	var tileYStart = -1;
+	var tileY = tileYStart;
+	var tileYFinish = -61;
+*/
+
+/*
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG'; // lat min -60 to max -1 , lon 90 to 179 
+
+//	var tileX = 90;
+//	var tileX = 120;
+	var tileX = 150;
+
+//	var tileXFinish = 120;
+//	var tileXFinish = 150;
+	var tileXFinish = 180;
+
+	var tileYStart = -1;
+	var tileY = tileYStart;
+	var tileYFinish = -61;
+*/
+
+
 
 	init();
 
 	function init() {
 
-/* 
-		for ( var i = 0; i < 180; i++ ) { // -181 for -
 
-			name = dirName + '+' + i;
-//			name = dirName + '-' + i;
+		for ( var i = tileXStart; i < tileXFinish; i++ ) {
 
-			if ( !fs.existsSync( name ) ) {
+			dname = tileX >= 0 ? destinationDirName + '/+' + i : destinationDirName + '/' + i;
 
-				fs.mkdirSync( name );
+			if ( !fs.existsSync( dname ) ) {
 
-console.log( 'dirname: ', name  );
+				fs.mkdirSync( dname );
+
+console.log( 'dirname: ', dname );
 
 			}
 
 		}
 
-*/
-
-		fs.readFile( fileName, callbackReadFile );
+		fs.readFile( path + fileName, callbackReadFile );
 
 	}
 
@@ -90,25 +181,22 @@ console.log( 'byteArray.length: ', byteArray.length );
 
 	function processTiles() {
 
-console.log( 'tx', tileX, 'ty', tileY, 's', tilesX, tilesY);
+//console.log( 'tx', tileX, '<', tileXFinish, 'ty', tileY, '>', tileYFinish, tileY > tileYFinish );
 
-		if ( tileY > 0 && tileX < tilesX ) {
+		if ( tileY >= tileYFinish && tileX < tileXFinish ) {
 
-			tileY--;
+			writePNG( tileX, tileY-- );
 
-			writePNG( tileX, tileY );
-
-
-		} else if ( tileX < tilesX - 1 ) {
+		} else if ( tileX < tileXFinish - 1 ) {
 
 			tileX++;
-			tileY = tilesY;
+			tileY = tileYStart;
 
 			processTiles();
 
 		} else {
 
-console.log(  'end of story' );
+console.log(  'reading data complete - now processing the save' );
 
 		}
 
@@ -118,11 +206,15 @@ console.log(  'end of story' );
 
 		var image = new Jimp( widthDestination, heightDestination, function( error, image ) {
 
-			this.rgba( false ); // make smaller files
+			this.rgba( false ); // makes smaller file
 
 			var index = 0;
 
-			var yStart = heightDestination * tY;
+			yTmp = tY < 0 ? tY + 1 : tY;
+
+//console.log( 'yTmp', yTmp );
+
+			var yStart = heightDestination * Math.abs( yTmp );
 			var yFinish = yStart + heightDestination;
 			var xStart = widthDestination * tX;
 			var xFinish = xStart + widthDestination;
@@ -135,28 +227,48 @@ console.log(  'end of story' );
 
 					elevation = byteArray[ y * widthSource + x ] + 10000;
 
-					min = elevation < min ? elevation : min;
-					max = elevation > max ? elevation : max;
+if ( tY === -1 && tX == -1 && yStart < 2 && x < 5 ) {
+
+console.log( tY, tX, 'yStart', yStart, x, y, elevation );
+
+}
+
+//					min = elevation < min ? elevation : min;
+//					max = elevation > max ? elevation : max;
 
 					this.bitmap.data[ index++ ] = ( elevation & 0x0000ff );
-					this.bitmap.data[ index++ ] = ( elevation & 0x00ff00 ) >> 8;
-					this.bitmap.data[ index++ ] = ( elevation & 0xff0000 ) >> 16;
+					this.bitmap.data[ index++ ] = ( elevation & 0x00ff00 ) >> 8; // * 256
+					this.bitmap.data[ index++ ] = ( elevation & 0xff0000 ) >> 16; // * 65536
 					this.bitmap.data[ index++ ] = 255;
 
 				}
 			}
 
-			tname = name + signEW + tX + '+' + tY + '.png';
+			signEW = tX < 0 ? '' : '+';
 
-		}).write( dirName + '/' + signEW + tX + '/' + tname, callbackWrite( tname, min, max ) );
+			if ( tY > -1  ) {
+
+				yy = tileYStart - tY ;
+
+			} else {
+
+				yy = yTmp - 1;
+
+			}
+
+			signNS = yy < 0 ? '' : '+';
+
+			tname = namePrefix + signEW + tX + signNS + yy + '.png';
+
+		}).write( destinationDirName + '/' + signEW + tX + '/' + tname, callbackWrite( tname, tX, tY, yy ) );
+
 
 	}
 
-	function callbackWrite( txt, min, max ) {
+	function callbackWrite( txt, tX, tY, yy ) {
 
-console.log(  'write: ', txt );
+//console.log(  'write: ', txt, tX, tY, yy );
 //console.log( 'min: ', min, 'max: ', max );
-//console.log( 'time', Date.now() - startTime, tileX, tileY );
 
 		processTiles();
 
