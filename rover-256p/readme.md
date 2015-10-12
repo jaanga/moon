@@ -22,7 +22,24 @@ The next step up in accuracy will be to 300+ pixels per degree or, roughly, one 
 The effort appears to be fairly trivial but requires some hours of work.
 This effort will be made as and when the time arises or whenever someone makes the request for this work to be done.
 
-## Road Map
+## Things to Do
 
+* Create heads-up display showing altitude at the point hovered over
+* Add overlay images of maps
+* Add g azetteer with all man-made objects on the moon with 3D models at their location
+* Location map in the menu
+	* With 'click and go there' feature
 
+## Sources
+
+Many thanks to:
+
+Gazetteer data sources:
+
+* [Gazetteer of Planetary Nomenclature]( http://planetarynames.wr.usgs.gov/Page/MOON/target )
+* [Lunar 100]( http://the-moon.wikispaces.com/Lunar+100 )
+
+Lunar height data source:
+
+[Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
