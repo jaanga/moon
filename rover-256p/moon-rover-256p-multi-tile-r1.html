@@ -451,11 +451,11 @@
 
 		context.font = parameters.font ? parameters.font : '48px sans-serif';
 
-//		var width = 0;
+		var width = 0;
 
 		for (var i = 0, len = textArray.length; i < len; i++) {
 
-			var width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
 
 		}
 
