@@ -10,11 +10,15 @@ Moon Read Me
 
 ## Moon Voyager
 
+* The Moon as a 3D sphere
+
 [Moon Voyager Read Me - Web Page]( http://jaanga.github.io/moon/voyager/ )  
 [Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )  
 
 
 ## Moon Rover Mobile
+
+* The Mon as a flat map - but in 3D
 
 [Moon Rover Mobile Read Me - Web Page]( http://jaanga.github.io/moon/rover-mobile/ )  
 [Moon Rover Mobile Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-mobile/ )  
@@ -30,7 +34,7 @@ Moon Read Me
 
 ## Moon Rover 256P
 
-* 256 pixels per degree
+* 256 pixels per degree ~4.25 billion points of data
 * Great detail views of the moon
 
 [Moon Rover 256P Read Me - Web Page]( http://jaanga.github.io/moon/rover-256p/ )  

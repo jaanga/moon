@@ -26,5 +26,5 @@ The effort appears to be fairly trivial but requires some hours of work.
 
 * Location placards
 * Location map in menu with box indicating current location
-* Feedback a to current loa and lon 
+* Feedback as to current lat and lon 
 
