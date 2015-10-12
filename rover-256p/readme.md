@@ -1,10 +1,17 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )
-
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )  
 [Moon Rover 256P Read Me]( ./index.html )
 ===
+<span style=display:none; >[You are now in GitHub source code view - click this button to view Read Me file as a web page]( http://jaanga.github.io/moon/rover-256p/ "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click this button to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/rover-256p/'; />
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/rover-256p/ "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/rover-256p/'; />
+## Concept
+
+### Mission
+
+* To display the Moon in as much 3D detail as possible
+* To enable you to explore craters and the dark side and more
+
+### Vision
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html" width=100% height=500px ></iframe>  
@@ -24,6 +31,9 @@ This effort will be made as and when the time arises or whenever someone makes t
 
 ## Things to Do
 
+* Change the default viewing angle
+* Add sunlight, shade and shadow
+
 * Add the data between 60 and 90 degrees and -60 and -90 degrees
 * Create a heads-up display that show altitude at the point hovered over
 * change the color of each pixel according to its elevation
@@ -32,6 +42,12 @@ This effort will be made as and when the time arises or whenever someone makes t
 * Location map in the menu
 	* With 'click and go there' feature
 * Create a slide show that zooms to different locations
+* Add the Earth and Sun as spheres in the distance
+* Create printable STL scale models
+
+
+* Look for signs of water or lave flow
+* Look for signs of earthquakes
 
 ## Issues
 
