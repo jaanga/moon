@@ -20,10 +20,23 @@ Moon Read Me
 [Moon Rover Mobile Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-mobile/ )  
 
 
-## Moon Rover
+## Moon Rover 64P
 
-_very alpha_
+* 64 pixels per degree
+* Good for touring the moon
 
-[Moon Rover Read Me - Web Page]( http://jaanga.github.io/moon/rover/ )  
-[Moon Rover Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover/ )  
+[Moon Rover 64P Read Me - Web Page]( http://jaanga.github.io/moon/rover-64p/ )  
+[Moon Rover 64P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-64p/ )  
+
+## Moon Rover 256P
+
+* 256 pixels per degree
+* Great detail views of the moon
+
+[Moon Rover 256P Read Me - Web Page]( http://jaanga.github.io/moon/rover-256p/ )  
+[Moon Rover 256P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-256p/ )  
+
+
+
+
 
