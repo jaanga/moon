@@ -1,4 +1,4 @@
-[Exploratoria]( http://exploratoria.github.io ) &raquo; [Sandbox]( http://exploratoria.github.io/sandbox/ ) &raquo; [Astronomy]( http://exploratoria.github.io/sandbox/astronomy/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Gazetteer Read Me]( ./index.html )
 ===
