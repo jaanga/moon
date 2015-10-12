@@ -16,7 +16,7 @@
 [Moon Rover 256P Demo Full Screen - Build]( http://jaanga.github.io/moon/rover-256p/build/ )
 
 ## Accuracy
-10917 km circumference of moon / ( 360 degrees * 256 pixels per degree ) = 0.473828125 or each pixel represents 474 meters or, roughly, each pixel is about half a kilometer.
+10917 km circumference of moon / ( 360 degrees * 256 pixels per degree ) = 0.11845703125 or each pixel represents 118 meters.
 
 The next step up in accuracy will be to 300+ pixels per degree or, roughly, one pixel per hundred meters.
 The effort appears to be fairly trivial but requires some hours of work.
@@ -24,7 +24,7 @@ This effort will be made as and when the time arises or whenever someone makes t
 
 ## Things to Do
 
-* Add the data between 60 an 9 degrees and -60 and -90 degrees
+* Add the data between 60 and 90 degrees and -60 and -90 degrees
 * Create a heads-up display that show altitude at the point hovered over
 * change the color of each pixel according to its elevation
 * Add overlay images of maps
@@ -32,6 +32,14 @@ This effort will be made as and when the time arises or whenever someone makes t
 * Location map in the menu
 	* With 'click and go there' feature
 * Create a slide show that zooms to different locations
+
+## Issues
+
+* Big issue: vertical artifacts at first line of every IMG file
+	* Is it the data or is it me??
+* Convoluted auto rotate code
+* Extra placards to the south being displayed
+
 
 ## Sources
 
