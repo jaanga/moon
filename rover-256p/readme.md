@@ -24,11 +24,14 @@ This effort will be made as and when the time arises or whenever someone makes t
 
 ## Things to Do
 
-* Create heads-up display showing altitude at the point hovered over
+* Add the data between 60 an 9 degrees and -60 and -90 degrees
+* Create a heads-up display that show altitude at the point hovered over
+* change the color of each pixel according to its elevation
 * Add overlay images of maps
-* Add g azetteer with all man-made objects on the moon with 3D models at their location
+* Add gazetteer with all man-made objects on the moon with 3D models at their location
 * Location map in the menu
 	* With 'click and go there' feature
+* Create a slide show that zooms to different locations
 
 ## Sources
 
