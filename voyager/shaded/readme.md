@@ -13,8 +13,6 @@
 
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
 
-
-
 ## Concept
 
 ### Issue
