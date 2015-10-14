@@ -137,7 +137,7 @@
 		fileName = location.hash.length > 1 ? 
 			location.hash.substr( 1 ) 
 		: 
-			sourceFolder + 'images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png'
+			sourceFolder + 'images/TSE_1925_NYC_SL_TopographicMapLunarLimb-4096x2048.png'
 		;
 
 		loader = new THREE.TextureLoader();
@@ -154,11 +154,20 @@
 
 // do something with the texture
 				texture.minFilter = texture.magFilter = THREE.NearestFilter;
+console.log( texture, texture.offset.width );
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+//				texture.repeat.set( 2, 1 );
+
+//				texture.offset.set( 2048, 0 );
+				texture.offset.width = 1048;
+				texture.needsUpdate = true;
+
 				material = new THREE.MeshBasicMaterial( { map: texture } );
 //				heightMesh = new THREE.Mesh( geometry, material );
 //				scene.add( heightMesh );
 				updateTerrain();
 				getGazetteerMoon();
+
 			},
 
 // Function called when download progresses
@@ -179,6 +188,37 @@
 
 		placards = new THREE.Object3D();
 		scene.add( placards );
+
+	}
+
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
+
+		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
+
+		heightMesh.geometry.dispose();
+		scene.remove( heightMesh );
+
+		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
+
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+		vertices = geometry.attributes.position.array;
+		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
+
+			var s = 1 + scl * map[ j ];
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+
+		}
+		heightMesh = new THREE.Mesh( geometry, material );
+		heightMesh.position.y = -300; //heightMeshYPosition;
+
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+
+		scene.add( heightMesh );
 
 	}
 
@@ -254,33 +294,7 @@
 
 	}
 
-	function updateTerrain() {
 
-		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
-
-		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
-
-		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
-
-			var s = 1 + scl * map[ j ];
-			vertices[ i++ ] *= s;
-			vertices[ i++ ] *= s;
-			vertices[ i++ ] *= s;
-
-		}
-
-		heightMesh.geometry.dispose();
-		scene.remove( heightMesh );
-
-		heightMesh = new THREE.Mesh( geometry, material );
-		heightMesh.position.y = -300; //heightMeshYPosition;
-
-		heightMesh.geometry.computeFaceNormals();
-		heightMesh.geometry.computeVertexNormals();
-
-		scene.add( heightMesh );
-
-	}
 
 	function convertPosition( lat, lon, radius ) {
 

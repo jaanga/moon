@@ -14,7 +14,7 @@
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
 Image maps to look at:
-* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png ) 31 MB 
+* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-4096x2048 ) 18 MB 
 * [PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/PIA17037_hires.jpg ) 533 KB
 * [LDEM_16.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/LDEM_16.jpg ) 5MB
 * [moon_8k_color_brim16_4096x2048.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg ) 1.8 MB
