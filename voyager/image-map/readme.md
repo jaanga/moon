@@ -7,19 +7,24 @@
 <input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-1.html" width=100% height=600px ></iframe>  
+####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-1.html )
 
 
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
-[PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map//moon-voyager-image-map-r1-1.html#http://jaanga.github.io/moon/images/PIA17037_hires.jpg )
+Image maps to look at:
+* [PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-1.html#http://jaanga.github.io/moon/images/PIA17037_hires.jpg )
+* [LDEM_16.jpg]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-1.html#http://jaanga.github.io/moon/images/LDEM_16.jpg )
+* [moon_8k_color_brim16_4096x2048.jpg]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-1.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )
+
 
 ## Concept
 
 ### Issue
 
-From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D orb with a surface full of complexity.
+There are may existing, quite beautiful 2D Mercator projection maps of the Moon. 
+Is it possible to drape or overlay these images over a 3D terrain and have attractive results  
 
 ## Mission
 
@@ -29,9 +34,8 @@ To show the usually hidden backside of the moon as easily as the front
 
 ## Things to Do
 
-* Edit the auto rotation variable to change the speed of the spin of the moon
-* Edit heighPlacard to move the location signboards up or down
-* Edit the default height scale
+* Ensure that the 2D images line up as closely as possible with the 3D landscape
+* Locate cool overalays
 
 
 
