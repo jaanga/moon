@@ -98,7 +98,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		camera.position.set( 3500, 3500, -3500 );
+		camera.position.set( -3500, 3500, 3500 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.minDistance = 2500;
@@ -113,7 +113,7 @@
 		toggleHelpers();
 
 		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
 		vertices = geometry.attributes.position.array;
 
 		heightMap = document.createElement( 'img' );
@@ -139,7 +139,7 @@
 		fileName = location.hash.length > 1 ? 
 			location.hash.substr( 1 ) 
 		: 
-			sourceFolder + 'images/TSE_1925_NYC_SL_TopographicMapLunarLimb-4096x2048.png'
+			sourceFolder + 'images/TSE_1925_NYC_SL_TopographicMapLunarLimb-crop.png'
 		;
 
 		loader = new THREE.TextureLoader();
@@ -247,7 +247,7 @@
 
 				gazetteer.push( [ place[0], place[ 1 ], parseFloat( lat ), parseFloat( - lon ) ] );
 
-				pos = convertPosition( lat, - lon, placardYPosition )
+				pos = convertPosition( lat, lon, placardYPosition )
 
 				drawSprite( place[ 0 ], placardSize, 120, pos.x, pos.y, pos.z );
 
@@ -286,11 +286,10 @@
 	}
 
 
-
 	function convertPosition( lat, lon, radius ) {
 
 		var rc = radius * Math.cos( lat * d2r );
-		return v( rc * Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
+		return v( rc *  - Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
 
 	}
 
