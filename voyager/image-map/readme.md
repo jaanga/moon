@@ -3,8 +3,8 @@
 [Moon Voyager Image Map Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; />
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/image-map/index.html "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/'; />
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1.html" width=100% height=600px ></iframe>  
@@ -13,7 +13,7 @@
 
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
-[PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/index.html#jaanga.github.io/moon/images/PIA17037_hires.jpg )
+[PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/index.html#http://jaanga.github.io/moon/images/PIA17037_hires.jpg )
 
 ## Concept
 
