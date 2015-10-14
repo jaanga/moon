@@ -7,11 +7,16 @@
 <input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  
+####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-gamer-r2.html )
 
-[Moon Voyager Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/dev/ )
+[Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
 
+[Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
+
+[Moon Voyager Shader Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shader/dev/ )
+
+[Moon Voyager Altitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
 
 ## Concept
 
