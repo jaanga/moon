@@ -1,14 +1,22 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Voyager Image Map R1.1</title>
+<title>Moon Voyager Image Map R1.2</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
 <body>
+<!--
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+
 <script src = http://rawgit.com/mrdoob/three.js/dev/build/three.js ></script>
 <script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+
 <script>
 
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
@@ -110,7 +118,7 @@
 //		document.body.appendChild( heightMap );
 //		heightMap.style.cssText = 'margin: 20px; position: absolute; top: 0;';
 		heightMap.crossOrigin = 'anonymous';
-		heightMap.onload = updateTerrain;
+//		heightMap.onload = updateTerrain;
 		heightMap.src = heightMapSource;
 
 		canvasHeightMap = document.createElement( 'canvas' );
@@ -122,41 +130,55 @@
 
 		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+		vertices = geometry.attributes.position.array;
+		material = new THREE.MeshNormalMaterial();
+		heightMesh = new THREE.Mesh( geometry.clone(), material );
 
-		THREE.ImageUtils.crossOrigin = 'anonymous';
+		fileName = location.hash.length > 1 ? 
+			location.hash.substr( 1 ) 
+		: 
+			sourceFolder + 'images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png'
+		;
 
-		if ( location.hash.length > 1 ) {
+		loader = new THREE.TextureLoader();
+		loader.crossOrigin = 'anonymous';
 
-			fileName = location.hash.substr( 1 );
+// load a resource
+		loader.load(
 
-		} else { 
+// resource URL
+			fileName,
 
-			fileName = '../../images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png';
+// Function when resource is loaded
+			function ( texture ) {
 
-		}
+// do something with the texture
+				texture.minFilter = texture.magFilter = THREE.NearestFilter;
+				material = new THREE.MeshBasicMaterial( { map: texture } );
+//				heightMesh = new THREE.Mesh( geometry, material );
+//				scene.add( heightMesh );
+				updateTerrain();
+				getGazetteerMoon();
+			},
 
-//		texture = THREE.ImageUtils.loadTexture( '../../images/moon_8k_color_brim16_4096x2048.jpg' );
-//		texture = THREE.ImageUtils.loadTexture( '../../images/LDEM_16.jpg' );
-//		texture = THREE.ImageUtils.loadTexture( '../../images/PIA17037_hires.jpg' );
+// Function called when download progresses
+			function ( xhr ) {
 
-		texture = THREE.ImageUtils.loadTexture( fileName );
-		texture.onload = function() { texture.needsUpdate = true; };
+				msg1.innerHTML = ( xhr.loaded / xhr.total * 100 ) + '% loaded';
 
-//		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-//		texture.repeat.set( 16, 16 );
-//		texture.anisotropy = 16;
+			},
 
-		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+// Function called when download errors
+			function ( xhr ) {
 
-		material3D = new THREE.MeshBasicMaterial( { map: texture} );
+				msg1.innerHTML = 'An error happened';
 
-		heightMesh = new THREE.Mesh( geometry, material3D );
-		scene.add( heightMesh );
+			}
+
+		);
 
 		placards = new THREE.Object3D();
 		scene.add( placards );
-
-		getGazetteerMoon();
 
 	}
 
@@ -238,9 +260,6 @@
 
 		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
 
-		heightMesh.geometry = geometry.clone();
-		vertices = heightMesh.geometry.attributes.position.array;
-
 		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
 
 			var s = 1 + scl * map[ j ];
@@ -250,8 +269,16 @@
 
 		}
 
+		heightMesh.geometry.dispose();
+		scene.remove( heightMesh );
+
+		heightMesh = new THREE.Mesh( geometry, material );
+		heightMesh.position.y = -300; //heightMeshYPosition;
+
 		heightMesh.geometry.computeFaceNormals();
 		heightMesh.geometry.computeVertexNormals();
+
+		scene.add( heightMesh );
 
 	}
 

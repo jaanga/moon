@@ -1,6 +1,13 @@
 Moon Dev Notes
 ===
 
+2015-10-14 ~ Theo
+
+It looks like some of the WAC_GLD100 files have TWO lines of headers.
+
+I don't yet know how to check for this. Other than inspecting PNG files for a black line at the top. ;-(
+ 
+
 2015-10-12 ~ Theo
 
 Working on utilities/img-data-parser/img-data-parser-r1.html

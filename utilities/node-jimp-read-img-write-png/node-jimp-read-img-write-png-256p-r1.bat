@@ -6,18 +6,18 @@ set STARTTIME=%TIME%
 
 rem NORTH East
 rem lat min 0 to max 59, lon 0 to 90
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 0 30 59 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 0 30 59 0
 
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 30 60 59 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 30 60 59 0
 
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 60 90 59 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N0450_256P.IMG zz-moon-heightmaps-256p-ne 60 90 59 0
 
 rem lat min 0 to max 59, lon 90 to 179 
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 90 120 59 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 90 120 59 0
 
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 120 150 59 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 120 150 59 0
 
-node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 150 180 69 0
+rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N1350_256P.IMG zz-moon-heightmaps-256p-ne 150 180 69 0
 
 rem
 
@@ -25,19 +25,19 @@ rem
 
 rem NORTH West
 rem lat min 0 to max 60 , lon -90 to 0 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -90 -60 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -90 -60 59 0
 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -60 -30 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -60 -30 59 0
 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -30 0 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N3150_256P.IMG zz-moon-heightmaps-256p-nw -30 0 59 0
 
 
 rem lat min 0 to max 60 , lon -180 to -90 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -180 -150 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -180 -150 59 0
 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -150 -120 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -150 -120 59 0
 
-rem node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -120 -90 59 0
+node node-jimp-read-img-write-png-256p-r1.js WAC_GLD100_E300N2250_256P.IMG zz-moon-heightmaps-256p-nw -120 -90 59 0
 
 rem
 

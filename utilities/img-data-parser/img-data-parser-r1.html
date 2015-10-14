@@ -22,30 +22,29 @@
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000N1800_032P.IMG';
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000S1800_032P.IMG';
 
-
-//	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG';
-//	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG';
-
 //	var width = 11520;
 //	var height = 5760;
 
 
-
+// lon 0 to 90
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG';
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300S0450_256P.IMG';
 
+// lon 90 to 179 
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG';
 	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG';
 
+
+// lat lon -90 to 0 
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300N3150_256P.IMG';
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300S3150_256P.IMG';
 
+// lon -180 to -90 
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300N2250_256P.IMG';
 //	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E300S2250_256P.IMG';
 
 	var width = 23040 * 2;
 	var height = 15360;
-
 
 	var byteArray;
 
@@ -72,15 +71,17 @@
 //			document.write('<h1>Inside an iframe</h1>');
 		}
 
+		msg0.innerHTML = fileName;
+
 		for ( var i = 0; i < 10; i++ ) {
 
-			requestIMGFile( fileName, 'start: ', width * i, width * i + width + 1 );
+			requestIMGFile( fileName, 'start ' + i +': ', width * i, width * i + width + 1 );
 
 		}
 
-		for ( var i = height; i < height + 1; i++ ) {
+		for ( i = height - 5; i < height + 1; i++ ) {
 
-			requestIMGFile( fileName, 'finish: ', width * i, width * i + width - 1 );
+			requestIMGFile( fileName, 'finish ' + i +': ' , width * i, width * i + width - 1 );
 
 		}
 
@@ -158,7 +159,7 @@
 
 			}
 
-			msg0.innerHTML += txt + '<br><br>';
+			msg1.innerHTML += txt + '<br><br>';
 
 //console.log( elevations );
 

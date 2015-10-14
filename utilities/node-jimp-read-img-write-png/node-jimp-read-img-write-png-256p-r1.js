@@ -111,7 +111,7 @@ console.log(  'reading data complete - now processing the save' );
 
 //console.log( 'yTmp', yTmp );
 
-			var yStart = heightDestination * Math.abs( yTmp ) + 1;
+			var yStart = heightDestination * Math.abs( yTmp ) + 2; // decide manually if needs to be 1 or 2
 			var yFinish = yStart + heightDestination;
 			var xStart = widthDestination * tX;
 			var xFinish = xStart + widthDestination;
