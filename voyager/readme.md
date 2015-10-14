@@ -10,9 +10,7 @@
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html" width=100% height=600px ></iframe>  
 ####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html )
 
-
 [Moon Voyager Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/dev/ )
-
 
 
 ## Concept
@@ -21,11 +19,41 @@
 
 From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D orb with a surface full of complexity.
 
-## Mission
+### Mission
 
 To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
 To show the usually hidden backside of the moon as easily as the front
 
+### Vision
+
+To create depictions of the geography of that Moon that they provoke questions as to ow things came to be
+
+
+## Apps
+
+### Moon Voyager Gamer
+
+[Moon Voyager Gamer Read Me - Web Page]( http://jaanga.github.io/moon/voyager/gamer/ )  
+[Moon Voyager Gamer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/gamer/ )  
+
+
+### Moon Voyager Image Map
+
+[Moon Voyager Image Map Read Me - Web Page]( http://jaanga.github.io/moon/voyager/image-map/ )  
+[Moon Voyager Image Map Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/ )  
+
+### Moon Voyager Shaded
+
+[Moon Voyager Shaded Read Me - Web Page]( http://jaanga.github.io/moon/voyager/shaded/ )  
+[Moon Voyager Shaded Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded/ )  
+
+### Moon Voyager Altitude
+
+[Moon Voyager Altitude Read Me - Web Page]( http://jaanga.github.io/moon/voyager/altitude/ )  
+[Moon Voyager Altitude Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/altitude/ )  
+
+
+<!--
 
 ## Things to Do
 
@@ -50,12 +78,12 @@ To show the usually hidden backside of the moon as easily as the front
 * Camera position follows cursor keys
 	* Latest camera position is used to control camera position when using cursor keys 
 
-<!--
+
 * Supports permalinks
 	* [Copernicus]( http://jaanga.github.io/moon-voyager/moon-rover-mobile/dev/index.html#20 )
 	* [Gassendi]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#30 )
 	* [Tycho]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#93 )
--->
+
 
 ## Road Map
 
@@ -74,6 +102,9 @@ To show the usually hidden backside of the moon as easily as the front
 ## Issues
 
 * Text flashes annoyingly as it moves
+
+-->
+
  
 ## Sources
 

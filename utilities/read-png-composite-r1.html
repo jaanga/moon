@@ -10,8 +10,8 @@
 // source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 
-//	var path = 'c:/temp/moon-heightmaps/'; // for developing etc
-	var path = 'http://jaanga.github.io/';
+	var path = 'c:/temp/moon-heightmaps/zz-'; // for developing etc
+//	var path = 'http://jaanga.github.io/';
 
 	var dirNE = 'moon-heightmaps-256p-ne/';
 	var dirNW = 'moon-heightmaps-256p-nw/';
@@ -22,13 +22,13 @@
 	var sourceSource = 256;
 
 	pixels = 256;
-	var tileXCount = 10;
-	var tileXStart = -180;
+	var tileXCount = 20;
+	var tileXStart = 0;
 	var tileXFinish = tileXStart + tileXCount;
 	var tileX = tileXStart;
 
-	var tileYCount = 3;
-	var tileYStart = 1;
+	var tileYCount = 10;
+	var tileYStart = 5;
 	var tileYFinish = tileYStart - tileYCount;
 	var tileY = tileYStart;
 
@@ -50,7 +50,7 @@
 		menu.style.cssText = 'margin: 0 20px; position: absolute;';
 		menu.innerHTML = '<h2>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/ >&#x24D8;</a>' +
+				'<a id=i href=http://jaanga.github.io/moon/utilities/ >&#x24D8;</a>' +
 			'</h2>' +
 			'<p>Use cursor keys to move about</p>' +
 			'<div id=info ></div>' +

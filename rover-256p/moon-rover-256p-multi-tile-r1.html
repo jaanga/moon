@@ -21,10 +21,6 @@
 	var dirSE = 'moon-heightmaps-256p-se/';
 	var dirSW = 'moon-heightmaps-256p-sw/';
 
-// Copernicus,Archetypal large complex crater,9.7N,20.1W
-	var latDefault = 9.7;
-	var lonDefault = -20.1;
-
 	var heightmapWidth = 1024;
 	var heightmapHeight = 1024;
 
@@ -36,8 +32,9 @@
 	var scl = scale * scaleAdjust;
 
 	var placards;
-	var placardYPosition = 100;
+	var placardYPosition = 350;
 
+// Copernicus,Archetypal large complex crater,9.7N,20.1W
 	var selectedPlace = 1753;  // Copernicus
 
 	var tileXCount = heightmapWidth / widthDestination
@@ -329,10 +326,10 @@
 
 			place = gazetteer[ i ];
 
-			if ( place[ 2 ] > tileYStart && place[ 2 ] < tileYFinish && place[ 3 ] > tileXStart && place[ 3 ] < tileXFinish ) {
+			if ( place[ 2 ] > tileYStart + 1 && place[ 2 ] < tileYFinish + 1 && place[ 3 ] > tileXStart && place[ 3 ] < tileXFinish ) {
 
 				txt += place[ 0 ] + '<br>&bull; lat:' + place[ 2 ] + ' lon:' + place[ 3 ] + '<br>';
-				drawSprite( place[ 0 ], 0.25, 120, 256 * ( place[ 3 ] - tileX + 2 ), 300 , -256 * ( place[ 2 ] - tileY - 3 ) );
+				drawSprite( place[ 0 ], 0.25, 120, 256 * ( place[ 3 ] - tileX + 2 ), placardYPosition , -256 * ( place[ 2 ] - tileY - 3 ) );
 
 			}
 
@@ -423,7 +420,7 @@
 		placards.add ( sprite );
 
 		var geometry = new THREE.Geometry();
-		geometry.vertices = [ v( x, 0, z ),  v( x, 300,  z ) ];
+		geometry.vertices = [ v( x, 0, z ),  v( x, y,  z ) ];
 		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
 		var line = new THREE.Line( geometry, material );
 		placards.add( line );

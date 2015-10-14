@@ -28,13 +28,12 @@ From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D o
 ## Moon Voyager
 
 * The Moon as a 3D sphere
-	* You can rotat, zoom and move the sphere
+	* You can rotate, zoom and move the sphere
 * 1440 x 720 data points
 * Displays placards with the names of 97 important Moon locations according to the-moon.wikispaces.com
 
 [Moon Voyager Read Me - Web Page]( http://jaanga.github.io/moon/voyager/ )  
 [Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )  
-[Jaanga]( http://jaanga.github.io/ ) &raquo;
 
 
 ## Moon Rover Mobile

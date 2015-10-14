@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>img-read-first-line.html</title>
+<meta charset=utf-8 />
+</head>
+<body>
+<script>
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+		'<div id=msg1 ></div>' +
+
+	'';
+
+//	var fileName = 'C:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG';
+	var fileName = 'C:/temp/moon-heightmaps/WAC_GLD100_P900N0000_256P.IMG';
+
+	var xmlHttp;
+
+	requestFile();
+
+	function requestFile() {
+		start = 0;
+		stop = 23000;
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.setRequestHeader( 'Range', 'bytes=' + start + '-' + stop );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
+
+	}
+
+	function callback() {
+
+		if ( xmlHttp.readyState != 4  ) { return; }
+		text = xmlHttp.responseText;
+		var lines = text.split(/\r\n|\n/);
+
+		msg1.innerText = text;
+//		console.log( text );
+
+	}
+
+</script>
+</body>
+</html>

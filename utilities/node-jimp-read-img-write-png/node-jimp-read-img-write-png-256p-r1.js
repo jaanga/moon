@@ -1,13 +1,11 @@
 // source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 	var fs = require( 'fs' );
+
 // https://github.com/oliver-moran
 	var Jimp = require( '../node_modules/jimp' );
 
 // lat /lon from lower left
-//	var fileName = 'c:/temp/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon + 0-90
-//	var fileName = 'c:/temp/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
-//	var fileName = 'c:/temp/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
 
 	var widthSource = 23040; // 256p ~ 90 degrees * 256 pixels
 	var heightSource = 15360;
@@ -35,107 +33,6 @@
 
 	var destinationDirName = path + process.argv[ 3 ];
 
-// Need to split into multiple runs
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
-
-//	var tileX = -90;
-//	var tileX = -60;
-//	var tileX = -30;
-
-//	var tileXFinish = -60;
-//	var tileXFinish = -30;
-//	var tileXFinish = 0;
-
-	var tileYStart = 60;
-	var tileY = tileYStart;
-	var tileYFinish = 0;
-*/
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N2250_256P.IMG'; // lat min 0 to max 60 , lon -180 to -90 
-
-//	var tileX = -180;
-//	var tileX = -150;
-	var tileX = -120;
-
-//	var tileXFinish = -150;
-//	var tileXFinish = -120;
-	var tileXFinish = -90;
-
-	var tileYStart = 60;
-	var tileY = tileYStart;
-	var tileYFinish = 0;
-*/
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon 0 to 90 
-
-	var tileX = 0;
-//	var tileX = 30;
-//	var tileX = 60;
-
-	var tileXFinish = 30;
-//	var tileXFinish = 60;
-//	var tileXFinish = 90;
-
-	var tileYStart = 60;
-	var tileY = tileYStart;
-	var tileYFinish = 0;
-*/
-
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
-
-//	var tileX = 90;
-	var tileX = 120;
-//	var tileX = 150;
-
-//	var tileXFinish = 120;
-	var tileXFinish = 150;
-//	var tileXFinish = 180;
-
-	var tileYStart = 60;
-	var tileY = tileYStart;
-	var tileYFinish = 0;
-*/
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S0450_256P.IMG'; // lat min -60 to max -1 , lon 0 to 90 
-
-//	var tileX = 0;
-//	var tileX = 30;
-	var tileX = 60;
-
-//	var tileXFinish = 30;
-//	var tileXFinish = 60;
-	var tileXFinish = 90;
-
-	var tileYStart = -1;
-	var tileY = tileYStart;
-	var tileYFinish = -61;
-*/
-
-/*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG'; // lat min -60 to max -1 , lon 90 to 179 
-
-//	var tileX = 90;
-//	var tileX = 120;
-	var tileX = 150;
-
-//	var tileXFinish = 120;
-//	var tileXFinish = 150;
-	var tileXFinish = 180;
-
-	var tileYStart = -1;
-	var tileY = tileYStart;
-	var tileYFinish = -61;
-*/
-
-
-
 	init();
 
 	function init() {
@@ -149,7 +46,7 @@
 
 				fs.mkdirSync( dname );
 
-console.log( 'dirname: ', dname );
+console.log( 'new dir: ', dname );
 
 			}
 
@@ -214,7 +111,7 @@ console.log(  'reading data complete - now processing the save' );
 
 //console.log( 'yTmp', yTmp );
 
-			var yStart = heightDestination * Math.abs( yTmp );
+			var yStart = heightDestination * Math.abs( yTmp ) + 1;
 			var yFinish = yStart + heightDestination;
 			var xStart = widthDestination * tX;
 			var xFinish = xStart + widthDestination;
@@ -226,12 +123,6 @@ console.log(  'reading data complete - now processing the save' );
 				for ( var x = xStart; x < xFinish; x++ ) {
 
 					elevation = byteArray[ y * widthSource + x ] + 10000;
-
-if ( tY === -1 && tX == -1 && yStart < 2 && x < 5 ) {
-
-console.log( tY, tX, 'yStart', yStart, x, y, elevation );
-
-}
 
 //					min = elevation < min ? elevation : min;
 //					max = elevation > max ? elevation : max;
@@ -262,7 +153,6 @@ console.log( tY, tX, 'yStart', yStart, x, y, elevation );
 
 		}).write( destinationDirName + '/' + signEW + tX + '/' + tname, callbackWrite( tname, tX, tY, yy ) );
 
-
 	}
 
 	function callbackWrite( txt, tX, tY, yy ) {
@@ -273,4 +163,3 @@ console.log( tY, tX, 'yStart', yStart, x, y, elevation );
 		processTiles();
 
 	}
-

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Moon Voyager R1</title>
+<meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+</head>
+<body>
+<!--
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+
+<script src = http://rawgit.com/mrdoob/three.js/dev/build/three.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script>
+
+var width = 1024;
+var height = 512;
+
+//var width = 512;
+//var height = 256;
+
+	var scale = 25;
+	var sphere;
+
+	var startTime = performance.now();
+	var delayTime = 2000;
+	var autoRotateSpeed = 0.2;
+
+	var srcImage = '../moon-heightmaps/WAC_GLD100_E000N1800_004P.png';
+
+	var stats, renderer, scene, camera, controls;
+	var geometry, material, mesh, axisHelper;
+
+	var heightMap, canvasHeightMap, contextHeightMap;
+	var mapTextureOverlayMaterial;
+	var axis;
+
+	init();
+	animate();
+
+	function init() {
+
+		var css = document.head.appendChild( document.createElement('style') );
+		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; /* overflow: hidden; */ }' ;
+
+		if ( window.self === window.top ) {
+
+			var info = document.body.appendChild( document.createElement( 'div' ) );
+			info.style.cssText = ' background-color: #ccc; margin: 0 20px; max-width: 200px; opacity: 0.7; padding: 0 0 0 10px; position: absolute; ';
+			info.innerHTML = '<a href="" ><h3>' + document.title + '</h3></a>' +
+				'<div id=msg ></div>' +
+				'<p>Auto Rotation <input type=checkbox id=chkRotate checked /></p>' +
+				'<p>Vertical Scale <input type=range id=inpScale min=1 max=50 value=25 step=1 onchange=updateTerrain(); /></p>' +
+
+				'<p><input type=checkbox id=inpHelpers onchange=setHelpers(); checked=true /> Display axis</p>' +
+				'<p>Map overlay: <select id=selMap onchange=setTextureMapOverlays() /></select></p>' +
+			'';
+
+		}
+
+		getTextureMapOverlays();
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 30000 );
+		camera.position.set( 12000, 12000, 12000 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.minDistance = 9000;
+		controls.maxDistance = 30000;
+		scene = new THREE.Scene();
+
+		setHelpers();
+
+		heightMap = document.createElement( 'img' );
+//		document.body.appendChild( heightMap );
+//		heightMap.style.cssText = 'margin: 20px; position: absolute; top: 0;';
+		heightMap.crossOrigin = 'anonymous';
+		heightMap.onload = updateTerrain;
+		heightMap.src = srcImage;
+
+		canvasHeightMap = document.createElement( 'canvas' );
+//		document.body.appendChild( canvasHeightMap );
+//		canvasHeightMap.style.cssText = 'margin: 20px; position: absolute; top: 0;';
+		canvasHeightMap.width = width;
+		canvasHeightMap.height =  height;
+		contextHeightMap = canvasHeightMap.getContext( '2d' );
+
+		THREE.ImageUtils.crossOrigin = 'anonymous';
+
+		setRandomGradient();
+
+		controls.autoRotateSpeed = autoRotateSpeed;
+		renderer.domElement.addEventListener( 'mousemove', onMouseMove, false ); // or mousedown?
+
+	}
+
+
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
+
+		var image = contextHeightMap.getImageData( 0, 0, width, height );
+		rgb = image.data;
+
+		var elevation;
+
+		var scale = parseFloat( inpScale.value );
+		var scl = 0.00001 * scale;
+
+		var geometry = new THREE.SphereGeometry( 6371, width - 1, height - 1 );
+		vertices = geometry.vertices;
+
+		for ( var i = 0, j = 0; i < rgb.length; i += 4, j++ ) {
+
+			elevation = rgb[ i ]; // + 256 * rgb[ i + 1 ] + 65536 * rgb[ i + 2 ] ;
+//			elevation = rgb[ i ] + 256 * rgb[ i + 1 ]; // + 65536 * rgb[ i + 2 ] ;
+
+//			elevation = elevation < 32767 ? elevation : elevation - 16777216;
+//			elevation = elevation < 32767 ? elevation : elevation - 65536;
+
+// take out following once world bitmap is updated
+//			elevation  = elevation < -11000 || elevation > 9000 ? 0 : elevation ;
+
+			vertices[ j ].multiplyScalar( 1 + scl * elevation );
+
+		}
+
+		geometry.computeFaceNormals();
+		geometry.computeVertexNormals();
+
+//		setTextureMapOverlays();
+
+
+		mapTextureOverlayMaterial = new THREE.MeshNormalMaterial( { side: 2 } );
+		scene.remove( sphere );
+		sphere = new THREE.Mesh( geometry, mapTextureOverlayMaterial );
+		scene.add( sphere );
+
+	}
+
+
+	function getTextureMapOverlays() {
+
+		mapTypes = [
+			['Default colors',''],
+			['Elevation','http://jaanga.github.io/terrain-r2/images/Elevation.jpg'],
+			['GLOBALeb3colshade','http://jaanga.github.io/terrain-r2/images/GLOBALeb3colshade.jpg']
+
+//			['world-map-google-satellite','../../../terrain-srtm30-plus-data-tms-1-7/0/world-map-google-satellite.png']
+
+		];
+
+		for ( var i = 0; i < mapTypes.length; i++ ) {
+
+			parent.selMap.appendChild( document.createElement( 'option' ) );
+			parent.selMap.children[ i ].text = mapTypes[ i ][ 0 ];
+
+		}
+
+		parent.selMap.selectedIndex = 1;
+
+	}
+
+	function setTextureMapOverlays() {
+
+		if ( parent.selMap.selectedIndex === 0 && mapTextureOverlayMaterial.type !== 'MeshNormalMaterial'  ) {
+
+			mapTextureOverlayMaterial = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading, side: 2 } );
+			sphere.material = mapTextureOverlayMaterial;
+			sphere.material.needsUpdate = true;
+
+		} else {
+
+			file = mapTypes[ parent.selMap.selectedIndex ][ 1 ]
+			mapTextureOverlayMaterial = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( file ) } );
+			mapTextureOverlayMaterial.map.minFilter = mapTextureOverlayMaterial.map.magFilter = THREE.NearestFilter;
+
+			if ( sphere ) {
+
+				sphere.material = mapTextureOverlayMaterial;
+				sphere.material.needsUpdate = true;
+
+			}
+		}
+
+	}
+
+
+	function onMouseMove() {
+
+		startTime = parent.chkRotate.checked ? performance.now() : 1000000 ;
+		controls.autoRotate = false;
+
+	}
+
+
+	function setHelpers() {
+
+		if ( parent.inpHelpers.checked === true ) {
+
+			axis = new THREE.AxisHelper( 8000 );
+			scene.add( axis );
+
+		} else {
+
+			if ( axis ) {
+
+				scene.remove( axis );
+
+			}
+
+		}
+
+	}
+
+
+	function setRandomGradient() {
+
+		cssBackround = document.body.appendChild( document.createElement('style') );
+
+		var col1 = "#" + Math.random().toString(16).slice(2, 8);
+		var col2 = "#" + Math.random().toString(16).slice(2, 8);
+		var col3 = "#" + Math.random().toString(16).slice(2, 8);
+		var X = ( Math.random() * window.innerWidth ).toFixed(0);
+		var Y = ( Math.random() * window.innerHeight ).toFixed(0);
+		var center =  20 + ( Math.random() * 60 ).toFixed(0);
+
+		cssBackround.innerText = 'body { ' +
+			'background: -webkit-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: -moz-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); }' +
+		'';
+
+	};
+
+
+	function animate( timestamp ) {
+
+		if ( timestamp - startTime > delayTime ) {
+
+			controls.autoRotate = true;
+
+		}
+
+		renderer.render( scene, camera );
+		controls.update();
+		stats.update();
+		requestAnimationFrame( animate );
+
+	}
+
+</script>
+</body>
+</html>

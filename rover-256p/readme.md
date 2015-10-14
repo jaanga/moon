@@ -31,30 +31,32 @@ This effort will be made as and when the time arises or whenever someone makes t
 
 ## Things to Do
 
+Basic coding
 * Change the default viewing angle
 * Add sunlight, shade and shadow
 
+Adding features
 * Add the data between 60 and 90 degrees and -60 and -90 degrees
 * Create a heads-up display that show altitude at the point hovered over
-* change the color of each pixel according to its elevation
+* Change the color of each pixel according to its elevation
 * Add overlay images of maps
 * Add gazetteer with all man-made objects on the moon with 3D models at their location
 * Location map in the menu
-	* With 'click and go there' feature
+* With 'click and go there' feature
 * Create a slide show that zooms to different locations
 * Add the Earth and Sun as spheres in the distance
 * Create printable STL scale models
-
-
+Exploring the Moon
 * Look for signs of water or lave flow
 * Look for signs of earthquakes
+* One side of the Moon always faces the Earth. Can you tell which side this is just by looking? Why? 
 
 ## Issues
 
 * Big issue: vertical artifacts at first line of every IMG file
-	* Is it the data or is it me??
+	* Is it the data or is it me??  << it's the data
+	* 2015-10-13 ~ half fixed
 * Convoluted auto rotate code
-* Extra placards to the south being displayed
 
 
 ## Sources
