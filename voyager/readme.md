@@ -14,7 +14,7 @@
 
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
-[Moon Voyager Shader Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shader/dev/ )
+[Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
 
 [Moon Voyager Altitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
 
