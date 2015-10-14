@@ -138,7 +138,9 @@
 //		texture = THREE.ImageUtils.loadTexture( "../../images/moon_8k_color_brim16_4096x2048.jpg" );
 //		texture = THREE.ImageUtils.loadTexture( '../../images/LDEM_16.jpg' );
 //		texture = THREE.ImageUtils.loadTexture( '../../images/PIA17037_hires.jpg' );
+
 		texture = THREE.ImageUtils.loadTexture( fileName );
+		texture.onload = function() { texture.needsUpdate = true; };
 
 //		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 //		texture.repeat.set( 16, 16 );
@@ -147,7 +149,7 @@
 		texture.minFilter = texture.magFilter = THREE.NearestFilter;
 
 		material3D = new THREE.MeshBasicMaterial( { map: texture} );
-		texture.onload = function() { texture.needsUpdate = true; };
+
 		heightMesh = new THREE.Mesh( geometry, material3D );
 		scene.add( heightMesh );
 

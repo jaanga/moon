@@ -13,7 +13,7 @@
 
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
-[PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/index.html#http://jaanga.github.io/moon/images/PIA17037_hires.jpg )
+[PIA17037_hires.jpg]( http://jaanga.github.io/moon/voyager/image-map//moon-voyager-image-map-r1-1.html#http://jaanga.github.io/moon/images/PIA17037_hires.jpg )
 
 ## Concept
 
