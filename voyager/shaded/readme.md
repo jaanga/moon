@@ -7,8 +7,8 @@
 <input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-shaded-r1.html" width=100% height=600px ></iframe>  
-####_Moon Voyager Shaded - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-shaded-r1.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1.html" width=100% height=600px ></iframe>  
+####_Moon Voyager Shaded - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1.html )
 
 
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
