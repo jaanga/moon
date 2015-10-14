@@ -110,9 +110,11 @@
 		window.addEventListener( 'resize', onWindowResize, false );
 		renderer.domElement.addEventListener( 'mousemove', onMouseMove, false ); // or mousedown?
 
-		THREE.ImageUtils.crossOrigin = 'anonymous';
-
 		toggleHelpers();
+
+		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+		vertices = geometry.attributes.position.array;
 
 		heightMap = document.createElement( 'img' );
 //		document.body.appendChild( heightMap );
@@ -154,13 +156,6 @@
 
 // do something with the texture
 				texture.minFilter = texture.magFilter = THREE.NearestFilter;
-console.log( texture, texture.offset.width );
-				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-//				texture.repeat.set( 2, 1 );
-
-//				texture.offset.set( 2048, 0 );
-				texture.offset.width = 1048;
-				texture.needsUpdate = true;
 
 				material = new THREE.MeshBasicMaterial( { map: texture } );
 //				heightMesh = new THREE.Mesh( geometry, material );
@@ -200,10 +195,6 @@ console.log( texture, texture.offset.width );
 		heightMesh.geometry.dispose();
 		scene.remove( heightMesh );
 
-		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
-
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
-		vertices = geometry.attributes.position.array;
 		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
 
 			var s = 1 + scl * map[ j ];
@@ -213,7 +204,7 @@ console.log( texture, texture.offset.width );
 
 		}
 		heightMesh = new THREE.Mesh( geometry, material );
-		heightMesh.position.y = -300; //heightMeshYPosition;
+//		heightMesh.position.y = -300; //heightMeshYPosition;
 
 		heightMesh.geometry.computeFaceNormals();
 		heightMesh.geometry.computeVertexNormals();
