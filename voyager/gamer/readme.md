@@ -1,14 +1,14 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo; [Voyager]( http://jaanga.github.io/moon/voyager/ ) &raquo;
 
-[Moon Voyager Read Me]( index.html )
+[Moon Voyager Gamer Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; />
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/gamer/index.html "View file as a web page." ) </span>
+<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/gamer/'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-r2.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  
+####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/moon-voyager-gamer-r2.html )
 
 
 [Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
@@ -23,7 +23,7 @@
 
 * The first and most basic of the Voyager series
 	* A good file to start with when you want to build your own app
-* Named 'Gamer' because of the exagerated colors and heights
+* Named 'Gamer' because of the exaggerated colors and heights
 
 
 ## Things to Do
