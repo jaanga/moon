@@ -12,7 +12,8 @@
 
 [Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
 
-[Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
+[Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
+[Moon Voyager Image Map #2 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )
 
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
 
