@@ -5,8 +5,11 @@
 
 	var startTime = Date.now();
 
-	var fileName = 'c:/temp/WAC_GLD100_E000N1800_064P.IMG';
+	var path = 'c:/temp/moon-heightmaps/';
+
 //	var fileName = 'c:/temp/WAC_GLD100_E000N1800_016P.IMG';
+	var fileName = 'c:/temp/WAC_GLD100_E000N1800_064P.IMG';
+
 
 //	var dirName = __dirname + dirName;
 	var dirName = 'c:/temp/moon-heightmaps/64p/';

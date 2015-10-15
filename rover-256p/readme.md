@@ -53,9 +53,7 @@ Exploring the Moon
 
 ## Issues
 
-* Big issue: vertical artifacts at first line of every IMG file
-	* Is it the data or is it me??  << it's the data
-	* 2015-10-13 ~ half fixed
+
 * Convoluted auto rotate code
 
 

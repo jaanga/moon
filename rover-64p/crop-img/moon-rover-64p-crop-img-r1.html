@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>moon-rover-64p-crop-img-r1</title>
+<meta name = viewport content = 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui' >
+
+</head>
+<body>
+<script src=http://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script>
+
+	var startTime = Date.now();
+
+	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000N1800_064P.IMG';
+	var fileWidth = 23040 * 2;
+	var fileheight = 11520;
+
+	var cropWidth = 1024;
+	var cropHeight = 1024;
+
+	var byteArray;
+	var elevations;
+	var count;
+
+	lat = 10;
+	lon = -20;
+
+	lat = 0;
+	lon = 0;
+
+	var css, menu, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		css = document.head.appendChild( document.createElement( 'style' ) );
+		css.innerHTML ='body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
+			'#aa {text-decoration: none; }' +
+		'';
+
+		menu = document.body.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = 'margin: 0 20px; position: absolute; ';
+		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
+			'<a id=aa href=http://jaanga.github.io/ >&#x24D8;</a></h2>' +
+			'<div id=info ></div>' +
+		'';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 1000, 1000, 1000 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 8000;
+		controls.enableKeys = false;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'keyup', onKeyUp, false );
+		window.addEventListener( 'resize', onWindowResize, false );
+
+// helpers
+
+		var axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+// assets
+		geometry3D = new THREE.PlaneBufferGeometry( cropWidth, cropHeight, cropWidth - 1, cropHeight - 1 );
+		geometry3D.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		vertices = geometry3D.attributes.position.array;
+
+		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
+		heightMesh = new THREE.Mesh( geometry3D.clone(), material3D );
+
+		updateCoordinates( lat, lon );
+//		updateCoordinates( 0, 0 );
+
+		info.innerHTML = fileName;
+	}
+
+
+	function updateCoordinates( lat, lon ) {
+
+		pt = latlon2xy( lat, lon );
+
+		xStart = pt[ 0 ];
+		yStart = pt[ 1 ];
+
+//		xStart = 0; // 11520 - 512;
+//		yStart = 5760 - 512;
+
+		elevations = [];
+		count = 0;
+
+		for ( var y = yStart; y < yStart + cropWidth; y++ ) {
+
+			requestIMGFile( fileName, y - yStart, fileWidth * y + xStart, fileWidth * y + xStart * 2 + cropWidth * 2 - 1 );
+
+		}
+
+	}
+
+
+	function latlon2xy( lat, lon ) {
+
+		cx = lon < 0 ? 64 * ( 180 + 180 * lon / 180 ) : 64 * ( 180 * lon / 180 );
+		cy = 64 * ( 90 - 90 * lat / 90 ) ;
+
+		return [ cx, cy ];
+
+	}
+
+
+
+	function requestIMGFile( fileName, row, startByte, finishByte ) {
+
+		var xmlHttp;
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.crossOrigin = 'Anonymous';
+		xmlHttp.responseType = 'arraybuffer';
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = getData;
+		xmlHttp.setRequestHeader('Range', 'bytes=' + startByte + '-' + finishByte );
+		xmlHttp.send( null );
+
+		function getData() {
+
+			if ( xmlHttp.readyState === 4  ) {
+
+				byteArray = new Int16Array( xmlHttp.response );
+				line = [];
+
+				for ( var i = 0; i < byteArray.length; i++ ) {
+
+					line.push( byteArray[ i ] + 10000 );
+
+				}
+
+				elevations[ row ] = line;
+
+				if ( ++count >= cropHeight ) {
+
+
+					updateTerrain();
+				}
+
+			}
+
+		}
+
+	}
+
+	function updateTerrain() {
+
+		for ( var i = 0, index = 1; i < cropHeight; i++ ) {
+
+			for ( var j = 0; j < cropWidth; j++, index += 3 ) {
+
+				vertices[ index ] = 0.008 * elevations[ i ][ j ];
+
+			}
+		}
+
+		heightMesh.geometry.dispose();
+		scene.remove( heightMesh );
+		heightMesh = new THREE.Mesh( geometry3D, material3D );
+//		heightMesh.position.y = -300; //heightMeshYPosition;
+
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+
+		scene.add( heightMesh );
+
+console.log( pt, lat, lon );
+//		if ( gazetteer === undefined ) { getGazetteerMoon(); } else { checkoutPlace(); }
+
+	}
+
+// cursor keys
+
+	function onKeyUp ( event ) {
+
+		event.preventDefault();
+
+//console.log( 'key', event.keyCode );
+
+		switch( event.keyCode ) {
+
+			case 37: goWest(); break; // cursor left
+
+			case 39: goEast(); break; // cursor right
+
+			case 38: goNorth(); break; // cursor up
+
+			case 40: goSouth(); break; // cursor down
+
+		}
+
+	}
+
+	function goNorth() {
+
+		lat += 0.5;
+		lat = lat > 89 ? 89 : lat;
+
+		updateCoordinates( lat, lon );
+
+	}
+
+	function goSouth() {
+		--lat;
+		lat = lat < -89 ? -89 : lat;
+
+		updateCoordinates( lat, lon );
+
+	}
+
+	function goEast() {
+
+		++lon;
+		lon = lon > 179 ? -180 : lon;
+
+		updateCoordinates( lat, lon );
+
+	}
+
+	function goWest() {
+
+		--lon;
+		lon = lon < -180 ? +179 : lon;
+
+		updateCoordinates( lat, lon );
+
+
+	}
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

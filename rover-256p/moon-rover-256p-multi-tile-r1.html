@@ -273,13 +273,15 @@
 
 			var lines = response.split(/\r\n|\n/);
 
-			gazetteer = [];
+			gazetteer = [ ['select destination'] ];
 
 			for ( var i = 0; i < lines.length; i++ ) {
 
 				var place = lines[i].split( ',' );
 
-				gazetteer.push( [ place[0], place[ 1 ], place[ 2 ], place[ 3 ] ] );
+//				gazetteer.push( [ place[0], place[ 1 ], place[ 2 ], place[ 3 ] ] );
+				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
+
 
 			}
 
@@ -367,7 +369,7 @@
 
 		tileX = tileXStart - 1;
 
-		tileYStart = ++tileYStart > 56 ? 56: tileYStart;
+		tileYStart = ++tileYStart >= 56 ? 56: tileYStart;
 		tileYFinish = tileYStart + tileYCount;
 
 		processTiles();

@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Rover 64P R1.1</title>
-<meta charset=utf-8 />
-<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+<meta charset=utf-8 >
+<title>Moon Rover 64P R2</title>
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' >
 </head>
 <body>
 <script src=http://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
@@ -31,7 +31,8 @@
 	var scaleAdjust = 0.015;
 	var scl = scale * scaleAdjust;
 
-	var placardYPosition = 100;
+	var placards;
+	var placardYPosition = 350;
 
 	var selectedPlace = 1753;  // Copernicus
 
@@ -68,7 +69,6 @@
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; width: 260px; ';
 		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
 			'<a id=i href=http://jaanga.github.io/moon/rover/ >&#x24D8;</a></h2>' +
-			'<p>Use cursor keys to move over terrain</p>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
@@ -80,8 +80,9 @@
 				'Use cursor keys to move around the moon<br>' +
 				'Roll = left | 1 finger<br>Zoom = scroll | 2 finger<br>Move = right | 3 finger' +
 			'</small></p>' +
-
+			'<hr>' +
 			'<div id=info ></div>' +
+			'<p id=places>downloading gazetteer...</p>' +
 		'';
 
 		stats = new Stats();
@@ -122,7 +123,7 @@
 		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
 		heightMesh = new THREE.Mesh( geometry3D.clone(), material3D );
 //		heightMesh.position.y = heightMeshYPosition;
-		scene.add( heightMesh );
+//		scene.add( heightMesh );
 
 		panes = [];
 
@@ -149,20 +150,27 @@
 
 		updateHeightMap();
 
-
-
 	}
 
 	function getCoordinates( lat, lon ) {
 
 //console.log( 'lat', lat, 'lon', lon  );
 
-		pt = latlon2xy( lat, lon );
+		pt1 = latlon2xy( lat, lon );
 //console.log( 'lat', lat, 'lon', lon, '\n', 'centerX', pt[ 0 ], 'centerZ', pt[ 1 ]  );
 
-		pt2 = xz2latlon( pt[ 0 ], pt[ 1 ] ) 
+		pt2 = xz2latlon( pt1[ 0 ], pt1[ 1 ] ) 
 
-console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ], '\nlat', pt2[ 0 ], 'lon', pt2[ 1 ] );
+console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 ], '\nlat', pt2[ 0 ], 'lon', pt2[ 1 ] );
+
+	}
+
+	function latlon2xy( lat, lon ) {
+
+		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 1 + 90 * lon / 360 );
+		cy = Math.floor( 22 - 45 * lat / 180 ) ;
+
+		return [ cx, cy ];
 
 	}
 
@@ -178,7 +186,6 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 
 		}
 
-
 		if ( z > 22 ) {
 
 			lat = 90 - ( 4 * ( z - 1 ) ); 
@@ -193,14 +200,7 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 
 	}
 
-	function latlon2xy( lat, lon ) {
 
-		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 1 + 90 * lon / 360 );
-		cy = Math.floor( 22 - 45 * lat / 180 ) ;
-
-		return [ cx, cy ];
-
-	}
 
 	function updateHeightMap() {
 
@@ -226,7 +226,11 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 		y = 256 * point[ 1 ];
 		heightmapContext.drawImage( img, 0, 0, 256, 256, x, y, 256, 256 );
 
-		if ( ++count > 15 ) { updateTerrain(); }
+		if ( ++count > 15 ) { 
+			updateTerrain(); 
+
+
+		}
 
 	}
 
@@ -249,7 +253,19 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 
 		scene.add( heightMesh );
 
-		if ( gazetteer === undefined ) { getGazetteerMoon(); }
+		if ( gazetteer === undefined ) { 
+
+			getGazetteerMoon(); 
+
+		} else {
+
+			info.innerHTML = 'lat: ' + lat + ' lon: ' + lon;
+
+			getCoordinates( lat, lon );
+
+			checkoutPlace();
+
+		}
 
 	}
 
@@ -284,12 +300,6 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 
 				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
 
-//				if ( parseFloat( place[ 1 ] ) > minPlaceRadiusToDisplay ) {
-
-//					drawSprite( place[ 0 ], 0.15, 120, parseFloat( place[ 2 ] ) - 0.5 * mapWidth, placardYPosition, parseFloat( place[ 3 ] ) - 0.5 * mapHeight);
-
-//				}
-
 			}
 
 			for ( var i = 0, place; i < lines.length; i++ ) {
@@ -312,43 +322,42 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt[ 0 ], 'centerZ', pt[ 1 ],
 
 				updateHeightMap();
 
-getCoordinates( place[ 2 ], place[ 3 ]  );
+				getCoordinates( place[ 2 ], place[ 3 ]  );
 
-//				centerX = nextPlace[ 2 ];
-//				centerZ = nextPlace[ 3 ];
-
-//				drawSprite( nextPlace[ 0 ], 0.15, 120, nextPlace[ 2 ] - 0.5 * mapWidth, placardYPosition, nextPlace[ 3 ] - 0.5 * mapHeight);
-
-				//butZoomIn.onclick();
-//controls.reset(); 
-
+			
 			};
 
-/*
-county = 0;
-
-		for ( var i = 0; i < gazetteer.length; i++ ) {
-
-			place = gazetteer[ i ];
-
-			if ( place[ 2 ] < 5 && place[ 2 ] > 0 && place[ 3 ] > 0 && place[ 3 ] < 5 ) {
-
-county++;
-
-			}
-
-		}
-
-console.log( county );
-
-*/
-
-//			selPlace.onchange();
+			checkoutPlace();
 
 		}
 
 	}
 
+	function checkoutPlace() {
+
+		var txt = '';
+
+		scene.remove( placards );
+
+		placards = new THREE.Object3D();
+
+		for ( var i = 0; i < gazetteer.length; i++ ) {
+
+			place = gazetteer[ i ];
+
+			if ( place[ 2 ] > lat - 11 && place[ 2 ] < lat + 4 && place[ 3 ] > lon - 7 && place[ 3 ] < lon + 8 ) {
+
+				txt += place[ 0 ] + '<br>&bull; lat:' + place[ 2 ] + ' lon:' + place[ 3 ] + '<br>';
+				drawSprite( place[ 0 ], 0.25, 120, 64 * ( place[ 3 ] - lon  - 1 ), placardYPosition , -64 * ( place[ 2 ] - lat + + 3 )) ;
+
+			}
+
+		};
+
+//		places.innerHTML = txt;
+		scene.add( placards );
+
+	}
 
 // cursor keys
 
@@ -405,6 +414,76 @@ console.log( county );
 		centerX = centerX <  3 ? 86 : centerX;
 
 		updateHeightMap();
+
+	}
+
+
+// draw placards
+
+	function drawSprite( text, scale, color, x, y, z) {
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }  );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+		placards.add ( sprite );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, 0, z ),  v( x, y,  z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+		placards.add( line );
+
+	}
+
+	function canvasMultilineText( textArray, parameters ) {
+
+		var parameters = parameters || {} ;
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		var col = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+		context.fillStyle = 'hsl( ' + col + ', 80%, 50% )' ;
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = parameters.font ? parameters.font : '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+
+		return texture;
 
 	}
 

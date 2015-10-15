@@ -1,6 +1,16 @@
 Moon Dev Notes
 ===
 
+
+2015-10-14 ~ Theo
+
+Fixed:
+
+* Big issue: vertical artifacts at first line of every IMG file
+	* Is it the data or is it me??  << it's the data
+	* 2015-10-13 ~ half fixed
+
+
 2015-10-14 ~ Theo
 
 It looks like some of the WAC_GLD100 files have TWO lines of headers.

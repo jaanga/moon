@@ -20,7 +20,7 @@
 	var signNS;
 
 	var path = 'c:/temp/moon-heightmaps/';
-	var namePrefix = '256p';
+	var namePrefix = 'zz-64p';
 	var fileName = process.argv[ 2 ];
 
 	var tileXStart = parseFloat( process.argv[ 4 ] );

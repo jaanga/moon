@@ -72,6 +72,7 @@
 
 		msg0.innerHTML = fileName;
 
+/*
 		for ( var i = 0; i < 10; i++ ) {
 
 			requestIMGFile( fileName, 'start ' + i +': ', width * i, width * i + width + 1 );
@@ -83,6 +84,24 @@
 			requestIMGFile( fileName, 'finish ' + i +': ' , width * i, width * i + width - 1 );
 
 		}
+*/
+
+		txt = 'bytes='
+
+		for ( var i = 0; i < 2; i++ ) {
+
+			txt += ( i * 100 )  + '-' + ( i * 100 + 50 ) + ',';
+
+		}
+
+txt += '5000-5050';
+
+txt = 'bytes=0-1001';
+
+console.log( txt );
+
+requestIMGFile( fileName, txt );
+
 
 /*
 		canvas = document.createElement( 'canvas' );
@@ -109,7 +128,7 @@
 
 	}
 
-	function requestIMGFile( fileName, prefix, startByte, finishByte ) {
+	function requestIMGFile( fileName, range ) {
 
 	var xmlHttp;
 
@@ -119,7 +138,7 @@
 		xmlHttp.responseType = 'arraybuffer';
 		xmlHttp.open( 'GET', fileName, true );
 		xmlHttp.onreadystatechange = getData;
-		xmlHttp.setRequestHeader('Range', 'bytes=' + startByte + '-' + finishByte );
+		xmlHttp.setRequestHeader('Range', range );
 		xmlHttp.send( null );
 
 	function getData() {
@@ -142,6 +161,7 @@
 
 			}
 
+/*
 			txt = prefix;
 
 			for ( var i = 0; i < 5; i++ ) {
@@ -159,8 +179,9 @@
 			}
 
 			msg1.innerHTML += txt + '<br><br>';
+*/
 
-//console.log( elevations );
+console.log( byteArray );
 
 /*
 			context.putImageData( imageData, 0, 0 );
