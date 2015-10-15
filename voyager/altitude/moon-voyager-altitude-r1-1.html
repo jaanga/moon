@@ -96,12 +96,14 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		camera.position.set( 3500, 3500, -3500 );
+		camera.position.set( -3500, 3500, 3500 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.minDistance = 2500;
 		controls.maxDistance = 8000;
+
 		scene = new THREE.Scene();
+		scene.add( camera );
 
 		controls.autoRotateSpeed = autoRotateSpeed;
 
@@ -110,7 +112,7 @@
 		scene.add( light );
 
 		light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		light.position.set( 5000, 200, 5000 );
+		light.position.set( -5000, 200, 5000 );
 
 		var d = 2000;
 		light.shadowCameraLeft = -d;
@@ -131,9 +133,9 @@
 //		light.shadowCameraVisible = true;
 		scene.add( light );
 
-		lightPoint = new THREE.PointLight( 0x888888, 0.25 );
+		lightPoint = new THREE.PointLight( 0x9988aa, 0.5 );
 		camera.add( lightPoint );
-		lightPoint.position = new THREE.Vector3( 0, 0 , 1 );
+		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
 
 //		cameraHelper = new THREE.CameraHelper( light.shadow )
 //		scene.add( cameraHelper );
@@ -173,6 +175,59 @@
 
 	}
 
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
+
+		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
+
+geometry = geometry.clone();
+		vertices = geometry.vertices;
+
+		for ( var i = 0, j = 0; i < vertices.length; i++, j += 4 ) {
+
+			var s = 1 + scl * map[ j ];
+			vertices[ i ].x *= s;
+			vertices[ i ].y *= s;
+			vertices[ i ].z *= s;
+
+			color = new THREE.Color();
+			color.setHSL( 0.7 * ( 255 - map[ j ] ) / 255, 1, 0.5 );
+			geometry.colors[i] = color; // use this array for convenience
+
+		}
+
+		for ( var i = 0; i < geometry.faces.length; i++ ) {
+
+			face = geometry.faces[ i ];
+			face.vertexColors[ 0 ] = geometry.colors[ face[ 'a'] ];
+			face.vertexColors[ 1 ] = geometry.colors[ face[ 'b'] ];
+			face.vertexColors[ 2 ] = geometry.colors[ face[ 'c'] ];
+
+		}
+
+		material = new THREE.MeshPhongMaterial( { vertexColors: THREE.VertexColors,
+
+			color: 0x888888,
+			emissive: 0x111111,
+			specular: 0x444444,
+			shininess: 30
+
+		} );
+
+//			material = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading, side: 2 } );
+
+		scene.remove( heightMesh );
+		heightMesh = new THREE.Mesh( geometry, material );
+		heightMesh.castShadow = true;
+		heightMesh.receiveShadow = true;
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+//		heightMesh.material.needsUpdate = true;
+		scene.add( heightMesh );
+
+	}
+
 	function getGazetteerMoon() {
 
 		var data = requestGazetteer( gazetteerFile );
@@ -207,7 +262,7 @@
 
 				gazetteer.push( [ place[0], place[ 1 ], parseFloat( lat ), parseFloat( - lon ) ] );
 
-				pos = convertPosition( lat, - lon, placardYPosition )
+				pos = convertPosition( lat, lon, placardYPosition )
 
 				drawSprite( place[ 0 ], placardSize, 60, pos.x, pos.y, pos.z );
 
@@ -245,61 +300,10 @@
 
 	}
 
-	function updateTerrain() {
-
-		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
-
-		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
-
-		vertices = geometry.vertices;
-
-		for ( var i = 0, j = 0; i < vertices.length; i++, j += 4 ) {
-
-			var s = 1 + scl * map[ j ];
-			vertices[ i ].x *= s;
-			vertices[ i ].y *= s;
-			vertices[ i ].z *= s;
-
-			color = new THREE.Color();
-			color.setHSL( 0.7 * ( 255 - map[ j ] ) / 255, 1, 0.5 );
-			geometry.colors[i] = color; // use this array for convenience
-
-		}
-
-		for ( var i = 0; i < geometry.faces.length; i++ ) {
-
-			face = geometry.faces[ i ];
-			face.vertexColors[ 0 ] = geometry.colors[ face[ 'a'] ];
-			face.vertexColors[ 1 ] = geometry.colors[ face[ 'b'] ];
-			face.vertexColors[ 2 ] = geometry.colors[ face[ 'c'] ];
-
-		}
-
-		material = new THREE.MeshPhongMaterial( { vertexColors: THREE.VertexColors,
-
-			color: 0x888888,
-			emissive: 0x111111,
-			specular: 0x444444,
-			shininess: 30
-
-		} );
-//			material = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading, side: 2 } );
-
-		scene.remove( heightMesh );
-		heightMesh = new THREE.Mesh( geometry, material );
-		heightMesh.castShadow = true;
-		heightMesh.receiveShadow = true;
-			heightMesh.geometry.computeFaceNormals();
-			heightMesh.geometry.computeVertexNormals();
-//			heightMesh.material.needsUpdate = true;
-		scene.add( heightMesh );
-
-	}
-
 	function convertPosition( lat, lon, radius ) {
 
 		var rc = radius * Math.cos( lat * d2r );
-		return v( rc * Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
+		return v( rc * - Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
 
 	}
 

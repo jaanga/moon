@@ -14,7 +14,7 @@
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
 Image maps to look at:
-* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-4096x2048 ) 18 MB 
+* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-crop ) 18 MB 
 
 Images need to be shifted 180 degrees:
 
@@ -28,18 +28,16 @@ Images need to be shifted 180 degrees:
 ### Issue
 
 There are may existing, quite beautiful 2D Mercator projection maps of the Moon. 
-Is it possible to drape or overlay these images over a 3D terrain and have attractive results  
+Is it possible to drape or overlay these images over a 3D terrain and have attractive results?
 
 ## Mission
 
-To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
-To show the usually hidden backside of the moon as easily as the front
 
 
 ## Things to Do
 
 * Ensure that the 2D images line up as closely as possible with the 3D landscape
-* Locate cool overalays
+* Locate cool overlays
 
 
 

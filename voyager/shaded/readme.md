@@ -7,8 +7,8 @@
 <input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded'; />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1.html" width=100% height=600px ></iframe>  
-####_Moon Voyager Shaded - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1-1.html" width=100% height=600px ></iframe>  
+####_Moon Voyager Shaded - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-shaded-r1-1.html )
 
 
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
@@ -21,8 +21,7 @@ From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D o
 
 ## Mission
 
-To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
-To show the usually hidden backside of the moon as easily as the front
+To display the Moon with lights, shade and shadows
 
 
 ## Things to Do

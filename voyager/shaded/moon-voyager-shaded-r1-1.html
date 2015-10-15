@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Voyager Altitude R1</title>
+<title>Moon Voyager Shaded R1</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -20,14 +20,11 @@
 
 	var moonRadiusEquator = 1728;
 
-//	var width = 1440;
-//	var height = 720;
-
-	var width = 720;
-	var height = 360;
+	var width = 1440;
+	var height = 720;
 
 	var scale = 1;
-	var scaleAdjust = 0.0008;
+	var scaleAdjust = 0.0003;
 	var scl = scaleAdjust * scale;
 
 //	var selectedPlace = 1753;  // Copernicus 9000
@@ -38,7 +35,7 @@
 	var delayTime = 2000;
 	var autoRotateSpeed = 0.2;
 
-	var placardYPosition = 2000;
+	var placardYPosition = 2500;
 	var placardSize = 0.8;
 
 	var d2r = Math.PI / 180;
@@ -55,7 +52,8 @@
 	function init() {
 
 		var css = document.body.appendChild( document.createElement('style') );
-		css.innerHTML = 'body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
+		css.innerHTML = 'body { background-image: url("../../images/stars-2048x1024.png"); ' +
+				'font: 12pt monospace; margin: 0; overflow: hidden; }' +
 			'h3 { margin: 0; }' +
 			'#bars, #i { font-size: 24pt; text-decoration: none; }' +
 			'#bars { color: pink; } ' +
@@ -74,7 +72,7 @@
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
 		menu.innerHTML = '<h3>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/moon/voyager/altitude/ >&#x24D8;</a>' +
+				'<a id=i href=http://jaanga.github.io/moon/voyager/shaded/ >&#x24D8;</a>' +
 			'</h3>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p id=message ></p>' +
@@ -89,19 +87,21 @@
 		document.body.appendChild( stats.domElement );
 
 //		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
-		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		camera.position.set( 3500, 3500, -3500 );
+		camera.position.set( -3500, 3500, 3500 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.minDistance = 2500;
 		controls.maxDistance = 8000;
+
 		scene = new THREE.Scene();
+		scene.add( camera );
 
 		controls.autoRotateSpeed = autoRotateSpeed;
 
@@ -110,7 +110,7 @@
 		scene.add( light );
 
 		light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		light.position.set( 5000, 200, 5000 );
+		light.position.set( -5000, 200, 5000 );
 
 		var d = 2000;
 		light.shadowCameraLeft = -d;
@@ -131,9 +131,9 @@
 //		light.shadowCameraVisible = true;
 		scene.add( light );
 
-		lightPoint = new THREE.PointLight( 0x888888, 0.25 );
+		lightPoint = new THREE.PointLight( 0xaa8899, 0.5 );
+		lightPoint.position = new THREE.Vector3( 0, 0, -1 );
 		camera.add( lightPoint );
-		lightPoint.position = new THREE.Vector3( 0, 0 , 1 );
 
 //		cameraHelper = new THREE.CameraHelper( light.shadow )
 //		scene.add( cameraHelper );
@@ -157,19 +157,47 @@
 		canvasHeightMap.height = height;
 		contextHeightMap = canvasHeightMap.getContext( '2d' );
 
-		geometry = new THREE.SphereGeometry( moonRadiusEquator, width - 1, height - 1 );
+		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
 
-//		material3D = new THREE.MeshBasicMaterial();
-//		heightMesh = new THREE.Mesh( geometry, material3D );
-//		heightMesh.castShadow = true;
-//		heightMesh.receiveShadow = true;
-//		scene.add( heightMesh );
+		material3D = new THREE.MeshPhongMaterial( {
+			color: 0xaaaa99, 
+			specular: 0xaa9999,
+			shininess: 10
+		} );
+
+		heightMesh = new THREE.Mesh( geometry, material3D );
+		heightMesh.castShadow = true;
+		heightMesh.receiveShadow = true;
+		scene.add( heightMesh );
 
 		placards = new THREE.Object3D();
 		scene.add( placards );
 
 		getGazetteerMoon();
+
+	}
+
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
+
+		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
+
+		heightMesh.geometry = geometry.clone();
+		vertices = heightMesh.geometry.attributes.position.array;
+
+		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
+
+			var s = 1 + scl * map[ j ];
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+
+		}
+
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
 
 	}
 
@@ -207,7 +235,7 @@
 
 				gazetteer.push( [ place[0], place[ 1 ], parseFloat( lat ), parseFloat( - lon ) ] );
 
-				pos = convertPosition( lat, - lon, placardYPosition )
+				pos = convertPosition( lat, lon, placardYPosition )
 
 				drawSprite( place[ 0 ], placardSize, 60, pos.x, pos.y, pos.z );
 
@@ -245,61 +273,10 @@
 
 	}
 
-	function updateTerrain() {
-
-		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
-
-		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
-
-		vertices = geometry.vertices;
-
-		for ( var i = 0, j = 0; i < vertices.length; i++, j += 4 ) {
-
-			var s = 1 + scl * map[ j ];
-			vertices[ i ].x *= s;
-			vertices[ i ].y *= s;
-			vertices[ i ].z *= s;
-
-			color = new THREE.Color();
-			color.setHSL( 0.7 * ( 255 - map[ j ] ) / 255, 1, 0.5 );
-			geometry.colors[i] = color; // use this array for convenience
-
-		}
-
-		for ( var i = 0; i < geometry.faces.length; i++ ) {
-
-			face = geometry.faces[ i ];
-			face.vertexColors[ 0 ] = geometry.colors[ face[ 'a'] ];
-			face.vertexColors[ 1 ] = geometry.colors[ face[ 'b'] ];
-			face.vertexColors[ 2 ] = geometry.colors[ face[ 'c'] ];
-
-		}
-
-		material = new THREE.MeshPhongMaterial( { vertexColors: THREE.VertexColors,
-
-			color: 0x888888,
-			emissive: 0x111111,
-			specular: 0x444444,
-			shininess: 30
-
-		} );
-//			material = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading, side: 2 } );
-
-		scene.remove( heightMesh );
-		heightMesh = new THREE.Mesh( geometry, material );
-		heightMesh.castShadow = true;
-		heightMesh.receiveShadow = true;
-			heightMesh.geometry.computeFaceNormals();
-			heightMesh.geometry.computeVertexNormals();
-//			heightMesh.material.needsUpdate = true;
-		scene.add( heightMesh );
-
-	}
-
 	function convertPosition( lat, lon, radius ) {
 
 		var rc = radius * Math.cos( lat * d2r );
-		return v( rc * Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
+		return v( rc * - Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
 
 	}
 
