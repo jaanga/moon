@@ -20,10 +20,6 @@
 	var heightMapsFolder = sourceFolder + 'heightmaps/64p/'
 	var name = '/64p-';
 
-// Copernicus,Archetypal large complex crater,9.7N,20.1W
-	var latDefault = 9.7;
-	var lonDefault = -20.1;
-
 	var heightmapWidth = 1024;
 	var heightmapHeight = 1024;
 
@@ -34,6 +30,12 @@
 	var placards;
 	var placardYPosition = 350;
 
+// Copernicus,Archetypal large complex crater,9.7N,20.1W
+	var latDefault = 9.7;
+	var lonDefault = -20.1;
+
+	var lat = latDefault;
+	var lon = lonDefault;
 	var selectedPlace = 1753;  // Copernicus
 
 	var minPlaceRadiusToDisplay = 50; // radius of feature as defined by the gazetteer
@@ -51,7 +53,7 @@
 
 		var css = document.body.appendChild( document.createElement('style') );
 		css.innerHTML = 'body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
-			'h2 { margin: 0; }' +
+			'h2 { margin: 0 0 10px 0;}' +
 			'#bars, #i { font-size: 24pt; text-decoration: none; }' +
 			'#bars { color: pink; } ' +
 
@@ -67,9 +69,11 @@
 		menu = hamburger.appendChild( document.createElement( 'div' ) );
 		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -300px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; width: 260px; ';
-		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
+		menu.innerHTML = '<h2><a href="" >' + document.title + '</a> ' +
 			'<a id=i href=http://jaanga.github.io/moon/rover/ >&#x24D8;</a></h2>' +
-			'<p><select id=selPlace></select></p>' +
+			'<div><select id=selPlace></select></div>' +
+			'<div id=info ></div>' +
+			'<div id=info2 ></div>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
 //				'<button id=butZoomIn onclick="camera.position.set(centerX-halfMapWidth+50,heightMeshYPosition+300,centerZ-halfMapHeight+400);" >Zoom In</button>' +
@@ -81,23 +85,24 @@
 				'Roll = left | 1 finger<br>Zoom = scroll | 2 finger<br>Move = right | 3 finger' +
 			'</small></p>' +
 			'<hr>' +
-			'<div id=info ></div>' +
-			'<p id=places>downloading gazetteer...</p>' +
+
+			'<p id=places></p>' +
 		'';
 
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
 		document.body.appendChild( stats.domElement );
 
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+//		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0x000000 }  );
+		renderer = new THREE.WebGLRenderer( { antialias: true, clearColor: 0x000000 }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.position.set( 200, 800, 800 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 8000;
+		controls.maxDistance = 2000;
 		controls.enableKeys = false;
 
 		scene = new THREE.Scene();
@@ -139,29 +144,32 @@
 
 			}
 
-		} 
+		}
 
 		getCoordinates( latDefault, lonDefault);
 
-		pt = latlon2xy( latDefault, lonDefault );
-
-		centerX = pt[ 0 ];
-		centerZ = pt[ 1 ];
-
-		updateHeightMap();
+		getGazetteerMoon();
 
 	}
 
 	function getCoordinates( lat, lon ) {
 
-//console.log( 'lat', lat, 'lon', lon  );
-
 		pt1 = latlon2xy( lat, lon );
-//console.log( 'lat', lat, 'lon', lon, '\n', 'centerX', pt[ 0 ], 'centerZ', pt[ 1 ]  );
 
-		pt2 = xz2latlon( pt1[ 0 ], pt1[ 1 ] ) 
+		centerX = pt1[ 0 ];
+		centerZ = pt1[ 1 ];
 
-console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 ], '\nlat', pt2[ 0 ], 'lon', pt2[ 1 ] );
+		pt2 = xz2latlon( pt1[ 0 ], pt1[ 1 ] );
+
+		centerLat = pt2[ 0 ];
+		centerLon = pt2[ 1 ];
+
+//console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt1[ 1 ], '\ncenterLat', centerLat, 'centerLon', centerLon );
+
+		updateHeightMap();
+
+		info.innerHTML = 'lat: ' + lat.toFixed( 1 ) + ' lon: ' + lon.toFixed( 1 );
+		info2.innerHTML = 'Center lat: ' + centerLat.toFixed( 1 ) + ' lon: ' + centerLon.toFixed( 1 );
 
 	}
 
@@ -178,25 +186,25 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 
 		if ( x > 44 ) {
 
-			lon = ( 4 * ( x + 1 ) ) - 361;
+			lo = ( 4 * ( x + 1 ) ) - 360;
 
 		} else {
 
-			lon = 90 - 4 * x ;
+			lo = 4 * x ;
 
 		}
 
-		if ( z > 22 ) {
+//		if ( z > 22 ) {
 
-			lat = 90 - ( 4 * ( z - 1 ) ); 
+//			la = 90 - ( 4 * ( z + 1 ) );
 
-		} else {
+//		} else {
 
-			lat = 89 - ( 4 * z );
+			la = 90 - ( 4 * ( z + 1 ) );
 
-		}
+//		}
 
-		return [ lat, lon ];
+		return [ la, lo ];
 
 	}
 
@@ -209,13 +217,15 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 
 		for ( var x = centerX - 1; x < centerX + 3; x++ ) {
 
+			tmpX = x > 89 ? x - 90: x;
+
 			for ( var z = centerZ - 1; z < centerZ + 3; z++ ) {
 
-				panes[ index++ ].src = heightMapsFolder + x + name + x + '-' + z + '.png';
+				panes[ index++ ].src = heightMapsFolder + tmpX + name + tmpX + '-' + z + '.png';
 
 			}
 
-		} 
+		}
 
 	}
 
@@ -226,10 +236,15 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 		y = 256 * point[ 1 ];
 		heightmapContext.drawImage( img, 0, 0, 256, 256, x, y, 256, 256 );
 
-		if ( ++count > 15 ) { 
-			updateTerrain(); 
+		if ( ++count > 15 ) {
 
+			updateTerrain();
 
+			if ( gazetteer !== undefined ) {
+
+				checkoutPlace();
+
+			}
 		}
 
 	}
@@ -252,20 +267,6 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 		heightMesh.geometry.computeVertexNormals();
 
 		scene.add( heightMesh );
-
-		if ( gazetteer === undefined ) { 
-
-			getGazetteerMoon(); 
-
-		} else {
-
-			info.innerHTML = 'lat: ' + lat + ' lon: ' + lon;
-
-			getCoordinates( lat, lon );
-
-			checkoutPlace();
-
-		}
 
 	}
 
@@ -315,16 +316,11 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 
 				var place = gazetteer[ this.selectedIndex ];
 
-				pt = latlon2xy( place[ 2 ], place[ 3 ] );
+				lat = place[ 2 ];
+				lon = place[ 3 ];
 
-				centerX = pt[ 0 ];
-				centerZ = pt[ 1 ];
+				getCoordinates( lat, lon );
 
-				updateHeightMap();
-
-				getCoordinates( place[ 2 ], place[ 3 ]  );
-
-			
 			};
 
 			checkoutPlace();
@@ -345,10 +341,10 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 
 			place = gazetteer[ i ];
 
-			if ( place[ 2 ] > lat - 11 && place[ 2 ] < lat + 4 && place[ 3 ] > lon - 7 && place[ 3 ] < lon + 8 ) {
+			if ( place[ 2 ] > lat - 8 && place[ 2 ] < lat + 8 && place[ 3 ] > lon - 7 && place[ 3 ] < lon + 8 ) {
 
 				txt += place[ 0 ] + '<br>&bull; lat:' + place[ 2 ] + ' lon:' + place[ 3 ] + '<br>';
-				drawSprite( place[ 0 ], 0.25, 120, 64 * ( place[ 3 ] - lon  - 1 ), placardYPosition , -64 * ( place[ 2 ] - lat + + 3 )) ;
+				drawSprite( place[ 0 ], 0.25, 120, 64 * ( place[ 3 ] - centerLon ), placardYPosition , -64 * ( place[ 2 ] - centerLat ) ) ;
 
 			}
 
@@ -383,37 +379,37 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 
 	function goNorth() {
 
-		centerZ--;
-		centerZ = centerZ <= 3 ? 3 : centerZ;
+		lat += 4;
+		lat = lat < 84 ? lat : 84;
 
-		updateHeightMap();
+		getCoordinates( lat, lon );
 
 	}
 
 	function goSouth() {
 
-		centerZ++;
-		centerZ = centerZ >= 41 ? 41 : centerZ;
+		lat -= 4;
+		lat = lat > -83 ? lat : -83;
 
-		updateHeightMap();
+		getCoordinates( lat, lon );
 
 	}
 
 	function goEast() {
 
-		centerX++;
-		centerX = centerX < 86 ? centerX : 3;
+		lon += 4;
+		lon = lon < 179 ? lon : -180;
 
-		updateHeightMap();
+		getCoordinates( lat, lon );
 
 	}
 
 	function goWest() {
 
-		centerX--;
-		centerX = centerX <  3 ? 86 : centerX;
+		lon -= 4;
+		lon = lon > -180 ? lon : 179;
 
-		updateHeightMap();
+		getCoordinates( lat, lon );
 
 	}
 
@@ -516,4 +512,3 @@ console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt2[ 1 
 </script>
 </body>
 </html>
-

@@ -2,8 +2,8 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Moon Rover 256P R1</title>
-<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+<title>Moon Rover 64P R2</title>
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' >
 </head>
 <body>
 <script src=http://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
@@ -11,46 +11,38 @@
 <script src=http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 <script>
 
-	var path = 'http://jaanga.github.io/';
+// Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
+	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/moon/';
 
-	var gazetteerFile = path + 'moon/gazetteer/moon-iau-nomenclature.csv';
+	var gazetteerFile = sourceFolder + 'gazetteer/moon-iau-nomenclature.csv';
 	var gazetteer;
 
-	var dirNE = 'moon-heightmaps-256p-ne/';
-	var dirNW = 'moon-heightmaps-256p-nw/';
-	var dirSE = 'moon-heightmaps-256p-se/';
-	var dirSW = 'moon-heightmaps-256p-sw/';
+	var heightMapsFolder = sourceFolder + 'heightmaps/64p/'
+	var name = '/64p-';
+
+// Copernicus,Archetypal large complex crater,9.7N,20.1W
+	var latDefault = 9.7;
+	var lonDefault = -20.1;
+
+	var lat = latDefault;
+	var lon = lonDefault;
 
 	var heightmapWidth = 1024;
 	var heightmapHeight = 1024;
 
-	var widthDestination = 256;
-	var heightDestination = 256;
-
 	var scale = 1;
-	var scaleAdjust = 0.065;
+	var scaleAdjust = 0.015;
 	var scl = scale * scaleAdjust;
 
 	var placards;
 	var placardYPosition = 350;
 
-// Copernicus,Archetypal large complex crater,9.7N,20.1W
 	var selectedPlace = 1753;  // Copernicus
 
-	var tileXCount = heightmapWidth / widthDestination
-	var tileYCount = heightmapWidth / widthDestination
+	var minPlaceRadiusToDisplay = 50; // radius of feature as defined by the gazetteer
 
-	var tileXStart = -22;
-	var tileXFinish = tileXStart + tileXCount;
-	var tileX = tileXStart;
-
-	var tileYStart = 8;
-	var tileYFinish = tileYStart + tileYCount;
-	var tileY = tileYStart;
-
-	var startTime = performance.now();
-	var delayTime = 2000;
-	var autoRotateSpeed = 0.2;
+	var count;
+	var centerX, centerZ;
 
 	var css, menu, stats, renderer, scene, camera, controls;
 	var geometry, material, mesh;
@@ -79,18 +71,16 @@
 		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -300px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; width: 260px; ';
 		menu.innerHTML = '<h2 style=margin:0; ><a href="" >' + document.title + '</a> ' +
-			'<a id=i href=http://jaanga.github.io/moon/rover-256p/ >&#x24D8;</a></h2>' +
+			'<a id=i href=http://jaanga.github.io/moon/rover/ >&#x24D8;</a></h2>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +
 //				'<button id=butZoomIn onclick="camera.position.set(centerX-halfMapWidth+50,heightMeshYPosition+300,centerZ-halfMapHeight+400);" >Zoom In</button>' +
 			'</p>' +
 
-			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;processTiles(); /></p>' +
-			'<p><input type=checkbox id=chkGradient onchange=toggleGradientBackground(); checked /> Display gradient</p>' +
-			'<p><input type=checkbox id=chkRotate checked /> Auto Rotation</p>' +
+			'<p>Heights: <input type=range min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;updateHeightMap(); /></p>' +
 			'<p><small>' +
-				'Use cursor keys to rove the moon<br>' +
+				'Use cursor keys to move around the moon<br>' +
 				'Roll = left | 1 finger<br>Zoom = scroll | 2 finger<br>Move = right | 3 finger' +
 			'</small></p>' +
 			'<hr>' +
@@ -107,7 +97,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
-		camera.position.set( 200, 900, 1200 );
+		camera.position.set( 200, 800, 800 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 8000;
@@ -119,7 +109,7 @@
 		window.addEventListener( 'keydown', onKeyUp, false );
 
 // assets
-		var axisHelper = new THREE.AxisHelper( 50 );
+		var axisHelper = new THREE.AxisHelper( 800 );
 		scene.add( axisHelper );
 
 		heightmapCanvas = document.createElement( 'canvas' );
@@ -135,89 +125,120 @@
 
 		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
 		heightMesh = new THREE.Mesh( geometry3D.clone(), material3D );
-//		heightMesh.position.y = -300; //heightMeshYPosition;
+//		heightMesh.position.y = heightMeshYPosition;
 //		scene.add( heightMesh );
 
-		tile = document.createElement( 'img' );
-		tile.crossOrigin = 'Anonymous';
+		panes = [];
 
-		processTiles();
+		for ( var x = 0; x < 4; x++ ) {
 
-		toggleGradientBackground();
+			for ( var y = 0; y < 4; y++ ) {
+
+				pane = document.createElement( 'img' );
+				pane.crossOrigin = 'Anonymous';
+				pane.id = x + '-' + y;
+				pane.onload = function() { drawTile( this ) };
+				panes.push( pane );
+
+			}
+
+		}
+
+		getCoordinates( latDefault, lonDefault);
+
+//		pt = latlon2xy( latDefault, lonDefault );
+
+//		centerX = pt[ 0 ];
+//		centerZ = pt[ 1 ];
+
+//		updateHeightMap();
 
 	}
 
-	function processTiles() {
+	function getCoordinates( lat, lon ) {
 
-//console.log( 'tx', tileX, 'ty', tileY, 's', tileXFinish, tilesY);
+//console.log( 'lat', lat, 'lon', lon  );
 
-		if ( tileY <= tileYFinish && tileX < tileXFinish ) {
+		pt1 = latlon2xy( lat, lon );
+//console.log( 'lat', lat, 'lon', lon, '\n', 'centerX', pt[ 0 ], 'centerZ', pt[ 1 ]  );
 
-			addImage( tileX, tileY++ );
+		centerX = pt1[ 0 ];
+		centerZ = pt1[ 1 ];
 
-		} else if ( tileX < tileXFinish ) {
+		pt2 = xz2latlon( pt1[ 0 ], pt1[ 1 ] );
 
-			tileX++;
-			tileY = tileYStart;
+console.log( '\nlat', lat, 'lon', lon, '\ncenterX', pt1[ 0 ], 'centerZ', pt1[ 1 ], '\nlat', pt2[ 0 ], 'lon', pt2[ 1 ] );
 
-			processTiles();
+		updateHeightMap();
+
+	}
+
+	function latlon2xy( lat, lon ) {
+
+		cx = lon < 0 ? Math.floor( 90 + 90 * lon / 360 ) : Math.floor( 1 + 90 * lon / 360 );
+		cy = Math.floor( 22 - 45 * lat / 180 ) ;
+
+		return [ cx, cy ];
+
+	}
+
+	function xz2latlon( x, z ) {
+
+		if ( x > 44 ) {
+
+			lo = ( 4 * ( x + 1 ) ) - 361;
 
 		} else {
+
+			lo = 90 - 4 * x ;
+
+		}
+
+		if ( z > 22 ) {
+
+			la = 90 - ( 4 * ( z - 1 ) );
+
+		} else {
+
+			la = 89 - ( 4 * z );
+
+		}
+
+		return [ la, lo ];
+
+	}
+
+
+
+	function updateHeightMap() {
+
+		count = 0;
+		var index = 0;
+
+		for ( var x = centerX - 1; x < centerX + 3; x++ ) {
+
+			for ( var z = centerZ - 1; z < centerZ + 3; z++ ) {
+
+				panes[ index++ ].src = heightMapsFolder + x + name + x + '-' + z + '.png';
+
+			}
+
+		}
+
+	}
+
+	function drawTile( img ) {
+
+		point = img.id.split( '-' );
+		x = 256 * point[ 0 ];
+		y = 256 * point[ 1 ];
+		heightmapContext.drawImage( img, 0, 0, 256, 256, x, y, 256, 256 );
+
+		if ( ++count > 15 ) {
 
 			updateTerrain();
 
-			info.innerHTML = 'lat: ' + tileYStart + ' to ' + tileYFinish + ' lon: ' + tileXStart + ' to ' + tileXFinish;
-
 		}
-
-	}
-
-
-	function addImage( x, y ) {
-
-		tile.onload = function() {
-
-			heightmapContext.drawImage( tile, 0, 0, widthDestination, heightDestination, ( x - tileXStart ) * widthDestination, ( 4 - y + tileYStart ) * heightDestination, widthDestination, heightDestination ); 
-
-			processTiles();
-
-		}
-
-		if ( x < 0 ) {
-
-			signEW = '';
-
-			if ( y < 0 ) {
-
-				signNS = '';
-				dir = dirSW;
-
-			} else {
-
-				signNS = '+';
-				dir = dirNW;
-
-			}
-
-		} else {
-
-			signEW = '+';
-
-			if ( y < 0 ) {
-
-				signNS = '';
-				dir = dirSE;
-
-			} else {
-
-				signNS = '+';
-				dir = dirNE;
-
-			}
-
-		}
-
-		tile.src = path + dir + signEW + x + '/' + '256p' + signEW + x + signNS + y + '.png';
 
 	}
 
@@ -227,21 +248,32 @@
 
 		for ( var i = 1, j = 0; i < vertices.length; i += 3, j += 4 ) {
 
-			vertices[ i ] = scl * ( map[ j ] + 255 * map[ j + 1 ] ) - 300;
+			vertices[ i ] = scl * ( map[ j ] + 255 * map[ j + 1 ] );
 
 		}
 
 		heightMesh.geometry.dispose();
 		scene.remove( heightMesh );
 		heightMesh = new THREE.Mesh( geometry3D, material3D );
-		heightMesh.position.y = -300; //heightMeshYPosition;
 
-		heightMesh.geometry.computeFaceNormals();
+//		heightMesh.geometry.computeFaceNormals();
 		heightMesh.geometry.computeVertexNormals();
 
 		scene.add( heightMesh );
 
-		if ( gazetteer === undefined ) { getGazetteerMoon(); } else { checkoutPlace(); }
+		if ( gazetteer === undefined ) {
+
+			getGazetteerMoon();
+
+		} else {
+
+			info.innerHTML = 'lat: ' + lat + ' lon: ' + lon;
+
+//			getCoordinates( lat, lon );
+
+			checkoutPlace();
+
+		}
 
 	}
 
@@ -262,12 +294,7 @@
 
 		function callbackGazetteer() {
 
-			if ( xmlHttp.readyState != 4  ) { 
-
-				places.innerHTML += '.';
-				return; 
-
-			}
+			if ( xmlHttp.readyState != 4  ) { return; }
 
 			var response = xmlHttp.responseText;
 
@@ -275,17 +302,15 @@
 
 			gazetteer = [ ['select destination'] ];
 
-			for ( var i = 0; i < lines.length; i++ ) {
+			for ( var i = 0, place; i < lines.length; i++ ) {
 
-				var place = lines[i].split( ',' );
+				place = lines[i].split( ',' );
 
-//				gazetteer.push( [ place[0], place[ 1 ], place[ 2 ], place[ 3 ] ] );
 				gazetteer.push( [ place[0], parseFloat( place[ 1 ] ), parseFloat( place[ 2 ] ), parseFloat( place[ 3 ] ) ] );
-
 
 			}
 
-			for ( var i = 0; i < lines.length; i++ ) {
+			for ( var i = 0, place; i < lines.length; i++ ) {
 
 				selPlace.appendChild( document.createElement( 'option' ) );
 				selPlace.children[ i ].text = gazetteer[ i  ][ 0 ];
@@ -298,19 +323,20 @@
 
 				var place = gazetteer[ this.selectedIndex ];
 
-				tileXStart = Math.floor( parseFloat( place[ 3 ] ) ) - 1;
-				tileYStart = Math.floor( parseFloat( place[ 2 ] ) ) - 1;
+//				pt = latlon2xy( place[ 2 ], place[ 3 ] );
 
-				tileXFinish = tileXStart + tileXCount;
-				tileX = tileXStart;
+//				centerX = pt[ 0 ];
+//				centerZ = pt[ 1 ];
 
-				tileYFinish = tileYStart + tileYCount;
-				tileY = tileYStart;
-				processTiles();
+				getCoordinates( place[ 2 ], place[ 3 ] );
+//				checkoutPlace();
+//				updateHeightMap();
 
-			}
 
-			checkoutPlace(); 
+
+			};
+
+			checkoutPlace();
 
 		}
 
@@ -328,20 +354,19 @@
 
 			place = gazetteer[ i ];
 
-			if ( place[ 2 ] > tileYStart + 1 && place[ 2 ] < tileYFinish + 1 && place[ 3 ] > tileXStart && place[ 3 ] < tileXFinish ) {
+			if ( place[ 2 ] > lat - 8 && place[ 2 ] < lat + 8 && place[ 3 ] > lon - 7 && place[ 3 ] < lon + 8 ) {
 
 				txt += place[ 0 ] + '<br>&bull; lat:' + place[ 2 ] + ' lon:' + place[ 3 ] + '<br>';
-				drawSprite( place[ 0 ], 0.25, 120, 256 * ( place[ 3 ] - tileX + 2 ), placardYPosition , -256 * ( place[ 2 ] - tileY - 3 ) );
+				drawSprite( place[ 0 ], 0.25, 120, 64 * ( place[ 3 ] - lon ), placardYPosition , -64 * ( place[ 2 ] - lat )) ;
 
 			}
 
 		};
 
-		places.innerHTML = txt;
+//		places.innerHTML = txt;
 		scene.add( placards );
 
 	}
-
 
 // cursor keys
 
@@ -367,43 +392,60 @@
 
 	function goNorth() {
 
-		tileX = tileXStart - 1;
+//		centerZ--;
+//		centerZ = centerZ <= 3 ? 3 : centerZ;
 
-		tileYStart = ++tileYStart >= 56 ? 56: tileYStart;
-		tileYFinish = tileYStart + tileYCount;
+		lat += 4;
+		lat = lat < 90 ? lat : 90;
 
-		processTiles();
+		getCoordinates( lat, lon );
+
+		updateHeightMap();
 
 	}
 
 	function goSouth() {
 
-		tileX = tileXStart - 1;
-		--tileYStart;
-		tileYStart = tileYStart < -60 ? -60 : tileYStart;
-		tileYFinish = tileYStart + tileYCount;
+//		centerZ++;
+//		centerZ = centerZ >= 41 ? 41 : centerZ;
 
-		processTiles();
+
+		lat -= 4;
+		lat = lat > -89 ? lat : -89;
+
+		getCoordinates( lat, lon );
+
+
+		updateHeightMap();
 
 	}
 
 	function goEast() {
 
-		tileXStart = ++tileXStart > 175 ? -180 : tileXStart;
-		tileX = tileXStart;
-		tileXFinish = tileXStart + tileXCount;
+//		centerX++;
+//		centerX = centerX < 86 ? centerX : 3;
 
-		processTiles();
+
+		lon += 4;
+		lon = lon < 179 ? lon : -180;
+
+		getCoordinates( lat, lon );
+
+		updateHeightMap();
 
 	}
 
 	function goWest() {
 
-		tileXStart = --tileXStart < -180 ? 175 : tileXStart;
-		tileX = tileXStart;
-		tileXFinish = tileXStart + tileXCount;
+//		centerX--;
+//		centerX = centerX <  3 ? 86 : centerX;
 
-		processTiles();
+		lon -= 4;
+		lon = lon > -180 ? lon : 179;
+
+		getCoordinates( lat, lon );
+
+		updateHeightMap();
 
 	}
 
@@ -483,28 +525,6 @@
 
 	}
 
-	function toggleGradientBackground() {
-
-		if ( chkGradient.checked ) {
-
-			document.body.style.cssText += ' height: ' + window.innerHeight + 'px; ';
-
-			var col1 = Math.random().toString(16).slice(2, 8);
-			var col2 = Math.random().toString(16).slice(2, 8);
-			var col3 = Math.random().toString(16).slice(2, 8);
-			var x = ( Math.random() * window.innerWidth ).toFixed(0);
-			var y = ( Math.random() * window.innerHeight ).toFixed(0);
-
-			document.body.style.backgroundImage = 'radial-gradient( circle farthest-corner at ' + x + 'px ' + y + 'px, #' + col1 + ' 0%, #' + col2 + ' 50%, #' + col3 + ' 100%)';
-
-		} else {
-
-			document.body.style.backgroundImage = '';
-
-		}
-
-	}
-
 	function onWindowResize() {
 
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -516,24 +536,7 @@
 
 	function v( x, y, z){ return new THREE.Vector3( x, y, z ); }
 
-	function onMouseMove() {
-
-		startTime = chkRotate.checked ? performance.now() : 1000000 ;
-		controls.autoRotate = false;
-
-	}
-
-	function animate( timestamp ) {
-
-		if ( timestamp - startTime > delayTime && chkRotate.checked ) {
-
-			controls.autoRotate = true;
-
-		} else {
-
-			controls.autoRotate = false;
-
-		}
+	function animate() {
 
 		requestAnimationFrame( animate );
 		controls.update();
@@ -545,3 +548,4 @@
 </script>
 </body>
 </html>
+
