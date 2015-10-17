@@ -15,7 +15,7 @@
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html" width=100% height=500px ></iframe>  
-####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html )
+####_Moon Rover 256P - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html )
 
 
 [Moon Rover 256P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-256p/dev/ )

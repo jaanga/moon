@@ -8,12 +8,13 @@
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
+####_Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
 
 [Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
 
-[Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
-[Moon Voyager Image Map #2 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )
+[Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )  
+[Moon Voyager Image Map #2 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )  
+
 
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
 

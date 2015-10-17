@@ -8,8 +8,7 @@
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-64p/moon-rover-64p-multi-tile-r2.html" width=100% height=500px ></iframe>  
-####_Moon Rover - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-64p/moon-rover-64p-multi-tile-r2.html )
-
+####_Moon Rover 64P - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-64p/moon-rover-64p-multi-tile-r2.html )
 
 [Moon Rover 64P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-64p/dev/ )
 
@@ -24,7 +23,5 @@ The effort appears to be fairly trivial but requires some hours of work.
 
 ## Road Map
 
-* Location placards
 * Location map in menu with box indicating current location
-* Feedback as to current lat and lon 
 
