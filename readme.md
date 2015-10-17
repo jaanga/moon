@@ -11,15 +11,20 @@
 
 ## Concept
 
-### Issue
+### Issues
 
-From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D orb with a surface full of complexity.
+From earth, we 'see' the moon as a flat static one-sided disk. Yet we know it is a 3D orb with a surface full of complexity and changes.
+
+The tools to explore and discover things were once literally rocket science. Yet we know that the data is accessible and and the development tools easier than ever. 
 
 ### Mission
 <!-- a statement of a rationale, applicable now as well as in the future -->
 
-* To provide a way of flying over the Moon in 3D and to see its craters and rills in detail
+* To provide simple code that flies over the Moon in 3D and to see its craters and rills in detail
 * To show the usually hidden backside of the moon as easily as the front side
+
+* To proved software examples that only require a basic knowledge of HTML, CSS and JavaScript in order to get going and 'make it your own'
+* To demonstrate that all this is possible in an environment that allows you to fork, embellish, share and publish online that is free and open source
 
 ### Vision
 <!--  a descriptive picture of a desired future state -->
