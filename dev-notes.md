@@ -2,6 +2,13 @@ Moon Dev Notes
 ===
 
 
+2015-10-17 ~ Theo
+
+The various modules all seem to be operational.
+While they all should have much further development, they are all at a stage good enough t start showing.
+Yay!
+
+
 2015-10-14 ~ Theo
 
 Fixed:

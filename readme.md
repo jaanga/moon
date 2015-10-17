@@ -3,8 +3,12 @@
 &#127772; [Moon Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click this button to view Read Me file as a web page]( http://jaanga.github.io/moon/ "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click this button to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/'; />
+<span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]( http://jaanga.github.io/moon/ "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+
+<iframe id=ifr src="iframe-carousel-r2.html" width=100% height=600px ></iframe>  
+
+_Sample Jaanga Moon scripts_
 
 ## Concept
 
