@@ -22,14 +22,14 @@ The tools to explore and discover things were once literally rocket science. Yet
 
 * To provide simple code that flies over the Moon in 3D and to see its craters and rills in detail
 * To show the usually hidden backside of the moon as easily as the front side
-
 * To proved software examples that only require a basic knowledge of HTML, CSS and JavaScript in order to get going and 'make it your own'
 * To demonstrate that all this is possible in an environment that allows you to fork, embellish, share and publish online that is free and open source
 
 ### Vision
 <!--  a descriptive picture of a desired future state -->
 
-* To help you make some new discoveries about the Moon
+* To help you write code that helps you - and others - to discover new things about the Moon
+
 
 # Apps
 
@@ -89,6 +89,33 @@ The tools to explore and discover things were once literally rocket science. Yet
 
 [Moon Utilities Read Me - Web Page]( http://jaanga.github.io/moon/utilities/ )  
 [Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )  
+
+
+## Guidelines
+
+The code should be as close as possible to readable English
+
+* Descriptive, informative variable names
+* Lots of white space
+	* Follow the Mr.doob Coding Style
+	* Good: x = 23 * y + 54 * z
+	* Not so good: x=23*y+54*z
+	* Remember: JavaScript is compiled on the fly: no longer need to worry about whitespace slowing things down
+* Minimum notation or use of symbols
+	* Good: y = Math.floor( x );
+	Not so good: y = ~~x;
+* Everything in one file
+	* No need to have multiple files open 
+	* No need to keep looking akk over the place 
+* Emphasis on the use of one tool: JavaScript
+	* The Document Object Model(DOM) is your friend
+	* Use the DOM to add HTML and CSS to the document on the fly
+* Very limited usage of libraries
+	* No need to know Three.js and jQuery and whatever before you begin
+	* Knowing some JavaScript and something about a single library should be good enough in most instances
+* Lots of small apps
+	* Not one big app
+
 
 
 ## Copyright and License

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Moon Voyager Gamer R2.1</title>
+<title>Moon Voyager Gamer R2</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -97,7 +97,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		camera.position.set( -3500, 3500, 3500 );
+		camera.position.set( 3500, 3500, -3500 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.minDistance = 2500;
@@ -108,6 +108,8 @@
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		renderer.domElement.addEventListener( 'mousemove', onMouseMove, false ); // or mousedown?
+
+		THREE.ImageUtils.crossOrigin = 'anonymous';
 
 		toggleHelpers();
 
@@ -128,7 +130,7 @@
 		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
 
-		material3D = new THREE.MeshNormalMaterial();
+		material3D = new THREE.MeshNormalMaterial( { side: 2 } );
 
 		heightMesh = new THREE.Mesh( geometry, material3D );
 		scene.add( heightMesh );
@@ -139,29 +141,6 @@
 		getGazetteerMoon();
 
 		toggleGradientBackground();
-
-	}
-
-	function updateTerrain() {
-
-		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
-
-		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
-
-		heightMesh.geometry = geometry.clone();
-		vertices = heightMesh.geometry.attributes.position.array;
-
-		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
-
-			var s = 1 + scl * map[ j ];
-			vertices[ i++ ] *= s;
-			vertices[ i++ ] *= s;
-			vertices[ i++ ] *= s;
-
-		}
-
-		heightMesh.geometry.computeFaceNormals();
-		heightMesh.geometry.computeVertexNormals();
 
 	}
 
@@ -199,7 +178,7 @@
 
 				gazetteer.push( [ place[0], place[ 1 ], parseFloat( lat ), parseFloat( - lon ) ] );
 
-				pos = convertPosition( lat, lon, placardYPosition )
+				pos = convertPosition( lat, - lon, placardYPosition )
 
 				drawSprite( place[ 0 ], placardSize, 120, pos.x, pos.y, pos.z );
 
@@ -237,10 +216,33 @@
 
 	}
 
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, heightMap.width, heightMap.height, 0, 0, width, height );
+
+		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
+
+		heightMesh.geometry = geometry.clone();
+		vertices = heightMesh.geometry.attributes.position.array;
+
+		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
+
+			var s = 1 + scl * map[ j ];
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+
+		}
+
+		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+
+	}
+
 	function convertPosition( lat, lon, radius ) {
 
 		var rc = radius * Math.cos( lat * d2r );
-		return v( rc * - Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
+		return v( rc * Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
 
 	}
 

@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8 >
+<title>Moon Voyager Satellites</title>
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' >
+</head>
+<body>
+<!--
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src = http://rawgit.com/mrdoob/three.js/dev/build/three.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/loaders/STLLoader.js ></script>
+<script>
+
+	var sourceFolder = 'http://jaanga.github.io/moon/';
+
+	var heightMapSource = sourceFolder + 'heightmaps/WAC_GLD100_E000N1800_004P.png';
+
+	var satelliteCassini = 'https://rawgit.com/nasa/NASA-3D-Resources/master/3D%20Models/Cassini%20(A)/cassini.stl';
+	var satelliteMRO = 'https://rawgit.com/nasa/NASA-3D-Resources/master/3D%20Printing//MRO/MRO_13.stl';
+	var satelliteJuno = 'https://rawgit.com/nasa/NASA-3D-Resources/master/3D%20Models/Juno/Juno.stl';
+
+	var sats = [];
+
+	var moonRadiusEquator = 1728;
+
+	var width = 1440;
+	var height = 720;
+
+	var scale = 1;
+	var scaleAdjust = 0.0003;
+	var scl = scaleAdjust * scale;
+
+	var startTime = performance.now();
+	var delayTime = 2000;
+	var autoRotateSpeed = 0.2;
+
+	var d2r = Math.PI / 180;
+
+	var css, hamburger, menu, stats, renderer, scene, camera, controls;
+	var geometry, material, mesh, axisHelper;
+
+	var heightMap, heightMesh, canvasHeightMap, contextHeightMap;
+	var material3D;
+
+	init();
+//	animate();
+
+	function init() {
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
+			'h3 { margin: 0; }' +
+			'#bars, #i { font-size: 24pt; text-decoration: none; }' +
+			'#bars { color: pink; } ' +
+
+			'input[type=range] { -moz-appearance: none; -webkit-appearance: none; background-color: silver; height: 20px; width: 180px; } ' +
+			'input[type=range]::-moz-range-thumb { -moz-appearance: none; background-color: #888; width: 10px; } ' +
+			'input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; opacity: 0.5; height: 28px; width: 10px; } ' +
+		'';
+
+		hamburger = document.body.appendChild( document.createElement( 'div' ) );
+		hamburger.style.cssText = ' left: 220px; position: absolute; top: 0px; transition: left 1s; ';
+		hamburger.innerHTML = '<a id=bars href=JavaScript:slideHamburger(); >&#9776;</a>';
+
+		menu = hamburger.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -220px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
+			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
+		menu.innerHTML = '<h3>' +
+				'<a href="" >' + document.title + '</a> ' +
+				'<a id=i href=http://jaanga.github.io/moon/voyager/basic/ >&#x24D8;</a>' +
+			'</h3>' +
+			'<p id=message ></p>' +
+			'<p>Vertical Scale <input type=range id=inpScale min=0 max=2 step=0.05 value=1 onchange=scale=this.value;scl=scale*scaleAdjust;updateTerrain(); /></p>' +
+			'<p><input type=checkbox id=inpHelpers onchange=toggleHelpers(); checked /> Display axis</p>' +
+			'<p><input type=checkbox id=chkRotate checked /> Auto Rotation</p>' +
+		'';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 3500, 3500, -3500 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.minDistance = 200;
+		controls.maxDistance = 8000;
+		scene = new THREE.Scene();
+
+		controls.autoRotateSpeed = autoRotateSpeed;
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		renderer.domElement.addEventListener( 'mousemove', onMouseMove, false ); // or mousedown?
+
+		toggleHelpers();
+
+		heightMap = document.createElement( 'img' );
+//		document.body.appendChild( heightMap );
+//		heightMap.style.cssText = 'margin: 20px; position: absolute; top: 0;';
+		heightMap.crossOrigin = 'anonymous';
+		heightMap.onload = updateTerrain;
+		heightMap.src = heightMapSource;
+
+		canvasHeightMap = document.createElement( 'canvas' );
+//		document.body.appendChild( canvasHeightMap );
+//		canvasHeightMap.style.cssText = 'margin: 20px; position: absolute; top: 0;';
+		canvasHeightMap.width = width;
+		canvasHeightMap.height = height;
+		contextHeightMap = canvasHeightMap.getContext( '2d' );
+
+		geometry = new THREE.SphereBufferGeometry( moonRadiusEquator, width - 1, height - 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+		vertices = geometry.attributes.position.array;
+		material = new THREE.MeshNormalMaterial();
+
+
+		loadFileSTLByURL( satelliteCassini );
+		loadFileSTLByURL( satelliteMRO );
+		loadFileSTLByURL( satelliteJuno );
+
+	}
+
+	function updateTerrain() {
+
+		contextHeightMap.drawImage( heightMap, 0, 0, width, height );
+
+		map = contextHeightMap.getImageData( 0, 0, width, height ).data;
+
+		for ( var i = 0, j = 0; i < vertices.length; j += 4 ) {
+
+			var s = 1 + scl * map[ j ];
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+			vertices[ i++ ] *= s;
+
+		}
+
+		heightMesh = new THREE.Mesh( geometry, material );
+//		heightMesh.geometry.computeFaceNormals();
+		heightMesh.geometry.computeVertexNormals();
+
+		scene.add( heightMesh );
+
+	}
+
+	function loadFileSTLByURL( fileName ) {
+
+// http:///jaanga.github.io/cookbook-threejs/viewers/viewer-stl/latest/#http://va3c.github.io/viewer/samples/NPP_16.stl
+
+		var loader = new THREE.STLLoader();
+		loader.crossOrigin = 'anonymous';
+		loader.load( fileName, function ( geometry ) {
+
+			geometry.center();
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 180, 0, 0 ) );
+			geometry.computeFaceNormals();
+			geometry.computeVertexNormals();
+			material = new THREE.MeshNormalMaterial();
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.scale.multiplyScalar( 15 );
+//			objName.position.set( 2200, 0, 0 )
+			scene.add( mesh );
+			sats.push( mesh );
+
+			if ( sats.length > 2 ) { animate(); }
+
+		} );
+
+	}
+
+	function orbit() {
+
+		sats[ 0 ].rotation.y -= 0.01;
+		sats[ 0 ].rotation.x -= 0.01;
+		sats[ 1 ].rotation.y += 0.01;
+		sats[ 1 ].rotation.z -= 0.01;
+		sats[ 2 ].rotation.y += 0.005;
+
+	}
+
+	function toggleHelpers() {
+
+		if ( inpHelpers.checked === true ) {
+
+			axis = new THREE.AxisHelper( 10000 );
+			scene.add( axis );
+
+		} else {
+
+			scene.remove( axis );
+
+		}
+
+	}
+
+	function slideHamburger() {
+
+		hamburger.style.left = hamburger.style.left === '220px' ? 0 : '220px';
+
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+	function onMouseMove() {
+
+		startTime = chkRotate.checked ? performance.now() : 1000000 ;
+		controls.autoRotate = false;
+
+	}
+
+	function animate( timestamp ) {
+
+		if ( timestamp - startTime > delayTime && chkRotate.checked ) {
+
+			controls.autoRotate = true;
+
+		} else {
+
+			controls.autoRotate = false;
+
+		}
+
+		renderer.render( scene, camera );
+		controls.update();
+		stats.update();
+		requestAnimationFrame( animate );
+
+		orbit();
+
+	}
+
+</script>
+</body>
+</html>
