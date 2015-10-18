@@ -66,7 +66,6 @@ To create depictions of the geography of that Moon that they provoke questions a
 [Moon Voyager Satellites Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites/ )  
 
 
-
 ## Features
 
 * 1440 x 720 terrain data points with 255 heights

@@ -7,11 +7,13 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
 
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-satellites-r1.html" width=100% height=600px ></iframe>  
-####_Moon Voyager Shaded - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/shaded/moon-voyager-satellites-r1.html )
+<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/satellites/moon-voyager-satellites-r1.html" width=100% height=600px ></iframe>  
+####_Moon Voyager Satellites - Dev revision - Code Edit View_ /  [Edit full screen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/satellites/moon-voyager-satellites-r1.html )
 
 
-[Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/satellites/dev/ )
+[Moon Voyager Satellites - Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/satellites/dev/ )
+
+Added: 2015-10-17
 
 ## Concept
 
@@ -50,19 +52,10 @@ They are fill-ins until actual models are sourced. Ditto the trajectories.
 * Gazetteer takes you to 97 locations
 	* All locations available via a drop-down list
 	* Clicking a location in the drop-down takes you to the location
-
 * Slider to adjust vertical scale in real-time
 * Camera position follows cursor keys
 	* Latest camera position is used to control camera position when using cursor keys 
 
-
-## Road Map
-
-
-
-## Issues
-
-* Text flashes annoyingly as it moves
  
 ## Sources
 
