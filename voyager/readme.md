@@ -15,10 +15,11 @@
 [Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )  
 [Moon Voyager Image Map #2 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )  
 
-
 [Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
 
 [Moon Voyager Altitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
+
+[Moon Voyager Satellites Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/satellites/dev/ )
 
 ## Concept
 
@@ -59,14 +60,10 @@ To create depictions of the geography of that Moon that they provoke questions a
 [Moon Voyager Altitude Read Me - Web Page]( http://jaanga.github.io/moon/voyager/altitude/ )  
 [Moon Voyager Altitude Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/altitude/ )  
 
+### Moon Voyager Satellites
 
-<!--
-
-## Things to Do
-
-* Edit the auto rotation variable to change the speed of the spin of the moon
-* Edit heighPlacard to move the location signboards up or down
-* Edit the default height scale
+[Moon Voyager Satellites Read Me - Web Page]( http://jaanga.github.io/moon/voyager/satellites/ )  
+[Moon Voyager Satellites Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites/ )  
 
 
 
@@ -84,12 +81,6 @@ To create depictions of the geography of that Moon that they provoke questions a
 * Slider to adjust vertical scale in real-time
 * Camera position follows cursor keys
 	* Latest camera position is used to control camera position when using cursor keys 
-
-
-* Supports permalinks
-	* [Copernicus]( http://jaanga.github.io/moon-voyager/moon-rover-mobile/dev/index.html#20 )
-	* [Gassendi]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#30 )
-	* [Tycho]( http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/dev/index.html#93 )
 
 
 ## Road Map
