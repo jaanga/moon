@@ -17,7 +17,7 @@
 ## Concept
 
 ### Issue
-It is not easy to ascertain that one geographic area is highere or lower than another region some distance away
+It is not easy to ascertain that one geographic area is higher or lower than another region some distance away
 
 ### Mission
 
