@@ -117,10 +117,15 @@ _Descriptions and links to the scripts developed so far._
 
 ## Moon Heightmaps
 
-_Perhaps the ost important aspect of this project_
+_Perhaps the most important aspect of this project_
 
 * Heightmaps for the Moon in a variety of sizes and formats
-* All data simply and freely accessible via GitHub
+* Over two gigabytes of heightmap data simply and freely accessible via GitHub
+* Data contained in four repositories
+
+[Moon Heightmaps Read Me - Web Page]( http://jaanga.github.io/moon/heightmaps/ )  
+[Moon Heightmaps Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/heightmaps/ )  
+
 
 
 <hr>

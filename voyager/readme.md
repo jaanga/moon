@@ -4,7 +4,7 @@
 ===
 
 <span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; />
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
 
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  

@@ -60,10 +60,18 @@ Files accessed
 
 Heightmap files are in four separate GitHub Repositories: 
 
-* [Jaanga Moon Heightmaps 256P NE]( https://github.com/jaanga/moon-heightmaps-256p-ne/ )
-* [Jaanga Moon Heightmaps 256P NW]( https://github.com/jaanga/moon-heightmaps-256p-nw/ )
-* [Jaanga Moon Heightmaps 256P SE]( https://github.com/jaanga/moon-heightmaps-256p-se/ )
-* [Jaanga Moon Heightmaps 256P SW]( https://github.com/jaanga/moon-heightmaps-256p-nw/ )
+[Jaanga Moon Heightmaps 256P NE - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-ne/ )
+[Jaanga Moon Heightmaps 256P NE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-ne/ )
+
+[Jaanga Moon Heightmaps 256P NW - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-nw/ )
+[Jaanga Moon Heightmaps 256P NW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-nw/ )
+
+[Jaanga Moon Heightmaps 256P SE - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-se/ )
+[Jaanga Moon Heightmaps 256P SE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-se/ )
+
+[Jaanga Moon Heightmaps 256P SW - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-sw/ )
+[Jaanga Moon Heightmaps 256P SW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-sw/ )
+
 
 Details
 * Each file contains the data for one degree east/west and north/south
