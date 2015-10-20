@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang=en >
+<html>
 <head>
-<title>read-png-composite-r1.html</title>
-<meta charset=utf-8 />
-<meta name=viewport content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' />
+<meta charset=utf-8 >
+<title>read-png-composite-r2.html</title>
+<meta name=viewport content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' >
 </head>
 <body>
 <script>
@@ -19,17 +19,24 @@
 	var dirSE = 'moon-heightmaps-256p-se/';
 	var dirSW = 'moon-heightmaps-256p-sw/';
 
-	pixels = 256;
+	var sourceSize = 256;
+	var pixels = 64;
 
-	var tileXCount = 20;
-	var tileXStart = 0;
-	var tileXFinish = tileXStart + tileXCount;
-	var tileX = tileXStart;
+	var latStartDefault = 4;
+	var latCountDefault = 8;
 
-	var tileYCount = 10;
-	var tileYStart = 5;
-	var tileYFinish = tileYStart - tileYCount;
-	var tileY = tileYStart;
+	var lonStartDefault = -5;
+	var lonCountDefault = 10;
+
+	var latCount;
+	var latStart;
+	var latFinish;
+	var lat;
+
+	var lonCount;
+	var lonStart;
+	var lonFinish;
+	var lon
 
 	init();
 
@@ -51,17 +58,18 @@
 				'<a href="" >' + document.title + '</a> ' +
 				'<a id=i href=http://jaanga.github.io/moon/utilities/ >&#x24D8;</a>' +
 			'</h2>' +
-			'<p>Use cursor keys to move about</p>' +
+			'<div>Use cursor keys to move about</div>' +
 			'<div id=info ></div>' +
 		'';
 
+		window.addEventListener ( 'hashchange', hashChange, false );
 		window.addEventListener( 'keydown', onKeyUp, false );
 
 		canvas = document.createElement( 'canvas' );
 		document.body.appendChild( canvas );
 		canvas.style.cssText = 'border: 1px red solid; position: absolute; top: 80px; z-index: -1;';
-		canvas.width = tileXCount * pixels;
-		canvas.height = tileYCount * pixels;
+		canvas.width = lonCount * pixels;
+		canvas.height = latCount * pixels;
 		context = canvas.getContext( '2d' );
 
 		tile = document.createElement( 'img' );
@@ -69,31 +77,51 @@
 //		tile.style.cssText = 'position: absolute; top: 0; z-index: -50;';
 //		tile.crossOrigin = 'Anonymous';
 
-		processTiles();
+		hashChange()
 
 	}
 
+
+	function hashChange() {
+
+		hash = location.hash.split( '#' );
+
+		latStart = hash[ 1 ] ? parseFloat( hash[ 1 ] ) : latStartDefault;
+		latCount = hash[ 2 ] ? parseFloat( hash[ 2 ] ) : latCountDefault;
+		latFinish = latStart - latCount;
+		lat = latStart;
+
+		lonStart = hash[ 3 ] ? parseFloat( hash[ 3 ] ) : lonStartDefault;
+		lonCount = hash[ 4 ] ? parseFloat( hash[ 4 ] ) : lonCountDefault;
+		lonFinish = lonStart + lonCount;
+		lon = lonStart;
+
+		canvas.width = lonCount * pixels;
+		canvas.height = latCount * pixels;
+
+		processTiles();
+
+//console.log( hash, lat, latStart, latFinish, 'lon', lon, lonStart, lonFinish  );
+
+	}
+
+
 	function processTiles() {
 
-//console.log( 'tx', tileX, 'ty', tileY );
+		if ( lat > latFinish && lon < lonFinish ) {
 
-		if ( tileY > tileYFinish && tileX < tileXFinish ) {
+			addImage( lon, lat-- );
 
-			addImage( tileX, tileY-- );
+		} else if ( lon < lonFinish - 1 ) {
 
-		} else if ( tileX < tileXFinish - 1 ) {
-
-			tileX++;
-			tileY = tileYStart;
+			lon++;
+			lat = latStart;
 
 			processTiles();
 
 		} else {
 
-console.log(  'end of story' );
-
-			info.innerHTML = 'tX: ' + tileXStart + ' to ' + ( tileXFinish - 1 ) + ' tY: ' + tileYStart + ' to ' + ( tileYFinish + 1 );
-// console.log( tile.src );
+			info.innerHTML = 'lon: ' + lonStart + ' to ' + ( lonFinish - 1 ) + ' lat: ' + latStart + ' to ' + ( latFinish + 1 );
 
 		}
 
@@ -103,7 +131,7 @@ console.log(  'end of story' );
 
 		tile.onload = function() {
 
-			context.drawImage( tile, 0, 0, pixels, pixels, ( x - tileXStart ) * pixels, ( tileYStart - y ) * pixels, pixels, pixels ); 
+			context.drawImage( tile, 0, 0, sourceSize, sourceSize, ( x - lonStart ) * pixels, ( latStart - y ) * pixels, pixels, pixels ); 
 
 			processTiles();
 
@@ -151,8 +179,6 @@ console.log( 'err' );
 
 		tile.src = path + dir + signEW + x + '/' + '256p' + signEW + x + signNS + y + '.png';
 
-//console.log( tile.src );
-
 	}
 
 
@@ -180,44 +206,44 @@ console.log( 'err' );
 
 	function goNorth() {
 
-		tileX = tileXStart - 1;
+		lon = lonStart - 1;
 
-		tileYStart = ++tileYStart > 59 ? 59: tileYStart;
-		tileYFinish = tileYStart - tileYCount;
+		latStart = ++latStart > 59 ? 59: latStart;
+		latFinish = latStart - latCount;
 
-		processTiles();
+		location.hash = '#' + latStart + '#' + latCount + '#' + lonStart + '#' + lonCount;
 
 	}
 
 	function goSouth() {
 
-		tileX = tileXStart - 1;
+		lon = lonStart - 1;
 
-		--tileYStart;
-		tileYStart = tileYStart < -60 ? -60 : tileYStart;
-		tileYFinish = tileYStart - tileYCount;
+		--latStart;
+		latStart = latStart < -60 ? -60 : latStart;
+		latFinish = latStart - latCount;
 
-		processTiles();
+		location.hash = '#' + latStart + '#' + latCount + '#' + lonStart + '#' + lonCount;
 
 	}
 
 	function goEast() {
 
-		tileXStart = ++tileXStart > 175 ? -180 : tileXStart;
-		tileX = tileXStart - 1;
-		tileXFinish = tileXStart + tileXCount;
+		lonStart = ++lonStart > 175 ? -180 : lonStart;
+		lon = lonStart - 1;
+		lonFinish = lonStart + lonCount;
 
-		processTiles();
+		location.hash = '#' + latStart + '#' + latCount + '#' + lonStart + '#' + lonCount;
 
 	}
 
 	function goWest() {
 
-		tileXStart = --tileXStart < -180 ? 175 : tileXStart;
-		tileX = tileXStart - 1;
-		tileXFinish = tileXStart + tileXCount;
+		lonStart = --lonStart < -180 ? 175 : lonStart;
+		lon = lonStart - 1;
+		lonFinish = lonStart + lonCount;
 
-		processTiles();
+		location.hash = '#' + latStart + '#' + latCount + '#' + lonStart + '#' + lonCount;
 
 	}
 

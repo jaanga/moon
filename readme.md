@@ -11,11 +11,30 @@
 
 ## Concept
 
-### Issues
+### Issues / Problems
+<!--
 
-From earth, we 'see' the moon as a flat static one-sided disk. Yet we know it is a 3D orb with a surface full of complexity and changes.
+The general format is an adaptation of the ideas developed in Alexander's _et al_ [A Patttern Language]( https://books.google.com/books?id=hwAHmktpk5IC&pg=PR10#v=onepage&q&f=false ) - as sammarized on page 10.
 
-The tools to explore and discover things were once literally rocket science. Yet we know that the data is accessible and and the development tools easier than ever. 
+Each pattern describes a problem which occurs over and over again in our environment, and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without ever doing it the same way twice.
+
+patterns are descriptions of common problems and proposal for the solutions that can be used repeatedly every time the problem is encountered and producing an different outcome.
+
+-->
+
+Seeing Astronomy in Many Ways
+
+* From Earth, we 'see' the Moon as a flat static one-sided disk. Yet we know it is a 3D orb with a surface full of complexity and changes.
+
+Access to STEM
+
+* People do not always find it an easy thing trying to acquire skills in science, technology, engineering and math ( [STEM]( https://en.wikipedia.org/wiki/Science,_Technology,_Engineering,_and_Mathematics ) )
+* Computers and the Internet have allowed scientists to gather, store and share huge amounts of data, yet that data is often in huge highly inaccessible files and to examine the data compl  
+
+Access to Data
+
+* The tools to explore and discover things were once literally rocket science. Yet we know that the data is accessible and and the development tools easier than ever. 
+
 
 ### Mission
 <!-- a statement of a rationale, applicable now as well as in the future -->
@@ -25,6 +44,10 @@ The tools to explore and discover things were once literally rocket science. Yet
 * To proved software examples that only require a basic knowledge of HTML, CSS and JavaScript in order to get going and 'make it your own'
 * To demonstrate that all this is possible in an environment that allows you to fork, embellish, share and publish online that is free and open source
 
+STEM
+
+* To provide real-world SREM tools that useful, informative and simple that you may fork, edit and share
+
 ### Vision
 <!--  a descriptive picture of a desired future state -->
 
@@ -32,6 +55,8 @@ The tools to explore and discover things were once literally rocket science. Yet
 
 
 # Apps
+
+_Descriptions and links to the scripts developed so far._
 
 ## Moon Voyager
 
@@ -90,9 +115,17 @@ The tools to explore and discover things were once literally rocket science. Yet
 [Moon Utilities Read Me - Web Page]( http://jaanga.github.io/moon/utilities/ )  
 [Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )  
 
+## Moon Heightmaps
+
+_Perhaps the ost important aspect of this project_
+
+* Heightmaps for the Moon in a variety of sizes and formats
+* All data simply and freely accessible via GitHub
+
+
 <hr>
 
-_The following sections are still at an early stage_
+_The following sections are very much a work in progress_
 
 ## Coding Style Guidelines
 
@@ -124,7 +157,19 @@ The code should be as close as possible to readable English
 	* Fork, improve, share is the mantra
 	* GitHub is the platform
 
+### Various Quirks
 
+* CSS tags are in alphabetical order
+
+* Latitude and longitude are always specified in this order
+	* lat = 2 * x
+	* lon = 3 * y
+* X and y are always specified in this order
+	* x = lon - 10;
+	* y = lat + 5;
+* Width and height are always specified in this order 
+	* width = lon / 2
+	* height = lat / 3
 
 ## User Experience Overview
 
@@ -189,11 +234,21 @@ Good camera movement takes good coding, tools that have excellent user experienc
 
 ## Pedagogy
 
-Every script should have a 'things to do' sections relating
+Every script should have a 'things to do' sections relating to the issues addressed in the concept/mission/vision statement
 
 * Coding
 * User Experience
 * Physics, math, geology, astronomy and more 
+
+
+## Links
+
+[Wikipedia: Moon]( https://en.wikipedia.org/wiki/Moon )
+
+[The Moon Wiki]( http://the-moon.wikispaces.com/Introduction )
+
+[Multiple studies address riddles of the Moon's origin]( http://www.bbc.com/news/science-environment-32219494 )
+
 
 ## Copyright and License
 
