@@ -11,7 +11,7 @@
 ####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/altitude/moon-voyager-altitude-r1-1.html )
 
 
-[Moon Voyager Alitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
+[Moon Voyager Altitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
 
 
 ## Concept
@@ -21,12 +21,15 @@ It is not easy to ascertain that one geographic area is higher or lower than ano
 
 ### Mission
 
-To display the landscape so that different elevations have different colors
+To display the terrain of the Moon so that different elevations have different colors
 
 ### Notes
 
-This revision uses the older THREE.SphereGeometry and is slow and shows onl 720  360 data points. 
-As and when we figure out how to do vertex colors in THREE.SphereBufferGeometry then the scripts will be faster and have higher resolution
+This revision uses the older THREE.SphereGeometry and is slow and shows only 720 x 360 data points. 
+As and when we figure out how to do vertex colors with THREE.SphereBufferGeometry then the scripts will be faster and have higher resolution
+
+## Features
+
 
 
 
