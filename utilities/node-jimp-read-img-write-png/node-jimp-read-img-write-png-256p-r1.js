@@ -65,7 +65,7 @@ console.log( 'new dir: ', dname );
 
 // http://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
 
-		var arrayBuffer = new Uint8Array( buffer).buffer;
+		var arrayBuffer = new Uint8Array( buffer ).buffer;
 		byteArray = new Int16Array( arrayBuffer );
 
 console.log( '\nfileName: ', fileName );

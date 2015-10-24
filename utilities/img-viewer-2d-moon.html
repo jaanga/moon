@@ -30,15 +30,17 @@
 //	var width = 1440 * 4;
 //	var height = 720 * 4;
 
+/*
 	var fileName = path + 'WAC_GLD100_E000N1800_064P.IMG';
 	var width = 5760;
 	var height = 2880;
+*/
 
-/*
+
 	var fileName = 	'C:/temp/moon-heightmaps/WAC_GLD100_E000N1800_032P.IMG';
 	var width = 11520;
 	var height = 5760;
-*/
+
 
 	var xmlHttp;
 	var byteArray;
@@ -113,9 +115,9 @@
 				elevation = byteArray[ i ] + 10000;
 				elevations.push( elevation );
 
-				imageDataData[ index++ ] = (elevation & 0x0000ff )
-				imageDataData[ index++ ] = (elevation & 0x00ff00 ) >> 8;
-				imageDataData[ index++ ] = (elevation & 0xff0000 ) >> 16;
+				imageDataData[ index++ ] = ( elevation & 0x0000ff )
+				imageDataData[ index++ ] = ( elevation & 0x00ff00 ) >> 8;
+				imageDataData[ index++ ] = ( elevation & 0xff0000 ) >> 16;
 				imageDataData[ index++ ] = 255;
 
 			}
