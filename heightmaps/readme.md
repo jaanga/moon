@@ -60,16 +60,16 @@ Files accessed
 
 Heightmap files are in four separate GitHub Repositories: 
 
-[Jaanga Moon Heightmaps 256P NE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-ne/ )
+[Jaanga Moon Heightmaps 256P NE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-ne/ )  
 [Jaanga Moon Heightmaps 256P NE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-ne/ )
 
-[Jaanga Moon Heightmaps 256P NW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-nw/ )
+[Jaanga Moon Heightmaps 256P NW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-nw/ )  
 [Jaanga Moon Heightmaps 256P NW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-nw/ )
 
-[Jaanga Moon Heightmaps 256P SE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-se/ )
+[Jaanga Moon Heightmaps 256P SE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-se/ )  
 [Jaanga Moon Heightmaps 256P SE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-se/ )
 
-[Jaanga Moon Heightmaps 256P SW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-sw/ )
+[Jaanga Moon Heightmaps 256P SW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-sw/ )  
 [Jaanga Moon Heightmaps 256P SW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-sw/ )
 
 
@@ -83,6 +83,9 @@ Lunar height data source:
 
 [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
+
+<br>
+<hr>
 
 ## Copyright and License
 
@@ -112,6 +115,9 @@ To the extent possible under law, <a rel="dct:publisher" href="http://jaanga.git
 <span property="dct:title">Jaanga authors</span></a> have waived all copyright and related or neighboring rights to <span property="dct:title">Jaanga works</span>.
 This work is published from: <span property="vcard:Country" datatype="dct:ISO3166" content="US" about="http://jaanga.github.io"> United States</span>.
 </p>
+
+<br>
+<hr>
 
 <center title="Waxing Gibbous Moon" >
 # <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
