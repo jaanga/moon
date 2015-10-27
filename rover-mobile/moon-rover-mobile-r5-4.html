@@ -109,7 +109,7 @@
 		'';
 
 		navigation = document.body.appendChild( document.createElement( 'div' ) );
-		navigation.style.cssText = ' bottom: 0; left: 0; margin: 10px auto; position: absolute; right: 0; width: 250px; ';
+		navigation.style.cssText = ' bottom: 0; left: 0; margin: 10px auto; position: absolute; right: 0; width: 250px; z-index: 1; ';
 		navigation.innerHTML = '<div><button onclick=goNorth(); >North</button> ' +
 				'<button onclick=goSouth(); >South</button> ' +
 				'<button onclick=goEast(); >East</button> ' +

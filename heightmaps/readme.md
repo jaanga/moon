@@ -1,4 +1,4 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo;  [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;  [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Heightmaps Read Me]( index.html )
 ===
@@ -60,16 +60,16 @@ Files accessed
 
 Heightmap files are in four separate GitHub Repositories: 
 
-[Jaanga Moon Heightmaps 256P NE - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-ne/ )
+[Jaanga Moon Heightmaps 256P NE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-ne/ )
 [Jaanga Moon Heightmaps 256P NE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-ne/ )
 
-[Jaanga Moon Heightmaps 256P NW - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-nw/ )
+[Jaanga Moon Heightmaps 256P NW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-nw/ )
 [Jaanga Moon Heightmaps 256P NW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-nw/ )
 
-[Jaanga Moon Heightmaps 256P SE - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-se/ )
+[Jaanga Moon Heightmaps 256P SE - Web page]( http://jaanga.github.io/moon-heightmaps-256p-se/ )
 [Jaanga Moon Heightmaps 256P SE - Source code]( https://github.com/jaanga/moon-heightmaps-256p-se/ )
 
-[Jaanga Moon Heightmaps 256P SW - Web page] ]( http://jaanga.github.io/moon-heightmaps-256p-sw/ )
+[Jaanga Moon Heightmaps 256P SW - Web page]( http://jaanga.github.io/moon-heightmaps-256p-sw/ )
 [Jaanga Moon Heightmaps 256P SW - Source code]( https://github.com/jaanga/moon-heightmaps-256p-sw/ )
 
 
@@ -101,11 +101,18 @@ The software is provided 'as is', without warranty of any kind, express or impli
 In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
 
-2: Jaanga data is available under a Creative Commons license
+2: Jaanga documentation and data is available under a [Creative Commons]( http://creativecommons.org/ ) CC0 license.
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/StillImage" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-
+<p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">
+<img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<br />
+To the extent possible under law, <a rel="dct:publisher" href="http://jaanga.github.io">
+<span property="dct:title">Jaanga authors</span></a> have waived all copyright and related or neighboring rights to <span property="dct:title">Jaanga works</span>.
+This work is published from: <span property="vcard:Country" datatype="dct:ISO3166" content="US" about="http://jaanga.github.io"> United States</span>.
+</p>
 
 <center title="Waxing Gibbous Moon" >
-# &#127764;
+# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
 </center>

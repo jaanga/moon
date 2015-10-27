@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang=en >
+<html>
 <head>
 <meta charset=utf-8 >
 <title>Moon Rover 256P R1</title>
@@ -432,15 +432,13 @@
 	function canvasMultilineText( textArray, parameters ) {
 
 		var parameters = parameters || {} ;
-
+		var width = 0;
 		var canvas = document.createElement( 'canvas' );
 		var context = canvas.getContext( '2d' );
 
 		if ( typeof textArray === 'string' ) textArray = [ textArray ];
 
 		context.font = parameters.font ? parameters.font : '48px sans-serif';
-
-		var width = 0;
 
 		for (var i = 0, len = textArray.length; i < len; i++) {
 
@@ -514,14 +512,14 @@
 
 	}
 
-	function v( x, y, z){ return new THREE.Vector3( x, y, z ); }
-
 	function onMouseMove() {
 
 		startTime = chkRotate.checked ? performance.now() : 1000000 ;
 		controls.autoRotate = false;
 
 	}
+
+	function v( x, y, z){ return new THREE.Vector3( x, y, z ); }
 
 	function animate( timestamp ) {
 
