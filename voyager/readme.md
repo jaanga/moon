@@ -10,6 +10,8 @@
 <iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  
 ####_Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
 
+## The Apps
+
 [Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
 
 [Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )  
@@ -27,21 +29,23 @@
 
 ### Issue
 
-From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D orb with a surface full of complexity.
+* From earth, we 'see' the moon as a flat one-sided disk. Yet we know it is a 3D orb with a surface full of complexity.
 
 ### Mission
 
-To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
-To show the usually hidden backside of the moon as easily as the front
+* To provide a way of flying over the sphere of the moon in 3D and to see its craters and rills in detail
+* To show the usually hidden backside of the moon as easily as the front
 
 ### Vision
 
-To create depictions of the geography of that Moon that they provoke questions as to ow things came to be
+* To create depictions of the geography of that Moon that they provoke questions as to how things came to be
 
 
 ## Apps
 
 ### Moon Voyager Gamer
+
+* Most basic version - uses Three.js MeshNormalMaterial
 
 [Moon Voyager Gamer Read Me - Web Page]( http://jaanga.github.io/moon/voyager/gamer/ )  
 [Moon Voyager Gamer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/gamer/ )  
@@ -49,25 +53,35 @@ To create depictions of the geography of that Moon that they provoke questions a
 
 ### Moon Voyager Image Map
 
+* Applies selected images to the surface of the moon
+
 [Moon Voyager Image Map Read Me - Web Page]( http://jaanga.github.io/moon/voyager/image-map/ )  
 [Moon Voyager Image Map Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/ )  
 
 ### Moon Voyager Shaded
+
+* Add lights, shade and shadow to the Moon
 
 [Moon Voyager Shaded Read Me - Web Page]( http://jaanga.github.io/moon/voyager/shaded/ )  
 [Moon Voyager Shaded Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded/ )  
 
 ### Moon Voyager Altitude
 
+* Add lights shades and shadows and each vertex is colored according to its altitude
+
 [Moon Voyager Altitude Read Me - Web Page]( http://jaanga.github.io/moon/voyager/altitude/ )  
 [Moon Voyager Altitude Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/altitude/ )  
 
 ### Moon Voyager Satellites
 
+* Gamer version with three NASA satellites in simple circular orbits around the moon
+
 [Moon Voyager Satellites Read Me - Web Page]( http://jaanga.github.io/moon/voyager/satellites/ )  
 [Moon Voyager Satellites Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites/ )  
 
-### Moon Voyager Satellites
+### Moon Sun Earth Moon
+
+* Displays in real-time 3D how the Moon orbits around the Earth while the Earth orbits the Sun and both receive light from the Sun
 
 [Moon Voyager Sun Earth Moon Read Me - Web Page]( http://jaanga.github.io/moon/voyager/sun-earth-moon/ )  
 [Moon Voyager Sun Earth Moon Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/sun-earth-moon/ )  
@@ -80,27 +94,26 @@ To create depictions of the geography of that Moon that they provoke questions a
 * 'Travel' over the moon in 3D faster than any satellite
 	* Use one finger to rotate
 	* Pinch with two fingers to zoom in and out
-	* use three fingers to pan
+	* Use three fingers to pan
 * Gazetteer takes you to 97 locations
 	* All locations available via a drop-down list
 	* Clicking a location in the drop-down takes you to the location
-
 * Slider to adjust vertical scale in real-time
-* Camera position follows cursor keys
-	* Latest camera position is used to control camera position when using cursor keys 
+* Apss with special features
+	* Sunlight, shade and shadows
+	* Textures and materials to 3D terrain
 
 
-## Road Map
 
-* 'Zoom All' and 'Zoom In' buttons
+## Things to Do / Road Map
+
+* Add 'Zoom All' and 'Zoom In' buttons
 * Toggle between short and long gazetteers
 * Links to Data sources such as WikiMoon for each location
 * First person control moon flyover capability
 * Supports permalinks
 * Click on a placard to go there
 * Permalinks to set target and camera positions
-* Sunlight and shadows
-* Textures and materials to 3D terrain
 * 3D models of lunar landers in their locations
 * Locations of Apollo photographs - perhaps as geojson data
 
@@ -108,24 +121,13 @@ To create depictions of the geography of that Moon that they provoke questions a
 
 * Text flashes annoyingly as it moves
 
--->
 
- 
-## Sources
-
-Many thanks to:
-
-Gazetteer data sources:
-
-* [Gazetteer of Planetary Nomenclature]( http://planetarynames.wr.usgs.gov/Page/MOON/target )
-* [Lunar 100]( http://the-moon.wikispaces.com/Lunar+100 )
-
-Lunar height data source:
-
-[Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
-
-
+<br>
 <hr>
+
+<center title="Waxing Gibbous Moon" >
+# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
+</center>
 
 
 

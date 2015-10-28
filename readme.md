@@ -6,7 +6,7 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]( http://jaanga.github.io/moon/ "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
-<iframe id=ifr src="iframe-carousel-r2.html" width=100% height=600px >_Sample Jaanga Moon scripts viewable in web page view only_</iframe>  
+<iframe id=ifr src="iframe-carousel-r2.html" width=100% height=600px ></iframe>  
 
 
 ## Concept
@@ -38,7 +38,7 @@ Seeing Astronomy in Many Ways
 ### Vision
 <!--  a descriptive picture of a desired future state -->
 
-To build a platform that enables all sorts of moon data - gravity, minerals, magnetism, etc - to be displayed in 3D
+* To build a platform that enables all sorts of moon data - gravity, minerals, magnetism, etc - to be displayed in 3D
 
 # Apps
 
@@ -50,6 +50,9 @@ _Descriptions and links to the scripts developed so far._
 	* You can rotate, zoom and move the sphere
 * 1440 x 720 data points
 * Displays placards with the names of 97 important Moon locations according to the-moon.wikispaces.com
+* Multiple apps based on a common core
+	* Each app handles Three.js material in a different way
+	* And/or add fun feature demos
 
 [Moon Voyager Read Me - Web Page]( http://jaanga.github.io/moon/voyager/ )  
 [Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )  
@@ -80,7 +83,6 @@ _Descriptions and links to the scripts developed so far._
 
 * 256 pixels per degree ~4.25 billion points of data
 * Great detail views of the moon
-
 
 [Moon Rover 256P Read Me - Web Page]( http://jaanga.github.io/moon/rover-256p/ )  
 [Moon Rover 256P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-256p/ )  
@@ -125,7 +127,7 @@ _Perhaps the most important aspect of this project_
 
 ### Code
 * Direct links to demos??
-* More Carousel examples
+* More carousel examples
 
 ### User Experience
 * Add more links
@@ -135,6 +137,20 @@ _Perhaps the most important aspect of this project_
 
 <br>
 <hr>
+
+## Sources
+
+Many thanks to:
+
+Gazetteer data sources:
+
+* [Gazetteer of Planetary Nomenclature]( http://planetarynames.wr.usgs.gov/Page/MOON/target )
+* [Lunar 100]( http://the-moon.wikispaces.com/Lunar+100 )
+
+Lunar height data source:
+
+* [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
+
 
 
 ## Links of Interest
