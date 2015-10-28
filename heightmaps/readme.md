@@ -11,7 +11,7 @@
 -->
 
 ![WAC_GLD100_E000N1800_004P-1024x512.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_004P-1024x512.png "Moon heightmap" )  
-_WAC_GLD100_E000N1800_004P-1024x512.png - moon heightmap_
+_WAC GLD100 E000N1800 004P-1024x512.png - moon heightmap_
 
 [Wikipedia: Heightmap]( https://en.wikipedia.org/wiki/Heightmap )
 In computer graphics, a heightmap or heightfield is a raster image used to store values, such as surface elevation data, for display in 3D computer graphics.
@@ -28,13 +28,13 @@ Other terms used to discuss this type of data include:
 
 Links to single heightmap images on Jaanga Moon Heightmaps on GitHub
 
-* [LALT_GGT_MAP.jpg]( http://jaanga.github.io/moon/heightmaps/LALT_GGT_MAP.jpg )
-* [moon_lro_bumpmap_8192x4096.jpg]( http://jaanga.github.io/moon/heightmaps/moon_lro_bumpmap_8192x4096.jpg )
-* [WAC_GLD100_E000N1800_004P.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_004P.png )
-* [WAC_GLD100_E000N1800_004P-1024x512.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_004P-1024x512.png )
-* [WAC_GLD100_E000N1800_008P.jpg]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_008P.jpg )
-* [WAC_GLD100_E000N1800_016P.jpg]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_016P.jpg )
-* [WAC_GLD100_E000N1800_016P.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_016P.png )
+* [LALT GGT MAP.jpg]( http://jaanga.github.io/moon/heightmaps/LALT_GGT_MAP.jpg )
+* [moon lro bumpmap 8192x4096.jpg]( http://jaanga.github.io/moon/heightmaps/moon_lro_bumpmap_8192x4096.jpg )
+* [WAC GLD100 E000N1800 004P.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_004P.png )
+* [WAC GLD100 E000N1800 004P-1024x512.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_004P-1024x512.png )
+* [WAC GLD100 E000N1800 008P.jpg]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_008P.jpg )
+* [WAC GLD100 E000N1800 016P.jpg]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_016P.jpg )
+* [WAC GLD100 E000N1800 016P.png]( http://jaanga.github.io/moon/heightmaps/WAC_GLD100_E000N1800_016P.png )
 
 ## Jaanga Moon Heightmaps 64P
 
@@ -54,8 +54,8 @@ Overview
 
 Files accessed
 
-* [WAC_GLD100_E300N2250_256P - 256 pixels per degree ]( http://wms.lroc.asu.edu/lroc/view_rdr_product/WAC_GLD100_E300N2250_256P )
-* [Index of /data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_GLD100]( http://lroc.sese.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_GLD100/ )
+* [WAC GLD100 E300N2250 256P - 256 pixels per degree ]( http://wms.lroc.asu.edu/lroc/view_rdr_product/WAC_GLD100_E300N2250_256P )
+* [Index of /data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC GLD100]( http://lroc.sese.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_GLD100/ )
 
 
 Heightmap files are in four separate GitHub Repositories: 
