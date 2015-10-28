@@ -1,7 +1,10 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo;  [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;  [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Gazetteer Read Me]( ./index.html )
 ===
+
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/gazetteer/index.html "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/gazetteer/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
 A gazetteer is a catalog of place names. 
 [Wikpedia Gazetteer definition]( http://en.wikipedia.org/wiki/Gazetteer )
@@ -11,20 +14,19 @@ Gazetteer Data Sources:
 
 ### [Gazetteer of Planetary Nomenclature]( http://planetarynames.wr.usgs.gov/Page/MOON/target )
 
-
 * Click 'All features' link. When list appears, scroll down and click 'CSV'
 * 9,116 Features
-* See <moon-GPN-gazetteer-source.csv>
-* Data simplifier: <get-moon-9000.html>
+* See [moon-GPN-gazetteer-source.csv]( moon-GPN-gazetteer-source.csv )
+* Data simplifier: [get-moon-9000.html]( get-moon-9000.html )
 	* Translates lat & lon to x and y coordinates for use by moon viewers
-	* See <moon-iau-nomenclature.csv>
+	* See [moon-iau-nomenclature.cs]( moon-iau-nomenclature.csv )
 
 ### [Lunar 100]( http://the-moon.wikispaces.com/Lunar+100 )
 
 * 100 features / 97 available
 * Nearside locations only
 * See [lunar-100-the-moon-wikispaces.csv]( lunar-100-the-moon-wikispaces.csv )
-* Data simplifier: <get-moon-100.html>
+* Data simplifier: [get-moon-100.html]( get-moon-100.html )
 	* Translates lat & lon to x and y coordinates for use by moon viewers
 
 

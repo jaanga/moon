@@ -1,8 +1,14 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo;  [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;  [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Utilities Read Me]( ./index.html )
 ===
 
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/utilities/index.html "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/utilities/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
+
+_Missing links to a number of scripts_
+
+_Equivalent utilities for Mars are more up to date than these Moon utilities._
 
 ##Data sources
 
@@ -26,9 +32,7 @@ Doing the heavy lifting:
 	* Could easily be permalinks
 
 
-
 [Read multiple PNG files and combine]( read-png-composite-r1.html> )
-
 
 
 ### Apps that work best on your computer
