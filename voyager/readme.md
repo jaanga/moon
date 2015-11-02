@@ -1,15 +1,16 @@
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
+
 [Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;
- [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Voyager Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
+## Web Page / Source Code
 
-
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
+<iframe src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html width=100% height=600px ></iframe>  
+###### _Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
 
 ## The Apps
 
@@ -122,14 +123,18 @@
 
 * Text flashes annoyingly as it moves
 
+## Contact
 
-<br>
-<hr>
+* jaanga@googlegroups.com
+
+## Copyright and License
+
+* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+
+***
 
 <center title="Waxing Gibbous Moon" >
 # <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
 </center>
-
-
 
 
