@@ -1,4 +1,5 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;
+ [Moon]( http://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Voyager Read Me]( index.html )
 ===

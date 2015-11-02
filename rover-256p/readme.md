@@ -1,8 +1,19 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )  
-[Moon Rover 256P Read Me]( ./index.html )
+<span style=display:none; >[You are now in a GitHub source code view - click this button to view Read Me file as a web page]( http://jaanga.github.io/moon/rover-256p/ "View file as a web page." ) </span>
+<input type=button value='You are now in a GitHub web page view - Click this button to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/rover-256p/'; />
+
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )  [Jaanga]( http://jaanga.github.io/ ) » [Outer Space]( http://jaanga.github.io/outer-space/ ) »
+[Moon]( http://jaanga.github.io/moon/ ) » [Voyager]( http://jaanga.github.io/moon/voyager/ ) »
+
+[Moon Rover 256P Read Me]( index.html )
 ===
-<span style=display:none; >[You are now in GitHub source code view - click this button to view Read Me file as a web page]( http://jaanga.github.io/moon/rover-256p/ "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click this button to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/rover-256p/'; />
+
+[Moon Rover 256P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-256p/dev/ )
+
+## Web Page / Source Code
+
+<iframe class=isrc=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html width=100% height=500px ></iframe>  
+####_Moon Rover 256P - Dev revision - Code Edit View_ /  [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html )
+
 
 ## Concept
 
@@ -12,15 +23,6 @@
 * To enable you to explore craters and the dark side and more
 
 ### Vision
-
-
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html" width=100% height=500px ></iframe>  
-####_Moon Rover 256P - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/rover-256p/moon-rover-256p-multi-tile-r1.html )
-
-
-[Moon Rover 256P Demo Full Screen - Dev]( http://jaanga.github.io/moon/rover-256p/dev/ )
-
-[Moon Rover 256P Demo Full Screen - Build]( http://jaanga.github.io/moon/rover-256p/build/ )
 
 ## Accuracy
 10917 km circumference of moon / ( 360 degrees * 256 pixels per degree ) = 0.11845703125 or each pixel represents 118 meters.
@@ -70,3 +72,17 @@ Lunar height data source:
 
 [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
+
+## Contact
+
+* jaanga@googlegroups.com
+
+## Copyright and License
+
+* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+
+***
+
+<center title="Waxing Gibbous Moon" >
+# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
+</center>

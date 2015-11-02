@@ -1,17 +1,19 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo; [Voyager]( http://jaanga.github.io/moon/voyager/ ) &raquo;
+<span style=display:none; >[You are now in a GitHub source code view - click here to view this read me file as a web page]( http://jaanga.github.io/moon/voyager/sun-earth-moon/index.html "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/sun-earth-moon/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code' />
+
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space/ ) &raquo;  [Moon]( http://jaanga.github.io/moon/ ) &raquo; [Voyager]( http://jaanga.github.io/moon/voyager/ ) &raquo;
 
 [Sun Earth Moon Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/sun-earth-moon/index.html "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/sun-earth-moon/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code' />
-
-
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/sun-earth-moon/moon-voyager-sun-earth-moon-r1.html" width=100% height=600px ></iframe>  
-####_Moon Voyager Sun Earth Moon - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/sun-earth-moon/moon-voyager-sun-earth-moon-r1.html )
-
-
 [Moon Voyager Sun Earth Moon Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/sun-earth-moon/dev/ )
+
+
+## Web Page / Source Code
+
+<iframe class=ifr src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/sun-earth-moon/moon-voyager-sun-earth-moon-r1.html width=100% height=600px ></iframe>  
+###### _Moon Voyager Sun Earth Moon - Dev revision - Code Edit View_ /  [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/sun-earth-moon/moon-voyager-sun-earth-moon-r1.html )
+
 
 ## Concept
 
@@ -56,3 +58,16 @@ To display in real-time 3D how the moon orbits around the Earth while the Earth 
 
 The simplified orbit concept came from Chris Strom's [The Earth and the Moon in Three.js]( http://japhr.blogspot.com/2013/01/the-earth-and-moon-in-threejs.html )
 
+## Contact
+
+* jaanga@googlegroups.com
+
+## Copyright and License
+
+* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+
+***
+
+<center title="dingbat" >
+# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >❦</a>
+</center>

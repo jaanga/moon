@@ -1,26 +1,17 @@
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ ) &raquo; [Voyager]( http://jaanga.github.io/moon/voyager/ ) &raquo;
+<span style=display:none; >[You are now in a GitHub source code view - click here to view this read me file as a web page]( http://jaanga.github.io/moon/voyager/image-map/index.html "View file as a web page." ) </span>
+<input type=button value='You are now in a GitHub web page view - Click here to view this read me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/'; />
+
+[Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space/ ) &raquo;  [Moon]( http://jaanga.github.io/moon/ ) &raquo; [Voyager]( http://jaanga.github.io/moon/voyager/ ) &raquo;
 
 [Moon Voyager Image Map Read Me]( index.html )
 ===
 
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/image-map/index.html "View file as a web page." ) </span>
-<input type=button value='You are now in GitHub web page view - Click here to view Read Me file as source code' onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/'; />
-
-
-<iframe src="http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html" width=100% height=600px ></iframe>  
-####_Moon Voyager - Dev revision - Code Edit View_ /  [Fullscreen]( http://exploratoria.github.io/lib/code-edit-view/code-edit-view.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html )
-
-
 [Moon Voyager Image Map Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )
 
-Image maps to look at:
-* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-crop ) 18 MB 
+## Web Page / Source Code
 
-Images need to be shifted 180 degrees:
-
-* [PIA17037 hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/PIA17037_hires.jpg ) 533 KB
-* [LDEM 16.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/LDEM_16.jpg ) 5MB
-* [moon 8k color brim16 4096x2048.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg ) 1.8 MB
+<iframe class=ifr src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html width=100% height=600px ></iframe>  
+###### _Moon Voyager - Dev revision - Code Edit View_ / [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html )
 
 
 ## Concept
@@ -39,6 +30,17 @@ Is it possible to drape or overlay these images over a 3D terrain and have attra
 * Ensure that the 2D images line up as closely as possible with the 3D landscape
 * Locate cool overlays
 
+Almost any Mercator projection map can be overlayed over a sphere and look good.
+The Three.js texture option to materials makes this process very easy.
+
+Image maps to look at:
+* [images/TSE_1925_NYC_SL_TopographicMapLunarLimb-cropped.png]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/TSE_1925_NYC_SL_TopographicMapLunarLimb-crop ) 18 MB 
+* [moon 8k color brim16 4096x2048.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg ) 1.8 MB
+
+Images need to be shifted 180 degrees:
+
+* [PIA17037 hires.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/PIA17037_hires.jpg ) 533 KB
+* [LDEM 16.jpg]( http://jaanga.github.io/moon/voyager/image-map/dev/#http://jaanga.github.io/moon/images/LDEM_16.jpg ) 5MB
 
 
 ## Features
@@ -95,8 +97,16 @@ Lunar height data source:
 [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
 
-<hr>
+## Contact
 
+* jaanga@googlegroups.com
 
+## Copyright and License
 
+* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
 
+***
+
+<center title="dingbat" >
+# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >❦</a>
+</center>
