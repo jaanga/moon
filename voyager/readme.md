@@ -9,7 +9,7 @@
 
 ## Web Page / Source Code
 
-<iframe src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html width=100% height=600px ></iframe>  
+<iframe class=ifr src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html width=100% height=600px ></iframe>  
 ###### _Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2.html )
 
 ## The Apps
