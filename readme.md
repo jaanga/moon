@@ -6,7 +6,16 @@
 🌜 [Moon Read Me]( index.html )
 ===
 
-## Web Page / Source Code
+_Data and scripts to view the entire Moon in 3D in your browser - all open source_
+
+
+[Outer Space Blog]( http://jaanga.github.io/outer-space/request-outer-space-posts.html ) 
+~ [Documents]( http://jaanga.github.io/documents/ ) 
+~ [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+~ [Contacts and Organization]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-contacts-and-organization.md )
+ 
+
+## Sample Web Page / Source Code
 
 <iframe class=ifr src="iframe-carousel-r3.html" width=100% height=600px ></iframe>  
 
@@ -42,7 +51,7 @@ Seeing Astronomy in Many Ways
 
 * To build a platform that enables all sorts of moon data - gravity, minerals, magnetism, etc - to be displayed in 3D
 
-# Apps
+# The Apps
 
 _Descriptions and links to the scripts developed so far._
 
@@ -104,6 +113,8 @@ _Descriptions and links to the scripts developed so far._
 
 [Moon Utilities Read Me - Web Page]( http://jaanga.github.io/moon/utilities/ )  
 [Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )  
+
+# The Data
 
 ## Moon Heightmaps
 
@@ -175,5 +186,11 @@ Lunar height data source:
 ***
 
 <center title="Waxing Gibbous Moon" >
+
+_[Fly me to the moon  
+And let me play among the stars  
+Let me see what spring is like  
+On Jupiter and Mars]( https://www.youtube.com/watch?v=QhMmBlL81nw )_  
+\- Olivia Ong
 # <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
 </center>
