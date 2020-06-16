@@ -1,18 +1,18 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view this read me file as a web page]( http://jaanga.github.io/moon/ "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view this read me file as a web page]( https://jaanga.github.io/moon/ "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/'; value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
-[Jaanga]( http://jaanga.github.io/ ) » [Outer Space]( http://jaanga.github.io/outer-space ) »
+[Jaanga]( https://jaanga.github.io/ ) » [Outer Space]( https://jaanga.github.io/outer-space ) »
 
-🌜 [Moon Read Me]( index.html )
+🌜 [Moon Read Me]( ./index.html )
 ===
 
 _Data and scripts to view the entire Moon in 3D in your browser - all open source_
 
 
-[Outer Space Blog]( http://jaanga.github.io/outer-space/request-outer-space-posts.html ) 
-~ [Documents]( http://jaanga.github.io/documents/ ) 
-~ [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
-~ [Contacts and Organization]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-contacts-and-organization.md )
+[Outer Space Blog]( https://jaanga.github.io/outer-space/request-outer-space-posts.html ) 
+~ [Documents]( https://jaanga.github.io/documents/ ) 
+~ [Copyright and License]( https://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+~ [Contacts and Organization]( https://jaanga.github.io/#http://jaanga.github.io/jaanga-contacts-and-organization.md )
  
 
 ## Sample Web Page / Source Code
