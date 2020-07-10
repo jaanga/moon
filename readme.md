@@ -11,8 +11,8 @@ _Data and scripts to view the entire Moon in 3D in your browser - all open sourc
 
 [Outer Space Blog]( https://jaanga.github.io/outer-space/request-outer-space-posts.html ) 
 ~ [Documents]( https://jaanga.github.io/documents/ ) 
-~ [Copyright and License]( https://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
-~ [Contacts and Organization]( https://jaanga.github.io/#http://jaanga.github.io/jaanga-contacts-and-organization.md )
+~ [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+~ [Contacts and Organization]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-contacts-and-organization.md )
  
 
 ## Sample Web Page / Source Code
@@ -65,7 +65,7 @@ _Descriptions and links to the scripts developed so far._
 	* Each app handles Three.js material in a different way
 	* Each adds fun feature demos
 
-[Moon Voyager Read Me - Web Page]( http://jaanga.github.io/moon/voyager/ )  
+[Moon Voyager Read Me - Web Page]( https://jaanga.github.io/moon/voyager/ )  
 [Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )  
 
 
@@ -75,7 +75,7 @@ _Descriptions and links to the scripts developed so far._
 * Intended to be the lightest, fastest loading version of the flat map
 	* But with the least detail
 
-[Moon Rover Mobile Read Me - Web Page]( http://jaanga.github.io/moon/rover-mobile/ )  
+[Moon Rover Mobile Read Me - Web Page]( https://jaanga.github.io/moon/rover-mobile/ )  
 [Moon Rover Mobile Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-mobile/ )  
 
 
@@ -87,7 +87,7 @@ _Descriptions and links to the scripts developed so far._
 	* Will be updated in due course
 	* Moon Rover 256P is a better tool for the moment
 
-[Moon Rover 64P Read Me - Web Page]( http://jaanga.github.io/moon/rover-64p/ )  
+[Moon Rover 64P Read Me - Web Page]( https://jaanga.github.io/moon/rover-64p/ )  
 [Moon Rover 64P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-64p/ )  
 
 ## Moon Rover 256P
@@ -95,7 +95,7 @@ _Descriptions and links to the scripts developed so far._
 * 256 pixels per degree ~4.25 billion points of data
 * Great detail views of the moon
 
-[Moon Rover 256P Read Me - Web Page]( http://jaanga.github.io/moon/rover-256p/ )  
+[Moon Rover 256P Read Me - Web Page]( https://jaanga.github.io/moon/rover-256p/ )  
 [Moon Rover 256P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-256p/ )  
 
 ## Moon Gazetteer
@@ -103,7 +103,7 @@ _Descriptions and links to the scripts developed so far._
 * Text files with lunar place names, location and other data
 * Utilities for dealing with these files
 
-[Moon Gazetteer Read Me - Web Page]( http://jaanga.github.io/moon/gazetteer/ )  
+[Moon Gazetteer Read Me - Web Page]( https://jaanga.github.io/moon/gazetteer/ )  
 [Moon Gazetteer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/gazetteer/ )  
 
 ## Moon Utilities
@@ -111,7 +111,7 @@ _Descriptions and links to the scripts developed so far._
 * Node.js scripts for reading binary IMG heightmap files, creating PNG files and saving these to disk
 * Scripts for viewing and testing the files
 
-[Moon Utilities Read Me - Web Page]( http://jaanga.github.io/moon/utilities/ )  
+[Moon Utilities Read Me - Web Page]( https://jaanga.github.io/moon/utilities/ )  
 [Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )  
 
 # The Data
@@ -124,7 +124,7 @@ _Perhaps the most important aspect of this project_
 * Over two gigabytes of heightmap data simply and freely accessible via GitHub
 * Data contained in four repositories
 
-[Moon Heightmaps Read Me - Web Page]( http://jaanga.github.io/moon/heightmaps/ )  
+[Moon Heightmaps Read Me - Web Page]( https://jaanga.github.io/moon/heightmaps/ )  
 [Moon Heightmaps Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/heightmaps/ )  
 
 
@@ -181,7 +181,7 @@ Lunar height data source:
 
 ## Copyright and License
 
-* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
 
 ***
 
