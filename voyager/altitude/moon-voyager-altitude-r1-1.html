@@ -44,7 +44,7 @@
 	var d2r = Math.PI / 180;
 
 	var css, hamburger, menu, stats, renderer, scene, camera, controls;
-	var geometry, material, mesh, axisHelper;
+	var geometry, material, mesh, axesHelper;
 
 	var heightMap, heightMesh, canvasHeightMap, contextHeightMap;
 	var material3D;
@@ -392,7 +392,7 @@ geometry = geometry.clone();
 
 		if ( inpHelpers.checked === true ) {
 
-			axis = new THREE.AxisHelper( 10000 );
+			axis = new THREE.AxesHelper( 10000 );
 			scene.add( axis );
 
 		} else {
