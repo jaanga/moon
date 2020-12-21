@@ -1,31 +1,31 @@
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( https://jaanga.github.io/moon/voyager/index.html "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/voyager/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;
-[Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( https://jaanga.github.io/ ) &raquo; [Outer Space]( https://jaanga.github.io/outer-space ) &raquo;
+[Moon]( https://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Voyager Read Me]( index.html )
 ===
 
 ## Web Page / Source Code
 
-<iframe class=ifr src=http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2-2.html width=100% height=600px ></iframe>  
-###### _Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Edit full screen]( http://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#http://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2-2.html )
+<iframe class=ifr src=https://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#https://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2-2.html width=100% height=600px ></iframe>
+###### _Moon Voyager Gamer - Dev revision - Code Edit View_ /  [Edit full screen]( https://jaanga.github.io/cookbook-html/templates/code-edit-view/code-edit-view-r2.html#https://jaanga.github.io/moon/voyager/gamer/moon-voyager-gamer-r2-2.html )
 
 ## The Apps
 
-[Moon Voyager Gamer Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/gamer/dev/ )
+[Moon Voyager Gamer Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/gamer/dev/ )
 
-[Moon Voyager Image Map #1 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/dev/ )  
-[Moon Voyager Image Map #2 Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#http://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )  
+[Moon Voyager Image Map #1 Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/image-map/dev/ )
+[Moon Voyager Image Map #2 Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/image-map/moon-voyager-image-map-r1-2.html#https://jaanga.github.io/moon/images/moon_8k_color_brim16_4096x2048.jpg )
 
-[Moon Voyager Shaded Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/shaded/dev/ )
+[Moon Voyager Shaded Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/shaded/dev/ )
 
-[Moon Voyager Altitude Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/altitude/dev/ )
+[Moon Voyager Altitude Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/altitude/dev/ )
 
-[Moon Voyager Satellites Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/satellites/dev/ )
+[Moon Voyager Satellites Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/satellites/dev/ )
 
-[Moon Voyager Sun Earth Moon Demo Full Screen - Dev]( http://jaanga.github.io/moon/voyager/sun-earth-moon/dev/ )
+[Moon Voyager Sun Earth Moon Demo Full Screen - Dev]( https://jaanga.github.io/moon/voyager/sun-earth-moon/dev/ )
 
 ## Concept
 
@@ -49,44 +49,44 @@
 
 * Most basic version - uses Three.js MeshNormalMaterial
 
-[Moon Voyager Gamer Read Me - Web Page]( http://jaanga.github.io/moon/voyager/gamer/ )  
-[Moon Voyager Gamer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/gamer/ )  
+[Moon Voyager Gamer Read Me - Web Page]( https://jaanga.github.io/moon/voyager/gamer/ )
+[Moon Voyager Gamer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/gamer/ )
 
 
 ### Moon Voyager Image Map
 
 * Applies selected images to the surface of the moon
 
-[Moon Voyager Image Map Read Me - Web Page]( http://jaanga.github.io/moon/voyager/image-map/ )  
-[Moon Voyager Image Map Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/ )  
+[Moon Voyager Image Map Read Me - Web Page]( https://jaanga.github.io/moon/voyager/image-map/ )
+[Moon Voyager Image Map Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/image-map/ )
 
 ### Moon Voyager Shaded
 
 * Add lights, shade and shadow to the Moon
 
-[Moon Voyager Shaded Read Me - Web Page]( http://jaanga.github.io/moon/voyager/shaded/ )  
-[Moon Voyager Shaded Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded/ )  
+[Moon Voyager Shaded Read Me - Web Page]( https://jaanga.github.io/moon/voyager/shaded/ )
+[Moon Voyager Shaded Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/shaded/ )
 
 ### Moon Voyager Altitude
 
 * Add lights shades and shadows and each vertex is colored according to its altitude
 
-[Moon Voyager Altitude Read Me - Web Page]( http://jaanga.github.io/moon/voyager/altitude/ )  
-[Moon Voyager Altitude Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/altitude/ )  
+[Moon Voyager Altitude Read Me - Web Page]( https://jaanga.github.io/moon/voyager/altitude/ )
+[Moon Voyager Altitude Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/altitude/ )
 
 ### Moon Voyager Satellites
 
 * Gamer version with three NASA satellites in simple circular orbits around the moon
 
-[Moon Voyager Satellites Read Me - Web Page]( http://jaanga.github.io/moon/voyager/satellites/ )  
-[Moon Voyager Satellites Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites/ )  
+[Moon Voyager Satellites Read Me - Web Page]( https://jaanga.github.io/moon/voyager/satellites/ )
+[Moon Voyager Satellites Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/satellites/ )
 
 ### Moon Sun Earth Moon
 
 * Displays in real-time 3D how the Moon orbits around the Earth while the Earth orbits the Sun and both receive light from the Sun
 
-[Moon Voyager Sun Earth Moon Read Me - Web Page]( http://jaanga.github.io/moon/voyager/sun-earth-moon/ )  
-[Moon Voyager Sun Earth Moon Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/sun-earth-moon/ )  
+[Moon Voyager Sun Earth Moon Read Me - Web Page]( https://jaanga.github.io/moon/voyager/sun-earth-moon/ )
+[Moon Voyager Sun Earth Moon Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/sun-earth-moon/ )
 
 
 
@@ -129,7 +129,7 @@
 
 ## Copyright and License
 
-* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md )
 
 ***
 

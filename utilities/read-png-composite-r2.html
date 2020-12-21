@@ -7,12 +7,12 @@
 </head>
 <body>
 <script>
-// source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
-// http://lroc.sese.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_GLD100/
-// http://www.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/
+// source https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
+// https://lroc.sese.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_GLD100/
+// https://www.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/
 
 //	var path = 'c:/temp/moon-heightmaps/'; // for developing etc
-	var path = 'http://jaanga.github.io/';
+	var path = 'https://jaanga.github.io/';
 
 	var dirNE = 'moon-heightmaps-256p-ne/';
 	var dirNW = 'moon-heightmaps-256p-nw/';
@@ -56,7 +56,7 @@
 		menu.style.cssText = 'margin: 0 20px; position: absolute;';
 		menu.innerHTML = '<h2>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/moon/utilities/ >&#x24D8;</a>' +
+				'<a id=i href=https://jaanga.github.io/moon/utilities/ >&#x24D8;</a>' +
 			'</h2>' +
 			'<div>Use cursor keys to move about</div>' +
 			'<div id=info ></div>' +
@@ -131,7 +131,7 @@
 
 		tile.onload = function() {
 
-			context.drawImage( tile, 0, 0, sourceSize, sourceSize, ( x - lonStart ) * pixels, ( latStart - y ) * pixels, pixels, pixels ); 
+			context.drawImage( tile, 0, 0, sourceSize, sourceSize, ( x - lonStart ) * pixels, ( latStart - y ) * pixels, pixels, pixels );
 
 			processTiles();
 

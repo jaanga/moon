@@ -62,7 +62,7 @@ console.log( 'dirname: ', dirName );
 
 		}
 
-// http://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
+// https://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
 
 		var arrayBuffer = new Uint8Array( buffer).buffer;
 		byteArray = new Int16Array( arrayBuffer );

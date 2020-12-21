@@ -1,8 +1,8 @@
-﻿<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/heightmaps/index.html "View file as a web page." ) </span>
+﻿<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( https://jaanga.github.io/moon/heightmaps/index.html "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/heightmaps/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
-[Jaanga]( http://jaanga.github.io/ ) &raquo; [Moon]( http://jaanga.github.io/moon/ )  [Jaanga]( http://jaanga.github.io/ ) » [Outer Space]( http://jaanga.github.io/outer-space/ ) »
-[Moon]( http://jaanga.github.io/moon/ ) »
+[Jaanga]( https://jaanga.github.io/ ) &raquo; [Moon]( https://jaanga.github.io/moon/ )  [Jaanga]( https://jaanga.github.io/ ) » [Outer Space]( https://jaanga.github.io/outer-space/ ) »
+[Moon]( https://jaanga.github.io/moon/ ) »
 
 [Images Read Me]( index.html )
 ===
@@ -15,7 +15,7 @@ Needs credits
 
 ## Copyright and License
 
-* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md )
 
 ***
 

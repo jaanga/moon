@@ -1,8 +1,8 @@
-<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( http://jaanga.github.io/moon/utilities/index.html "View file as a web page." ) </span>
+<span style=display:none; >[You are now in GitHub source code view - click here to view Read Me file as a web page]( https://jaanga.github.io/moon/utilities/index.html "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/moon/tree/gh-pages/utilities/'; value='You are now in GitHub web page view - Click here to view Read Me file as source code'  />
 
-[Jaanga]( http://jaanga.github.io/ ) &raquo;  [Outer Space]( http://jaanga.github.io/outer-space ) &raquo;
-[Moon]( http://jaanga.github.io/moon/ ) &raquo;
+[Jaanga]( https://jaanga.github.io/ ) &raquo;  [Outer Space]( https://jaanga.github.io/outer-space ) &raquo;
+[Moon]( https://jaanga.github.io/moon/ ) &raquo;
 
 [Moon Utilities Read Me]( ./index.html )
 ===
@@ -16,7 +16,7 @@ _Equivalent utilities for Mars are more up to date than these Moon utilities._
 
 Thanks to the data from:
 
-* [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
+* [Lunar Reconnaissance Orbiter Camera]( https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
 ## Utilities
 
@@ -56,7 +56,7 @@ Doing the heavy lifting:
 
 ## Copyright and License
 
-* [Copyright and License]( http://jaanga.github.io/#http://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md )
 
 ***
 

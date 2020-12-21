@@ -9,15 +9,15 @@
 _Data and scripts to view the entire Moon in 3D in your browser - all open source_
 
 
-[Outer Space Blog]( https://jaanga.github.io/outer-space/request-outer-space-posts.html ) 
-~ [Documents]( https://jaanga.github.io/documents/ ) 
-~ [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+[Outer Space Blog]( https://jaanga.github.io/outer-space/request-outer-space-posts.html )
+~ [Documents]( https://jaanga.github.io/documents/ )
+~ [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md )
 ~ [Contacts and Organization]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-contacts-and-organization.md )
- 
+
 
 ## Sample Web Page / Source Code
 
-<iframe class=ifr src="iframe-carousel-r3.html" width=100% height=600px ></iframe>  
+<iframe class=ifr src="iframe-carousel-r3.html" width=100% height=600px ></iframe>
 
 
 ## Concept
@@ -65,8 +65,8 @@ _Descriptions and links to the scripts developed so far._
 	* Each app handles Three.js material in a different way
 	* Each adds fun feature demos
 
-[Moon Voyager Read Me - Web Page]( https://jaanga.github.io/moon/voyager/ )  
-[Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )  
+[Moon Voyager Read Me - Web Page]( https://jaanga.github.io/moon/voyager/ )
+[Moon Voyager Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/voyager/ )
 
 
 ## Moon Rover Mobile
@@ -75,8 +75,8 @@ _Descriptions and links to the scripts developed so far._
 * Intended to be the lightest, fastest loading version of the flat map
 	* But with the least detail
 
-[Moon Rover Mobile Read Me - Web Page]( https://jaanga.github.io/moon/rover-mobile/ )  
-[Moon Rover Mobile Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-mobile/ )  
+[Moon Rover Mobile Read Me - Web Page]( https://jaanga.github.io/moon/rover-mobile/ )
+[Moon Rover Mobile Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-mobile/ )
 
 
 ## Moon Rover 64P
@@ -87,32 +87,32 @@ _Descriptions and links to the scripts developed so far._
 	* Will be updated in due course
 	* Moon Rover 256P is a better tool for the moment
 
-[Moon Rover 64P Read Me - Web Page]( https://jaanga.github.io/moon/rover-64p/ )  
-[Moon Rover 64P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-64p/ )  
+[Moon Rover 64P Read Me - Web Page]( https://jaanga.github.io/moon/rover-64p/ )
+[Moon Rover 64P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-64p/ )
 
 ## Moon Rover 256P
 
 * 256 pixels per degree ~4.25 billion points of data
 * Great detail views of the moon
 
-[Moon Rover 256P Read Me - Web Page]( https://jaanga.github.io/moon/rover-256p/ )  
-[Moon Rover 256P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-256p/ )  
+[Moon Rover 256P Read Me - Web Page]( https://jaanga.github.io/moon/rover-256p/ )
+[Moon Rover 256P Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/rover-256p/ )
 
 ## Moon Gazetteer
 
 * Text files with lunar place names, location and other data
 * Utilities for dealing with these files
 
-[Moon Gazetteer Read Me - Web Page]( https://jaanga.github.io/moon/gazetteer/ )  
-[Moon Gazetteer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/gazetteer/ )  
+[Moon Gazetteer Read Me - Web Page]( https://jaanga.github.io/moon/gazetteer/ )
+[Moon Gazetteer Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/gazetteer/ )
 
 ## Moon Utilities
 
 * Node.js scripts for reading binary IMG heightmap files, creating PNG files and saving these to disk
 * Scripts for viewing and testing the files
 
-[Moon Utilities Read Me - Web Page]( https://jaanga.github.io/moon/utilities/ )  
-[Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )  
+[Moon Utilities Read Me - Web Page]( https://jaanga.github.io/moon/utilities/ )
+[Moon Utilities Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/utilities/ )
 
 # The Data
 
@@ -124,8 +124,8 @@ _Perhaps the most important aspect of this project_
 * Over two gigabytes of heightmap data simply and freely accessible via GitHub
 * Data contained in four repositories
 
-[Moon Heightmaps Read Me - Web Page]( https://jaanga.github.io/moon/heightmaps/ )  
-[Moon Heightmaps Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/heightmaps/ )  
+[Moon Heightmaps Read Me - Web Page]( https://jaanga.github.io/moon/heightmaps/ )
+[Moon Heightmaps Read Me - Source Code]( https://github.com/jaanga/moon/tree/gh-pages/heightmaps/ )
 
 
 <br>
@@ -157,12 +157,12 @@ Many thanks to:
 
 Gazetteer data sources:
 
-* [Gazetteer of Planetary Nomenclature]( http://planetarynames.wr.usgs.gov/Page/MOON/target )
-* [Lunar 100]( http://the-moon.wikispaces.com/Lunar+100 )
+* [Gazetteer of Planetary Nomenclature]( https://planetarynames.wr.usgs.gov/Page/MOON/target )
+* [Lunar 100]( https://the-moon.wikispaces.com/Lunar+100 )
 
 Lunar height data source:
 
-* [Lunar Reconnaissance Orbiter Camera]( http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
+* [Lunar Reconnaissance Orbiter Camera]( https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100 )
 
 
 
@@ -170,9 +170,9 @@ Lunar height data source:
 
 [Wikipedia: Moon]( https://en.wikipedia.org/wiki/Moon )
 
-[The Moon Wiki]( http://the-moon.wikispaces.com/Introduction )
+[The Moon Wiki]( https://the-moon.wikispaces.com/Introduction )
 
-[Multiple studies address riddles of the Moon's origin]( http://www.bbc.com/news/science-environment-32219494 )
+[Multiple studies address riddles of the Moon's origin]( https://www.bbc.com/news/science-environment-32219494 )
 
 
 ## Contact
@@ -181,16 +181,16 @@ Lunar height data source:
 
 ## Copyright and License
 
-* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md ) 
+* [Copyright and License]( https://jaanga.github.io/#https://jaanga.github.io/jaanga-copyright-and-mit-license.md )
 
 ***
 
 <center title="Waxing Gibbous Moon" >
 
-_[Fly me to the moon  
-And let me play among the stars  
-Let me see what spring is like  
-On Jupiter and Mars]( https://www.youtube.com/watch?v=QhMmBlL81nw )_  
+_[Fly me to the moon
+And let me play among the stars
+Let me see what spring is like
+On Jupiter and Mars]( https://www.youtube.com/watch?v=QhMmBlL81nw )_
 \- Olivia Ong
 # <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >&#127764;</a>
 </center>

@@ -6,9 +6,9 @@
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
 <body>
-<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
-<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
-<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 <script>
 	var info, stats, renderer, scene, camera, controls;
 	var geometry, material, mesh;
@@ -20,7 +20,7 @@
 //	fileName = 'c:/temp/topo30/topo30';
 //	fileName = 'c:/temp/topo30/topo1.gsd';
 //	fileName = './topo30';
-//	fileName = 'http://caper.ws/terrain-srtm30-plus/topo30/topo30';
+//	fileName = 'https://caper.ws/terrain-srtm30-plus/topo30/topo30';
 //	var fileName = '../../../data-samples/usgs-srtm1-2-1/N37W121.hgt';
 //	var fileName = 	'C:/temp/de-ferranti/P32/N60E006.hgt';
 //	var fileName = 	'C:/temp/LDEM_16.IMG';
@@ -117,7 +117,7 @@
 
 		startTime = new Date();
 		xmlHttp = new XMLHttpRequest();
-		xmlHttp.crossOrigin = 'Anonymous'; 
+		xmlHttp.crossOrigin = 'Anonymous';
 		xmlHttp.responseType = 'arraybuffer';
 		xmlHttp.open( 'GET', fileName, true );
 		xmlHttp.onreadystatechange = getData;
@@ -140,7 +140,7 @@
 				elevations.push( elevation );
 
 				imageDataData[ index++ ] = (elevation & 0x0000ff )
-				imageDataData[ index++ ] = (elevation & 0x00ff00 ) >> 8; 
+				imageDataData[ index++ ] = (elevation & 0x00ff00 ) >> 8;
 				imageDataData[ index++ ] = (elevation & 0xff0000 ) >> 16;
 				imageDataData[ index++ ] = 255;
 

@@ -1,4 +1,4 @@
-// source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
+// source https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 	var fs = require( 'fs' );
 // https://github.com/oliver-moran
@@ -6,8 +6,8 @@
 
 // lat /lon from lower left
 //	var fileName = 'c:/temp/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon + 0-90
-//	var fileName = 'c:/temp/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
-//	var fileName = 'c:/temp/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
+//	var fileName = 'c:/temp/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0
+//	var fileName = 'c:/temp/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179
 
 	var widthSource = 23040; // 256p ~ 90 degrees * 256 pixels
 	var heightSource = 15360;
@@ -38,7 +38,7 @@
 // Need to split into multiple runs
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N3150_256P.IMG'; // lat min 0 to max 60 , lon -90 to 0
 
 //	var tileX = -90;
 //	var tileX = -60;
@@ -54,7 +54,7 @@
 */
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N2250_256P.IMG'; // lat min 0 to max 60 , lon -180 to -90 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N2250_256P.IMG'; // lat min 0 to max 60 , lon -180 to -90
 
 //	var tileX = -180;
 //	var tileX = -150;
@@ -70,7 +70,7 @@
 */
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon 0 to 90 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N0450_256P.IMG'; // lat min 0 to max 60 , lon 0 to 90
 
 	var tileX = 0;
 //	var tileX = 30;
@@ -87,7 +87,7 @@
 
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300N1350_256P.IMG'; // lat min 0 to max 60 , lon 90 to 179
 
 //	var tileX = 90;
 	var tileX = 120;
@@ -103,7 +103,7 @@
 */
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S0450_256P.IMG'; // lat min -60 to max -1 , lon 0 to 90 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S0450_256P.IMG'; // lat min -60 to max -1 , lon 0 to 90
 
 //	var tileX = 0;
 //	var tileX = 30;
@@ -119,7 +119,7 @@
 */
 
 /*
-	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG'; // lat min -60 to max -1 , lon 90 to 179 
+	var fileName = 'c:/temp/moon-heightmaps/WAC_GLD100_E300S1350_256P.IMG'; // lat min -60 to max -1 , lon 90 to 179
 
 //	var tileX = 90;
 //	var tileX = 120;
@@ -167,7 +167,7 @@ console.log( 'dirname: ', dname );
 
 		}
 
-// http://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
+// https://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
 
 		var arrayBuffer = new Uint8Array( buffer).buffer;
 		byteArray = new Int16Array( arrayBuffer );

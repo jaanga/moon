@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-// source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
+// source https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 //	var dirName = '/16p';
 	var dirName = 'c:/temp/moon-heightmaps/moon-heightmaps-256p-ne/';
@@ -47,7 +47,7 @@
 		menu.style.cssText = 'margin: 0 20px; position: absolute;';
 		menu.innerHTML = '<h2>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/ >&#x24D8;</a>' +
+				'<a id=i href=https://jaanga.github.io/ >&#x24D8;</a>' +
 			'</h2>' +
 			'<div id=info ></div>' +
 		'';
@@ -120,9 +120,9 @@ console.log(  'end of story' );
 
 		tile.onload = function() {
 
-//			context.drawImage( tile, 0, 0, widthSource, sourceSource, ( x - tileXStart ) * widthSource, ( y - tileYStart ) * sourceSource, widthSource, sourceSource ); 
+//			context.drawImage( tile, 0, 0, widthSource, sourceSource, ( x - tileXStart ) * widthSource, ( y - tileYStart ) * sourceSource, widthSource, sourceSource );
 
-			context.drawImage( tile, 0, 0, widthSource, sourceSource, ( x - tileXStart ) * pixels, ( tileYStart - y ) * pixels, pixels, pixels ); 
+			context.drawImage( tile, 0, 0, widthSource, sourceSource, ( x - tileXStart ) * pixels, ( tileYStart - y ) * pixels, pixels, pixels );
 
 			processTiles();
 

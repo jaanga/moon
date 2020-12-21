@@ -6,15 +6,15 @@
 <meta name=viewport content = 'width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' />
 </head>
 <body>
-<script src = http://rawgit.com/mrdoob/three.js/r72/build/three.min.js ></script>
-<script src = http://rawgit.com/mrdoob/three.js/r72/examples/js/controls/OrbitControls.js ></script>
-<script src = http://rawgit.com/mrdoob/three.js/r72/examples/js/controls/FirstPersonControls.js  ></script>
-<script src = http://rawgit.com/mrdoob/three.js/r72/examples/js/libs/stats.min.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/r72/build/three.min.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/r72/examples/js/controls/OrbitControls.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/r72/examples/js/controls/FirstPersonControls.js  ></script>
+<script src = https://rawgit.com/mrdoob/three.js/r72/examples/js/libs/stats.min.js ></script>
 <script>
 
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
 
-	var sourceFolder = window.self === window.top ? '../' : 'http://jaanga.github.io/jaanga-terrain/terrain-r2/viewers/';
+	var sourceFolder = window.self === window.top ? '../' : 'https://jaanga.github.io/jaanga-terrain/terrain-r2/viewers/';
 
 	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-100-5760x2880.csv';
 //	var gazetteerFile = sourceFolder + 'moon-gazetteer/moon-9000-5760x2880.csv';
@@ -22,8 +22,8 @@
 //	var mapImage = sourceFolder + 'moon-images/Moonmap_from_clementine_data.png'; // 1440 x 720
 //	var mapImage = sourceFolder + 'moon-images/WAC_GLD100_E000N1800_008P.jpg'; // 1440 x 720
 //	var mapImage = sourceFolder + 'moon-images/Lunar_Clementine_UVVIS_750nm_Global_Mosaic_1.2km.jpg'; // 9216 x 4608
-//	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16.jpg'; // 8192 x 4096 http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
-	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16_4096x2048.jpg'; //  http://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
+//	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16.jpg'; // 8192 x 4096 https://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
+	var mapImage = sourceFolder + 'moon-images/moon_8k_color_brim16_4096x2048.jpg'; //  https://laps.noaa.gov/albers/sos/moon/moon_8k_color_brim16.jpg
 
 //	var heightmapImage = sourceFolder + 'moon-heightmaps/moon_lro_bumpmap_8192x4096.jpg'
 //	var heightmapImage = sourceFolder + 'moon-heightmaps/WAC_GLD100_E000N1800_008P.jpg'; // 5770 x 2880
@@ -76,7 +76,7 @@
 		menu.style.cssText = ' background-color: #eee; border: 1px #ccc solid; left: -220px;  max-height: ' + ( window.innerHeight - 50 ) + 'px; ' +
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
 		menu.innerHTML = '<h3 style=margin:0; ><a href="" >' + document.title + '</a> ' +
-			'<a id=i href=http://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/ >&#x24D8;</a></h3>' +
+			'<a id=i href=https://jaanga.github.io/terrain-r2/viewers/moon-rover-mobile/ >&#x24D8;</a></h3>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p>' +
 				'<button onclick=controls.reset(); >Zoom All</button> ' +

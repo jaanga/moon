@@ -1,4 +1,4 @@
-// source http://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
+// source https://wms.lroc.asu.edu/lroc/view_rdr/WAC_GLD100
 
 	var fs = require( 'fs' );
 
@@ -63,7 +63,7 @@ console.log( 'new dir: ', dname );
 
 		}
 
-// http://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
+// https://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer
 
 		var arrayBuffer = new Uint8Array( buffer).buffer;
 		byteArray = new Int16Array( arrayBuffer );

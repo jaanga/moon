@@ -6,13 +6,13 @@
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
 <body>
-<script src = http://rawgit.com/mrdoob/three.js/dev/build/three.js ></script>
-<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
-<script src = http://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/dev/build/three.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src = https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 <script>
 
 // Enable the script to operate within an iframe, make URLs fixed - otherwise set to relative
-	var sourceFolder = window.self === window.top ? '../../' : 'http://jaanga.github.io/moon/';
+	var sourceFolder = window.self === window.top ? '../../' : 'https://jaanga.github.io/moon/';
 
 	var gazetteerFile = sourceFolder + 'gazetteer/lunar-100-the-moon-wikispaces.csv';
 
@@ -52,7 +52,7 @@
 	function init() {
 
 		var css = document.body.appendChild( document.createElement('style') );
-		css.innerHTML = 'body { background-image: url("http://jaanga.github.io/moon/images/stars-2048x1024.png"); ' +
+		css.innerHTML = 'body { background-image: url("https://jaanga.github.io/moon/images/stars-2048x1024.png"); ' +
 				'font: 12pt monospace; margin: 0; overflow: hidden; }' +
 			'h3 { margin: 0; }' +
 			'#bars, #i { font-size: 24pt; text-decoration: none; }' +
@@ -72,7 +72,7 @@
 			'opacity: 0.8; overflow: auto; padding: 0 10px; position: absolute; top: 0px; transition: left 1s; max-width: 200px; ';
 		menu.innerHTML = '<h3>' +
 				'<a href="" >' + document.title + '</a> ' +
-				'<a id=i href=http://jaanga.github.io/moon/voyager/shaded/ >&#x24D8;</a>' +
+				'<a id=i href=https://jaanga.github.io/moon/voyager/shaded/ >&#x24D8;</a>' +
 			'</h3>' +
 			'<p><select id=selPlace></select></p>' +
 			'<p id=message ></p>' +
@@ -161,7 +161,7 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
 
 		material3D = new THREE.MeshPhongMaterial( {
-			color: 0xaaaa99, 
+			color: 0xaaaa99,
 			specular: 0xaa9999,
 			shininess: 10
 		} );
